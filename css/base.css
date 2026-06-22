@@ -1,0 +1,215 @@
+/* ==========================================================================
+   APEX SIM RACING — BASE
+   Reset, grid, tipografía base, helpers globales
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-body);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  background: var(--color-light);
+  color: var(--color-text-on-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul, ol { list-style: none; }
+
+button { font-family: inherit; border: none; background: none; cursor: pointer; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-h2);
+  line-height: 1.15;
+}
+
+h1 { font-size: var(--t-h1); font-weight: var(--weight-h1); font-family: var(--font-h1); }
+h2 { font-size: var(--t-h2); font-weight: var(--weight-h2); }
+h3 { font-size: var(--t-h3); font-weight: 600; }
+h4 { font-size: var(--t-h4); font-weight: 600; }
+
+p { font-size: var(--t-body); }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   GRID
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin: 0 auto;
+  padding: 0 var(--grid-margin-mobile);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wrap { padding: 0 var(--grid-margin-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .wrap { padding: 0 var(--grid-margin-desktop); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gutter-mobile);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid { grid-template-columns: repeat(8, 1fr); gap: var(--grid-gutter-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(12, 1fr); gap: var(--grid-gutter-desktop); }
+}
+
+/* ==========================================================================
+   SECCIONES — alternancia de fondo
+   ========================================================================== */
+
+.section {
+  position: relative;
+  padding: var(--space-12) 0;
+}
+
+@media (min-width: 1024px) {
+  .section { padding: var(--space-20) 0; }
+}
+
+.bg-dark  { background: var(--color-dark);  color: var(--color-text-on-dark); }
+.bg-light { background: var(--color-light); color: var(--color-text-on-light); }
+
+.bg-dark  .text-muted { color: var(--color-text-muted-dark); }
+.bg-light .text-muted { color: var(--color-text-muted-light); }
+
+/* ==========================================================================
+   SECTION LABEL — eyebrow de identificación
+   ========================================================================== */
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: var(--t-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  margin-bottom: var(--space-8);
+  display: block;
+}
+
+/* ==========================================================================
+   CTA — botón primario
+   ========================================================================== */
+
+.cta {
+  display: inline-block;
+  font-family: var(--font-button);
+  font-weight: var(--weight-button);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  transition: background var(--duration-fast) ease, opacity var(--duration-fast) ease, transform var(--duration-fast) ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .cta { padding: 14px 32px; }
+}
+
+.cta--primary {
+  background: var(--color-accent);
+  color: var(--color-dark);
+}
+.cta--primary:hover { transform: scale(1.03); }
+
+.cta--outline {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: currentColor;
+}
+.cta--outline:hover { background: rgba(255,255,255,0.08); }
+
+.cta--ghost {
+  color: currentColor;
+  opacity: 0.7;
+}
+.cta--ghost:hover { opacity: 1; }
+
+/* ==========================================================================
+   EDITORIAL BLOCK
+   ========================================================================== */
+
+.editorial {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-16) var(--grid-margin-mobile);
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .editorial { min-height: 100vh; padding: var(--space-20); }
+}
+
+.editorial__line {
+  font-family: var(--font-h1);
+  font-weight: var(--weight-h1);
+  font-size: var(--t-editorial);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.editorial__line--outline {
+  -webkit-text-stroke: var(--outline-width) var(--color-white);
+  color: transparent;
+}
+
+.editorial__scroll-hint {
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--grid-margin-mobile);
+  font-size: var(--t-caption);
+  opacity: 0.5;
+}
+
+@media (min-width: 1024px) {
+  .editorial__scroll-hint { right: var(--grid-margin-desktop); }
+}
+
+/* ==========================================================================
+   UTILIDADES
+   ========================================================================== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.text-center { text-align: center; }
+.mono { font-family: var(--font-mono); }
