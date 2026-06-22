@@ -300,23 +300,75 @@
 </section>
 
 <!-- 09 CONFIGURAMOS TU SETUP -->
-<section class="section bg-dark">
+<section class="section bg-dark" id="setup">
   <div class="wrap">
     <span class="section-label">09 — Configuramos tu Setup</span>
     <h2 class="section-title">Configuramos tu volante</h2>
-    <div class="wheel-section">
-      <div class="wheel-section__visual">
-        <img src="../ASSETS/volante.png" alt="Volante de simracing">
-        <button class="wheel-hotspot" style="top:14%;left:50%" data-title="Force Feedback" data-desc="Ajustamos la fuerza y sensibilidad del volante según tu estilo de manejo.">1</button>
-        <button class="wheel-hotspot" style="top:32%;left:82%" data-title="Paddle Shifters" data-desc="Calibración de cambios para respuesta instantánea en competición.">2</button>
-        <button class="wheel-hotspot" style="top:68%;left:82%" data-title="Botonera" data-desc="Mapeo de botones para radio, pit limiter y asistencias.">3</button>
-        <button class="wheel-hotspot" style="top:86%;left:50%" data-title="Pedalera" data-desc="Curvas de frenado y aceleración ajustadas a tu telemetría.">4</button>
-        <button class="wheel-hotspot" style="top:68%;left:18%" data-title="Display" data-desc="Configuración de la pantalla de datos en vivo durante la carrera.">5</button>
+    <p>Cada milímetro de configuración importa. Nuestro proceso de calibración personalizada analiza tu biomecánica, estilo y hardware para definir el setup óptimo que maximiza tu rendimiento.</p>
+
+    <div class="wheel-media" style="position:relative;overflow:visible;height:auto">
+      <div id="wheel-stage" style="position:relative;width:100%;max-width:680px;margin:0 auto;cursor:none">
+
+        <img id="wheel-img" src="../ASSETS/volante.png" alt="Volante de simracing"
+          style="width:100%;display:block;filter:brightness(1.05) contrast(1.05);transition:filter 0.1s ease" />
+
+        <!-- Hotspots SVG overlay -->
+        <svg id="wheel-svg" viewBox="0 0 1024 1024" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible">
+
+          <!-- Pantalla -->
+          <g class="hotspot" data-id="pantalla">
+            <circle cx="512" cy="330" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="512" cy="330" r="6" fill="#ffffff"/>
+            <line x1="530" y1="312" x2="580" y2="270" stroke="#fa6f38" stroke-width="1" opacity="0.7"/>
+            <rect x="582" y="252" width="130" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="592" y="266" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">PANTALLA</text>
+          </g>
+
+          <!-- Rotary Encoders -->
+          <g class="hotspot" data-id="encoders">
+            <circle cx="512" cy="560" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="512" cy="560" r="6" fill="#ffffff"/>
+            <line x1="494" y1="560" x2="430" y2="540" stroke="#124af7" stroke-width="1" opacity="0.7"/>
+            <rect x="250" y="522" width="178" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="260" y="536" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">ROTARY ENCODERS</text>
+          </g>
+
+          <!-- Paddle Shifters -->
+          <g class="hotspot" data-id="paddles">
+            <circle cx="280" cy="470" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="280" cy="470" r="6" fill="#ffffff"/>
+            <line x1="262" y1="460" x2="200" y2="430" stroke="#fa6f38" stroke-width="1" opacity="0.7"/>
+            <rect x="50" y="412" width="148" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="60" y="426" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">PADDLE SHIFTERS</text>
+          </g>
+
+          <!-- Quick Release -->
+          <g class="hotspot" data-id="release">
+            <circle cx="512" cy="780" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="512" cy="780" r="6" fill="#ffffff"/>
+            <line x1="530" y1="792" x2="580" y2="820" stroke="#bec3bc" stroke-width="1" opacity="0.7"/>
+            <rect x="582" y="812" width="148" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="592" y="826" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">QUICK RELEASE</text>
+          </g>
+
+        </svg>
+
+        <!-- Cursor personalizado -->
+        <div id="wheel-cursor" style="position:absolute;width:24px;height:24px;border:1px solid rgba(255,255,255,0.6);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:transform 0.1s,opacity 0.2s;opacity:0;mix-blend-mode:difference"></div>
+
       </div>
-      <div class="wheel-card">
-        <h4>Seleccioná un punto del volante</h4>
-        <p>Hacé click en cada hotspot para ver el detalle de configuración.</p>
+
+      <!-- Ficha técnica modal -->
+      <div id="wheel-modal" style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;background:rgba(14,23,24,0.7);backdrop-filter:blur(12px)">
+        <div id="wheel-modal-inner" style="max-width:480px;width:90%;padding:40px;position:relative;
+          background:linear-gradient(135deg,rgba(255,255,255,0.07) 0%,rgba(28,38,40,0.55) 100%);
+          backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.12);border-radius:4px;
+          box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 24px 64px rgba(0,0,0,0.5)">
+          <button id="wheel-modal-close" style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.2rem;cursor:pointer;font-family:tachyon,sans-serif">✕</button>
+          <div id="wheel-modal-content"></div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>

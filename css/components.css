@@ -383,54 +383,22 @@
 }
 
 /* ---- STEERING WHEEL INTERACTIVE ---- */
+/* Tilt parallax 3D + hotspots + modal — comportamiento idéntico al de index.html */
 
-.wheel-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  align-items: center;
-}
+.wheel-media { margin-top: var(--space-8); }
 
-@media (min-width: 1024px) {
-  .wheel-section { grid-template-columns: 1fr 1fr; }
-}
-
-.wheel-section__visual {
+#wheel-stage {
   position: relative;
-  max-width: 360px;
-  margin: 0 auto;
+  z-index: 10;
 }
 
-.wheel-section__visual img { width: 100%; }
-
-.wheel-hotspot {
-  position: absolute;
-  width: 32px; height: 32px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-accent);
-  background: rgba(28,38,40,0.6);
-  color: var(--color-white);
-  font-family: var(--font-mono);
-  font-size: var(--t-caption);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
+#wheel-stage img,
+#wheel-svg {
+  position: relative;
+  z-index: 11;
 }
 
-.wheel-card {
-  border: 1px solid var(--color-border-dark);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  opacity: 0;
-  transition: opacity 180ms ease;
-}
-
-.wheel-card.is-visible { opacity: 1; }
-
-.wheel-card h4 { margin-bottom: var(--space-2); }
-.wheel-card p { font-size: var(--t-caption); opacity: 0.75; }
+.hotspot { cursor: pointer; }
 
 /* ---- COURSE CARD ---- */
 

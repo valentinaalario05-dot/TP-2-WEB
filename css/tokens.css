@@ -26,11 +26,11 @@
   --color-border-light: rgba(28,38,40,0.12);
 
   /* ---- Tipografía: familias (Adobe Fonts / Typekit kit ljr5kxo) ---- */
-  --font-h1:      "field-gothic-cond", sans-serif;       /* No. 47 XX Bold Cond */
-  --font-h2:      "field-gothic-cond", sans-serif;       /* No. 43 Med Cond */
-  --font-body:    "field-gothic-compact", sans-serif;    /* No. 53 Med Compact */
-  --font-button:  "field-gothic-cond", sans-serif;       /* No. 46 XBold Cond */
-  --font-mono:    "tachyon", monospace;                  /* Tachyon Regular — telemetría */
+  --font-h1:      "field-gothic-no-47", sans-serif;       /* No. 47 XX Bold Cond */
+  --font-h2:      "field-gothic-no-43", sans-serif;       /* No. 43 Med Cond */
+  --font-body:    "field-gothic-no-53", sans-serif;       /* No. 53 Med Compact */
+  --font-button:  "field-gothic-no-46", sans-serif;       /* No. 46 XBold Cond */
+  --font-mono:    "tachyon", monospace;                   /* Tachyon Regular — telemetría */
 
   --weight-h1:     800;
   --weight-h2:     500;
