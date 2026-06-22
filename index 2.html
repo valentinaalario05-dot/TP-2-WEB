@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es" class="is-loading">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Sim Racing</title>
+<style>
+  /* Crítico inline: cubre la pantalla en negro antes de que cargue el CSS externo */
+  html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
+  #preloader { position: fixed; inset: 0; z-index: 9999; background: #000; }
+</style>
+<link rel="stylesheet" href="https://use.typekit.net/ljr5kxo.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/glass.css">
+<link rel="stylesheet" href="css/preloader.css">
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader__stage">
+    <svg class="preloader__gauge" id="preloader-gauge" viewBox="0 0 300 300"></svg>
+    <div class="preloader__logo">
+      <img src="../ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing">
+    </div>
+  </div>
+</div>
+<script src="js/preloader.js"></script>
+
+<!-- NAV -->
+<header class="nav">
+  <a href="#hero" class="nav__logo"><img src="../ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing"></a>
+  <nav class="nav__links">
+    <a href="#quienes-somos">Nosotros</a>
+    <a href="#metodologia">Metodología</a>
+    <a href="#cursos">Cursos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="#contacto" class="cta cta--light glass-cta nav__cta">Registrarme</a>
+  <a href="#contacto" class="cta cta--light glass-cta nav__cta--mobile">Registrarme</a>
+  <button class="nav__toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="nav__drawer">
+  <a href="#quienes-somos">Nosotros</a>
+  <a href="#metodologia">Metodología</a>
+  <a href="#cursos">Cursos</a>
+  <a href="#contacto">Contacto</a>
+</div>
+
+<!-- 01 HERO -->
+<section id="hero" class="section bg-dark" style="position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:0">
+  <video class="notch-card__media" style="position:absolute;inset:0;object-fit:cover;clip-path:none;border-radius:0" autoplay muted loop playsinline preload="none" poster="">
+    <source src="../ASSETS/hero-video.mp4.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(28,38,40,0.75), rgba(28,38,40,0.2))"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <h1 style="margin-bottom:var(--space-6)">LO QUE NO SE MIDE,<br>NO SE MEJORA</h1>
+    <a href="#cursos" class="cta cta--primary glass-cta cta--pill">Ver cursos</a>
+  </div>
+</section>
+
+<!-- EDITORIAL A -->
+<section class="editorial bg-dark type-reveal">
+  <p class="editorial__line">LA PRÓXIMA</p>
+  <p class="editorial__line editorial__line--outline">GENERACIÓN</p>
+  <p class="editorial__line">DE <span class="editorial__line--outline">PILOTOS</span></p>
+  <p class="editorial__line">EMPIEZA ACÁ</p>
+  <span class="editorial__scroll-hint">Scroll ↓</span>
+</section>
+
+<!-- 02 PARTNERS -->
+<section class="section bg-dark">
+  <div class="wrap text-center">
+    <span class="section-label">02 — Partners</span>
+    <div class="partners-row">
+      <img src="../ASSETS/logos/fanatec.png" alt="Fanatec">
+      <img src="../ASSETS/logos/iracing.png" alt="iRacing">
+      <img src="../ASSETS/logos/nvidia.png" alt="Nvidia">
+      <img src="../ASSETS/logos/samsung.png" alt="Samsung">
+      <img src="../ASSETS/logos/simlab.png" alt="SimLab">
+      <img src="../ASSETS/logos/asseto corsa.png" alt="Assetto Corsa">
+      <img src="../ASSETS/logos/monza.png" alt="Monza">
+    </div>
+  </div>
+</section>
+
+<!-- 03 QUIÉNES SOMOS -->
+<section id="quienes-somos" class="section bg-light">
+  <div class="wrap">
+    <span class="section-label">03 — Quiénes somos</span>
+    <div class="about-grid">
+      <img class="about-grid__media" src="../ASSETS/placeholders/about-us.png" alt="Quiénes somos">
+      <div class="about-grid__text">
+        <h2 class="section-title">Creados para competidores</h2>
+        <p>Apex nació cuando la frontera entre el automovilismo real y virtual desapareció. Entrenamos pilotos mediante metodología profesional, telemetría y análisis de rendimiento.</p>
+        <a href="#metodologia" class="cta cta--outline">Conocer más</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 METODOLOGÍA APEX -->
+<section id="metodologia" class="section section--methodology bg-light">
+  <div class="wrap text-center">
+    <span class="section-label">04 — Metodología Apex</span>
+    <h2 class="section-title">¿Por qué entrenar con Apex?</h2>
+    <p class="section-subtitle">Cada vuelta cuenta</p>
+    <div class="method-flow">
+      <div class="method-flow__step">
+        <img class="method-flow__icon" src="../ASSETS/placeholders/process-01.png" alt="Datos">
+        <h4>Datos</h4>
+      </div>
+      <span class="method-flow__arrow">→</span>
+      <div class="method-flow__step">
+        <img class="method-flow__icon" src="../ASSETS/placeholders/process-02.png" alt="Análisis">
+        <h4>Análisis</h4>
+      </div>
+      <span class="method-flow__arrow">→</span>
+      <div class="method-flow__step">
+        <img class="method-flow__icon" src="../ASSETS/placeholders/process-03.png" alt="Coaching">
+        <h4>Coaching</h4>
+      </div>
+      <span class="method-flow__arrow">→</span>
+      <div class="method-flow__step">
+        <img class="method-flow__icon" src="../ASSETS/placeholders/process-04.png" alt="Mejora">
+        <h4>Mejora</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 APEX ANALYTICS -->
+<section class="section bg-dark">
+  <div class="wrap">
+    <span class="section-label">05 — Apex Analytics</span>
+    <div class="analytics-grid">
+      <div class="analytics-mockup">
+        <img class="analytics-mockup__bar" src="../ASSETS/placeholders/analytics-mockup.svg" alt="Apex Analytics dashboard">
+      </div>
+      <div class="analytics-text">
+        <h2 class="section-title">Apex Analytics</h2>
+        <p class="section-subtitle">Tu ingeniero de carrera digital</p>
+        <p>Mientras vos te concentrás en conducir, Apex Analytics analiza cada decisión.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PROCESO DE APRENDIZAJE -->
+<section class="section bg-light">
+  <div class="wrap">
+    <span class="section-label">06 — Proceso de aprendizaje</span>
+
+    <div class="timeline__step">
+      <div class="timeline__rail">
+        <div class="timeline__dot"></div>
+        <div class="timeline__line"></div>
+      </div>
+      <div class="timeline__content">
+        <img class="timeline__image" src="../ASSETS/placeholders/process-01.svg" alt="Evaluación inicial">
+        <div class="timeline__text">
+          <h4>Evaluación inicial</h4>
+          <p>Diagnóstico de nivel, telemetría base y objetivos del piloto.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline__step">
+      <div class="timeline__rail">
+        <div class="timeline__dot"></div>
+        <div class="timeline__line"></div>
+      </div>
+      <div class="timeline__content">
+        <img class="timeline__image" src="../ASSETS/placeholders/process-02.svg" alt="Plan de desarrollo">
+        <div class="timeline__text">
+          <h4>Plan de desarrollo</h4>
+          <p>Diseño de un programa de entrenamiento a medida.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline__step">
+      <div class="timeline__rail">
+        <div class="timeline__dot"></div>
+        <div class="timeline__line"></div>
+      </div>
+      <div class="timeline__content">
+        <img class="timeline__image" src="../ASSETS/placeholders/process-03.svg" alt="Entrenamiento técnico">
+        <div class="timeline__text">
+          <h4>Entrenamiento técnico</h4>
+          <p>Sesiones con coach, foco en consistencia y vueltas rápidas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline__step">
+      <div class="timeline__rail">
+        <div class="timeline__dot"></div>
+        <div class="timeline__line"></div>
+      </div>
+      <div class="timeline__content">
+        <img class="timeline__image" src="../ASSETS/placeholders/process-04.svg" alt="Competición">
+        <div class="timeline__text">
+          <h4>Competición</h4>
+          <p>Primeras carreras en ligas internas y eventos regionales.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline__step">
+      <div class="timeline__rail">
+        <div class="timeline__dot"></div>
+      </div>
+      <div class="timeline__content" style="padding-bottom:0">
+        <img class="timeline__image" src="../ASSETS/placeholders/process-05.svg" alt="Profesionalización">
+        <div class="timeline__text">
+          <h4>Profesionalización</h4>
+          <p>Acceso a equipos, sponsors y competición de alto nivel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 RESULTADOS DE LOS ALUMNOS -->
+<section class="section bg-dark">
+  <div class="wrap">
+    <span class="section-label">07 — Resultados de los alumnos</span>
+    <h2 class="section-title">Mirá dónde están nuestros pilotos</h2>
+    <div class="ranking-table">
+      <div class="ranking-table__row ranking-table__head">
+        <span>Pos</span><span>Piloto</span><span>Pts</span><span>Progreso</span>
+      </div>
+      <div class="ranking-table__row">
+        <span class="ranking-table__pos">01</span>
+        <span class="ranking-table__pilot"><img class="ranking-table__avatar" src="../ASSETS/placeholders/coach-01.svg" alt=""><span>Piloto 1</span></span>
+        <span class="ranking-table__pts">128</span>
+        <span class="ranking-table__progress"><span style="width:90%"></span></span>
+      </div>
+      <div class="ranking-table__row">
+        <span class="ranking-table__pos">02</span>
+        <span class="ranking-table__pilot"><img class="ranking-table__avatar" src="../ASSETS/placeholders/coach-02.svg" alt=""><span>Piloto 2</span></span>
+        <span class="ranking-table__pts">104</span>
+        <span class="ranking-table__progress"><span style="width:74%"></span></span>
+      </div>
+      <div class="ranking-table__row">
+        <span class="ranking-table__pos">03</span>
+        <span class="ranking-table__pilot"><img class="ranking-table__avatar" src="../ASSETS/placeholders/coach-03.svg" alt=""><span>Piloto 3</span></span>
+        <span class="ranking-table__pts">96</span>
+        <span class="ranking-table__progress"><span style="width:58%"></span></span>
+      </div>
+      <div class="ranking-table__row">
+        <span class="ranking-table__pos">04</span>
+        <span class="ranking-table__pilot"><img class="ranking-table__avatar" src="../ASSETS/placeholders/coach-04.svg" alt=""><span>Piloto 4</span></span>
+        <span class="ranking-table__pts">81</span>
+        <span class="ranking-table__progress"><span style="width:46%"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 COMUNIDAD -->
+<section class="section bg-light">
+  <div class="wrap">
+    <span class="section-label">08 — Comunidad</span>
+    <h2 class="section-title">Entrenás solo, competís en equipo</h2>
+    <div class="scroller">
+      <div class="scroller__item">
+        <div class="notch-card glass-card" style="height:0;padding-bottom:100%">
+          <img class="notch-card__media" src="../ASSETS/placeholders/community-01.svg" alt="Carrera regional">
+          <span class="notch-card__eyebrow">Evento</span>
+          <span class="notch-card__tag"><strong>Carrera regional</strong><span>2025</span></span>
+        </div>
+      </div>
+      <div class="scroller__item">
+        <div class="notch-card glass-card" style="height:0;padding-bottom:100%">
+          <img class="notch-card__media" src="../ASSETS/placeholders/community-02.svg" alt="Sesión grupal">
+          <span class="notch-card__eyebrow">Entrenamiento</span>
+          <span class="notch-card__tag"><strong>Sesión grupal</strong><span>2025</span></span>
+        </div>
+      </div>
+      <div class="scroller__item">
+        <div class="notch-card glass-card" style="height:0;padding-bottom:100%">
+          <img class="notch-card__media" src="../ASSETS/placeholders/community-03.svg" alt="Meetup Apex">
+          <span class="notch-card__eyebrow">Comunidad</span>
+          <span class="notch-card__tag"><strong>Meetup Apex</strong><span>2025</span></span>
+        </div>
+      </div>
+      <div class="scroller__item">
+        <div class="notch-card glass-card" style="height:0;padding-bottom:100%">
+          <img class="notch-card__media" src="../ASSETS/placeholders/community-04.svg" alt="Liga interna">
+          <span class="notch-card__eyebrow">Evento</span>
+          <span class="notch-card__tag"><strong>Liga interna</strong><span>2024</span></span>
+        </div>
+      </div>
+      <div class="scroller__item">
+        <div class="notch-card glass-card" style="height:0;padding-bottom:100%">
+          <img class="notch-card__media" src="../ASSETS/placeholders/community-05.svg" alt="Bootcamp elite">
+          <span class="notch-card__eyebrow">Entrenamiento</span>
+          <span class="notch-card__tag"><strong>Bootcamp elite</strong><span>2024</span></span>
+        </div>
+      </div>
+      <div class="scroller__item">
+        <div class="notch-card glass-card" style="height:0;padding-bottom:100%">
+          <img class="notch-card__media" src="../ASSETS/placeholders/community-06.svg" alt="Watch party">
+          <span class="notch-card__eyebrow">Comunidad</span>
+          <span class="notch-card__tag"><strong>Watch party</strong><span>2024</span></span>
+        </div>
+      </div>
+    </div>
+    <p class="scroller__hint">← arrastrar / deslizar →</p>
+  </div>
+</section>
+
+<!-- 09 CONFIGURAMOS TU SETUP -->
+<section class="section bg-dark" id="setup">
+  <div class="wrap">
+    <span class="section-label">09 — Configuramos tu Setup</span>
+    <h2 class="section-title">Configuramos tu volante</h2>
+    <p>Cada milímetro de configuración importa. Nuestro proceso de calibración personalizada analiza tu biomecánica, estilo y hardware para definir el setup óptimo que maximiza tu rendimiento.</p>
+
+    <div class="wheel-media" style="position:relative;overflow:visible;height:auto">
+      <div id="wheel-stage" style="position:relative;width:100%;max-width:680px;margin:0 auto;cursor:none">
+
+        <img id="wheel-img" src="../ASSETS/volante.png" alt="Volante de simracing"
+          style="width:100%;display:block;filter:brightness(1.05) contrast(1.05);transition:filter 0.1s ease" />
+
+        <!-- Hotspots SVG overlay -->
+        <svg id="wheel-svg" viewBox="0 0 1024 1024" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible">
+
+          <!-- Pantalla -->
+          <g class="hotspot" data-id="pantalla">
+            <circle cx="512" cy="330" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="512" cy="330" r="6" fill="#ffffff"/>
+            <line x1="530" y1="312" x2="580" y2="270" stroke="#fa6f38" stroke-width="1" opacity="0.7"/>
+            <rect x="582" y="252" width="130" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="592" y="266" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">PANTALLA</text>
+          </g>
+
+          <!-- Rotary Encoders -->
+          <g class="hotspot" data-id="encoders">
+            <circle cx="512" cy="560" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="512" cy="560" r="6" fill="#ffffff"/>
+            <line x1="494" y1="560" x2="430" y2="540" stroke="#124af7" stroke-width="1" opacity="0.7"/>
+            <rect x="250" y="522" width="178" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="260" y="536" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">ROTARY ENCODERS</text>
+          </g>
+
+          <!-- Paddle Shifters -->
+          <g class="hotspot" data-id="paddles">
+            <circle cx="280" cy="470" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="280" cy="470" r="6" fill="#ffffff"/>
+            <line x1="262" y1="460" x2="200" y2="430" stroke="#fa6f38" stroke-width="1" opacity="0.7"/>
+            <rect x="50" y="412" width="148" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="60" y="426" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">PADDLE SHIFTERS</text>
+          </g>
+
+          <!-- Quick Release -->
+          <g class="hotspot" data-id="release">
+            <circle cx="512" cy="780" r="18" fill="rgba(255,255,255,0.15)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="512" cy="780" r="6" fill="#ffffff"/>
+            <line x1="530" y1="792" x2="580" y2="820" stroke="#bec3bc" stroke-width="1" opacity="0.7"/>
+            <rect x="582" y="812" width="148" height="20" rx="3" fill="rgba(28,38,40,0.8)"/>
+            <text x="592" y="826" fill="#ffffff" font-family="tachyon,sans-serif" font-size="11" letter-spacing="0.08em">QUICK RELEASE</text>
+          </g>
+
+        </svg>
+
+        <!-- Cursor personalizado -->
+        <div id="wheel-cursor" style="position:absolute;width:24px;height:24px;border:1px solid rgba(255,255,255,0.6);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:transform 0.1s,opacity 0.2s;opacity:0;mix-blend-mode:difference"></div>
+
+      </div>
+
+      <!-- Ficha técnica modal -->
+      <div id="wheel-modal" style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;background:rgba(14,23,24,0.7);backdrop-filter:blur(12px)">
+        <div id="wheel-modal-inner" style="max-width:480px;width:90%;padding:40px;position:relative;
+          background:linear-gradient(135deg,rgba(255,255,255,0.07) 0%,rgba(28,38,40,0.55) 100%);
+          backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.12);border-radius:4px;
+          box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 24px 64px rgba(0,0,0,0.5)">
+          <button id="wheel-modal-close" style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.2rem;cursor:pointer;font-family:tachyon,sans-serif">✕</button>
+          <div id="wheel-modal-content"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 10 COACHES -->
+<section class="section bg-light">
+  <div class="wrap text-center">
+    <span class="section-label">10 — Coaches</span>
+    <h2 class="section-title">Aprendé de la experiencia</h2>
+    <div class="coach-grid">
+      <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+        <img class="notch-card__media" src="../ASSETS/placeholders/coach-01.svg" alt="Coach 1">
+        <span class="notch-card__tag"><strong>Coach 1</strong><span>Especialidad</span></span>
+        <div class="coach-card__sheet glass-sheet">
+          <h3>Coach 1</h3>
+          <p>Especialidad: GT3</p>
+          <p>Experiencia: 8 años</p>
+          <p>Categorías: GT3 · LMP2</p>
+        </div>
+      </div>
+      <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+        <img class="notch-card__media" src="../ASSETS/placeholders/coach-02.svg" alt="Coach 2">
+        <span class="notch-card__tag"><strong>Coach 2</strong><span>Especialidad</span></span>
+        <div class="coach-card__sheet glass-sheet">
+          <h3>Coach 2</h3>
+          <p>Especialidad: F1</p>
+          <p>Experiencia: 6 años</p>
+          <p>Categorías: F1 · F2</p>
+        </div>
+      </div>
+      <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+        <img class="notch-card__media" src="../ASSETS/placeholders/coach-03.svg" alt="Coach 3">
+        <span class="notch-card__tag"><strong>Coach 3</strong><span>Especialidad</span></span>
+        <div class="coach-card__sheet glass-sheet">
+          <h3>Coach 3</h3>
+          <p>Especialidad: Rally</p>
+          <p>Experiencia: 10 años</p>
+          <p>Categorías: Rally · Rallycross</p>
+        </div>
+      </div>
+      <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+        <img class="notch-card__media" src="../ASSETS/placeholders/coach-04.svg" alt="Coach 4">
+        <span class="notch-card__tag"><strong>Coach 4</strong><span>Especialidad</span></span>
+        <div class="coach-card__sheet glass-sheet">
+          <h3>Coach 4</h3>
+          <p>Especialidad: Oval</p>
+          <p>Experiencia: 5 años</p>
+          <p>Categorías: NASCAR · IndyCar</p>
+        </div>
+      </div>
+      <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+        <img class="notch-card__media" src="../ASSETS/placeholders/coach-05.svg" alt="Coach 5">
+        <span class="notch-card__tag"><strong>Coach 5</strong><span>Especialidad</span></span>
+        <div class="coach-card__sheet glass-sheet">
+          <h3>Coach 5</h3>
+          <p>Especialidad: Resistencia</p>
+          <p>Experiencia: 7 años</p>
+          <p>Categorías: WEC · Le Mans</p>
+        </div>
+      </div>
+      <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+        <img class="notch-card__media" src="../ASSETS/placeholders/coach-06.svg" alt="Coach 6">
+        <span class="notch-card__tag"><strong>Coach 6</strong><span>Especialidad</span></span>
+        <div class="coach-card__sheet glass-sheet">
+          <h3>Coach 6</h3>
+          <p>Especialidad: Karting</p>
+          <p>Experiencia: 4 años</p>
+          <p>Categorías: Karting · Junior</p>
+        </div>
+      </div>
+    </div>
+    <p class="scroller__hint">Hover / tap → ficha técnica</p>
+  </div>
+</section>
+
+<!-- 11 TESTIMONIOS -->
+<section class="section bg-dark">
+  <div class="wrap">
+    <span class="section-label">11 — Testimonios</span>
+    <div class="testimonial-grid">
+      <div class="testimonial-video">
+        <img src="../ASSETS/placeholders/testimonial-01.svg" alt="Testimonio 1">
+        <div class="testimonial-video__play">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <div class="testimonial-video">
+        <img src="../ASSETS/placeholders/testimonial-02.svg" alt="Testimonio 2">
+        <div class="testimonial-video__play">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <div class="testimonial-video">
+        <img src="../ASSETS/placeholders/testimonial-03.svg" alt="Testimonio 3">
+        <div class="testimonial-video__play">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL B -->
+<section class="editorial bg-light">
+  <p class="editorial__line">¿LISTO</p>
+  <p class="editorial__line">PARA</p>
+  <p class="editorial__line" style="margin-bottom:var(--space-6)"><span class="editorial__line--outline-dark">COMPETIR</span>?</p>
+  <a href="#cursos" class="cta cta--primary glass-cta" style="width:fit-content">Ver programas</a>
+  <span class="editorial__scroll-hint">Scroll ↓</span>
+</section>
+
+<!-- 12 CURSOS -->
+<section id="cursos" class="section bg-dark">
+  <div class="wrap text-center">
+    <span class="section-label">12 — Cursos</span>
+    <h2 class="section-title">Elegí tu camino</h2>
+    <div class="course-grid">
+      <a href="curso-foundations.html" class="course-card glass-card">
+        <img src="../ASSETS/placeholders/course-foundations.svg" alt="Foundations" style="border-radius:var(--radius-sm);margin-bottom:var(--space-3)">
+        <h3>Foundations</h3>
+        <p>Bases de pilotaje, configuración y consistencia.</p>
+        <span class="cta cta--outline">Ver</span>
+      </a>
+      <span class="course-arrow">→</span>
+      <span class="course-divider"></span>
+      <a href="curso-competition.html" class="course-card glass-card">
+        <img src="../ASSETS/placeholders/course-competition.svg" alt="Competition" style="border-radius:var(--radius-sm);margin-bottom:var(--space-3)">
+        <h3>Competition</h3>
+        <p>Estrategia de carrera y rendimiento bajo presión.</p>
+        <span class="cta cta--outline">Ver</span>
+      </a>
+      <span class="course-arrow">→</span>
+      <span class="course-divider"></span>
+      <a href="curso-elite.html" class="course-card course-card--elite glass-card">
+        <img src="../ASSETS/placeholders/course-elite.svg" alt="Elite" style="border-radius:var(--radius-sm);margin-bottom:var(--space-3)">
+        <h3>Elite</h3>
+        <p>Programa profesional con acceso a equipos y sponsors.</p>
+        <span class="cta cta--primary glass-cta">Ver</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 13 CONTACTO -->
+<section id="contacto" class="section bg-light">
+  <div class="wrap">
+    <span class="section-label">13 — Contacto</span>
+    <h2 class="section-title">¿Listo para empezar?</h2>
+    <div class="contact-grid">
+      <form class="contact-form">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="telefono" placeholder="Teléfono">
+        <textarea name="mensaje" placeholder="Mensaje" required></textarea>
+        <button type="submit" class="cta cta--primary glass-cta">Enviar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="section bg-dark">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__logo"><img src="../ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing"></div>
+      <div class="footer__col">
+        <a href="#quienes-somos">Nosotros</a>
+        <a href="#metodologia">Metodología</a>
+        <a href="#cursos">Cursos</a>
+      </div>
+      <div class="footer__col">
+        <a href="#">Coaches</a>
+        <a href="#">Comunidad</a>
+        <a href="#">Resultados</a>
+      </div>
+      <div class="footer__col">
+        <a href="#contacto">Contacto</a>
+        <a href="#">Términos</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+    <div class="footer__social">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Twitch">TW</a>
+      <a href="#" aria-label="Discord">DC</a>
+      <a href="#" aria-label="YouTube">YT</a>
+    </div>
+    <div class="footer__divider"></div>
+    <div class="footer__legal">
+      <p>© 2026 Apex Sim Racing</p>
+      <p>Términos · Privacidad</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
