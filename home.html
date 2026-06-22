@@ -41,15 +41,13 @@
   </video>
   <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(28,38,40,0.75), rgba(28,38,40,0.2))"></div>
   <div class="wrap" style="position:relative;z-index:1">
-    <span class="section-label">01 — Hero</span>
-    <h1 style="margin-bottom:var(--space-6)">LA PRÓXIMA GENERACIÓN<br>DE PILOTOS</h1>
+    <h1 style="margin-bottom:var(--space-6)">LO QUE NO SE MIDE,<br>NO SE MEJORA</h1>
     <a href="#contacto" class="cta cta--primary">Inscribirme</a>
   </div>
 </section>
 
 <!-- EDITORIAL A -->
 <section class="editorial bg-dark">
-  <span class="section-label" style="position:absolute;top:var(--space-4);left:var(--grid-margin-mobile)">Editorial A</span>
   <p class="editorial__line">LA PRÓXIMA</p>
   <p class="editorial__line">GENERACIÓN</p>
   <p class="editorial__line editorial__line--outline">DE PILOTOS</p>
@@ -58,7 +56,7 @@
 </section>
 
 <!-- 02 PARTNERS -->
-<section class="section bg-light">
+<section class="section bg-dark">
   <div class="wrap text-center">
     <span class="section-label">02 — Partners</span>
     <div class="partners-row">
@@ -73,24 +71,22 @@
 </section>
 
 <!-- 03 QUIÉNES SOMOS -->
-<section id="quienes-somos" class="section bg-dark">
-  <div class="wrap grid">
-    <span class="section-label" style="grid-column:1/-1">03 — Quiénes somos</span>
-    <div style="grid-column:1/-1" class="about-media">
-      <img src="../ASSETS/placeholders/about-us.svg" alt="Quiénes somos" style="border-radius:var(--radius-md);width:100%">
-    </div>
-    <div style="grid-column:1/-1">
-      <h2 style="margin-bottom:var(--space-4)">Formamos pilotos, no jugadores</h2>
-      <p class="text-muted" style="margin-bottom:var(--space-6);max-width:560px">
-        Apex Sim Racing combina datos, coaching profesional y metodología de competición real para llevar a simracers al siguiente nivel.
-      </p>
-      <a href="#metodologia" class="cta cta--outline">Conocer más</a>
+<section id="quienes-somos" class="section bg-light">
+  <div class="wrap">
+    <span class="section-label">03 — Quiénes somos</span>
+    <div class="about-grid">
+      <img class="about-grid__media" src="../ASSETS/placeholders/about-us.svg" alt="Quiénes somos">
+      <div class="about-grid__text">
+        <h2>Formamos pilotos, no jugadores</h2>
+        <p>Datos, coaching profesional y metodología de competición real.</p>
+        <a href="#metodologia" class="cta cta--outline">Conocer más</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- 04 METODOLOGÍA APEX -->
-<section id="metodologia" class="section bg-light">
+<section id="metodologia" class="section section--methodology bg-light">
   <div class="wrap text-center">
     <span class="section-label">04 — Metodología Apex</span>
     <div class="method-flow">
@@ -121,8 +117,14 @@
 <section class="section bg-dark">
   <div class="wrap">
     <span class="section-label">05 — Apex Analytics</span>
-    <div class="analytics-mockup">
-      <img class="analytics-mockup__bar" src="../ASSETS/placeholders/analytics-mockup.svg" alt="Apex Analytics dashboard">
+    <div class="analytics-grid">
+      <div class="analytics-mockup">
+        <img class="analytics-mockup__bar" src="../ASSETS/placeholders/analytics-mockup.svg" alt="Apex Analytics dashboard">
+      </div>
+      <div class="analytics-text">
+        <h2>Apex Analytics</h2>
+        <p>Tu telemetría, traducida en decisiones. Cada vuelta se convierte en datos comparables: consistencia, tiempos por sector y evolución frente a tus coaches, todo en un mismo panel.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -406,26 +408,14 @@
         </div>
       </div>
     </div>
-    <div class="testimonial-compare">
-      <div class="testimonial-compare__metric">
-        <span>Antes</span>
-        <strong>1:32.4</strong>
-      </div>
-      <span style="opacity:.35">→</span>
-      <div class="testimonial-compare__metric">
-        <span>Después</span>
-        <strong style="color:var(--color-accent)">1:28.1</strong>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- EDITORIAL B -->
 <section class="editorial bg-light">
-  <span class="section-label" style="position:absolute;top:var(--space-4);left:var(--grid-margin-mobile)">Editorial B</span>
   <p class="editorial__line">¿LISTO</p>
-  <p class="editorial__line editorial__line--outline">PARA</p>
-  <p class="editorial__line" style="margin-bottom:var(--space-6)">COMPETIR?</p>
+  <p class="editorial__line">PARA</p>
+  <p class="editorial__line" style="margin-bottom:var(--space-6)"><span class="editorial__line--outline-dark">COMPETIR</span>?</p>
   <a href="#cursos" class="cta cta--primary" style="width:fit-content">Ver programas</a>
   <span class="editorial__scroll-hint">Scroll ↓</span>
 </section>
@@ -473,7 +463,6 @@
         <textarea name="mensaje" placeholder="Mensaje" required></textarea>
         <button type="submit" class="cta cta--primary">Enviar</button>
       </form>
-      <img src="../ASSETS/placeholders/contact-image.svg" alt="Contacto" style="border-radius:var(--radius-md)">
     </div>
   </div>
 </section>

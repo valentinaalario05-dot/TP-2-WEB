@@ -178,13 +178,18 @@ p { font-size: var(--t-body); }
   font-family: var(--font-h1);
   font-weight: var(--weight-h1);
   font-size: var(--t-editorial);
-  line-height: 0.9;
+  line-height: 1.25;
   letter-spacing: -0.03em;
   text-transform: uppercase;
 }
 
 .editorial__line--outline {
   -webkit-text-stroke: var(--outline-width) var(--color-white);
+  color: transparent;
+}
+
+.editorial__line--outline-dark {
+  -webkit-text-stroke: var(--outline-width) var(--color-dark);
   color: transparent;
 }
 
