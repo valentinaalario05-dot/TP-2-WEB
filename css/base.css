@@ -157,6 +157,12 @@ p { font-size: var(--t-body); }
 }
 .cta--ghost:hover { opacity: 1; }
 
+.cta--light {
+  background: var(--color-light);
+  color: var(--color-dark);
+}
+.cta--light:hover { transform: scale(1.03); }
+
 /* ==========================================================================
    EDITORIAL BLOCK
    ========================================================================== */

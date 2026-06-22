@@ -9,18 +9,17 @@
   top: 0;
   z-index: 100;
   height: 56px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-4);
   padding: 0 var(--grid-margin-mobile);
-  background: var(--color-light);
-  border-bottom: 1px solid var(--color-border-light);
-  transition: backdrop-filter var(--duration-base) ease, background var(--duration-base) ease;
+  background: var(--color-dark);
+  transition: background var(--duration-base) ease;
 }
 
 .nav.is-scrolled {
-  background: rgba(244,243,239,0.85);
-  backdrop-filter: blur(8px);
+  background: var(--color-dark);
 }
 
 @media (min-width: 1024px) {
@@ -38,11 +37,28 @@
 @media (min-width: 1024px) {
   .nav__links {
     display: flex;
+    justify-self: center;
+    align-items: center;
     gap: var(--space-8);
     font-family: var(--font-h2);
     font-size: var(--t-h4);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    color: var(--color-white);
+    padding: var(--space-2) var(--space-8);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .nav__links {
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
   }
 }
 
@@ -63,7 +79,11 @@
   transition: transform var(--duration-base) ease, opacity var(--duration-base) ease;
 }
 
-.nav__cta { display: none; }
+.nav__cta {
+  display: none;
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-8);
+}
 
 @media (min-width: 1024px) { .nav__cta { display: inline-flex; } }
 
@@ -71,6 +91,8 @@
   font-size: 0.6875rem;
   padding: 8px 14px;
   min-height: 36px;
+  justify-self: end;
+  border-radius: var(--radius-full);
 }
 
 @media (min-width: 1024px) { .nav__cta--mobile { display: none; } }
@@ -78,7 +100,8 @@
 .nav__drawer {
   position: fixed;
   inset: 56px 0 0 0;
-  background: var(--color-light);
+  background: var(--color-dark);
+  color: var(--color-white);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
