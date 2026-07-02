@@ -321,7 +321,7 @@ p { font-size: 1.3rem; }
 /* ---- Editorial A: tipografía/fondo/colores propios (no afecta Editorial B) ---- */
 
 .editorial--a {
-  background-image: url("../ASSETS/backgrounds/background-editorial1.svg");
+  background-image: url("../ASSETS/backgrounds/background-editorial1.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
