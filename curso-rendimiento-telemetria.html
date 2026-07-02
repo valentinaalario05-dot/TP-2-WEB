@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es" class="is-loading">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rendimiento y Telemetría — Apex Sim Racing</title>
+<style>
+  html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
+  #preloader { position: fixed; inset: 0; z-index: 9999; background: #000; }
+</style>
+<link rel="stylesheet" href="https://use.typekit.net/ljr5kxo.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/glass.css">
+<link rel="stylesheet" href="css/preloader.css">
+</head>
+<body>
+
+<!-- SVG defs: mismas siluetas reutilizables que home.html (coach-notch-clip) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="coach-notch-clip" clipPathUnits="objectBoundingBox">
+      <path d="
+        M0.019656 0.001217
+        h0.960442
+        a0.018428 0.018248 0 0 1 0.018428 0.018248
+        v0.868572
+        a0.018428 0.018248 0 0 1 -0.018428 0.018248
+        H0.647247
+        a0.057738 0.057183 0 0 0 -0.045135 0.021529
+        l-0.040537 0.050365
+        a0.055287 0.054750 0 0 1 -0.043226 0.020615
+        H0.019656
+        A0.018428 0.018248 0 0 1 0.001229 0.980535
+        V0.019465
+        A0.018428 0.018248 0 0 1 0.019656 0.001217
+        Z
+      "/>
+    </clipPath>
+
+    <!-- Silueta del panel de módulos (timeline "Programa del curso"): geometría
+         exacta tomada de 67d9a2eb367e13f117c827e5_ln-calendar-track-mask.svg
+         (viewBox 1688x918), normalizada a objectBoundingBox (cada x /1688,
+         cada y /918) — mismo criterio que ln-shape-clip en home.html. El
+         borde visible se dibuja aparte con module-panel__frame (SVG con
+         stroke), igual que coach-card__frame. */
+    <clipPath id="module-panel-clip" clipPathUnits="objectBoundingBox">
+      <path d="
+        M0.043246 0.013072
+        V0.522969
+        C0.043246 0.531892 0.040486 0.540001 0.036101 0.544238
+        L0.007143 0.571231
+        C0.002761 0.575315 0 0.583579 0 0.592608
+        V0.986384
+        C0 0.993380 0.003183 0.999455 0.007109 0.999455
+        H0.948460
+        C0.952389 0.999455 0.955569 0.993380 0.955569 0.986384
+        V0.860755
+        C0.955569 0.852209 0.957844 0.844312 0.961861 0.840023
+        L0.993223 0.806490
+        C0.997225 0.802206 0.999704 0.794306 0.999704 0.785759
+        V0.013072
+        C0.999704 0.005852 0.996408 0 0.992908 0
+        H0.050355
+        C0.046416 0 0.043246 0.005852 0.043246 0.013072
+        Z
+      "/>
+    </clipPath>
+  </defs>
+</svg>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader__stage">
+    <svg class="preloader__gauge" id="preloader-gauge" viewBox="0 0 300 300"></svg>
+    <div class="preloader__logo">
+      <img src="ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing">
+    </div>
+  </div>
+</div>
+<script src="js/preloader.js"></script>
+
+<!-- NAV -->
+<header class="nav nav--right">
+  <a href="home.html#hero" class="nav__logo" aria-label="Apex Sim Racing">
+    <svg class="nav__logo-svg" viewBox="0 0 208.02 50.11" role="img" aria-label="Apex Sim Racing">
+      <g>
+        <path d="M50.15,10.33L39.89,0H9.91l-.02.02L0,10.33v9.83h9.81L0,30.45v19.65h9.88v-10.27h-.1l.1-.1v-9.28h30.01v9.26l.12.13h-.12v10.27h10.25v-19.65l-10.15-10.29h10.15v-9.83ZM39.89,20.16H9.88v-9.83h30.01v9.83Z"/>
+        <polygon points="103.32 10.33 103.32 30.45 63.07 30.45 63.07 39.73 62.97 39.84 63.07 39.84 63.07 50.11 53.18 50.11 53.18 30.45 63 20.16 93.08 20.16 93.08 10.33 63.07 10.33 63.07 20.08 63 20.16 53.18 20.16 53.18 10.33 63.07 .02 63.09 0 93.08 0 103.32 10.33"/>
+        <polygon points="115.33 39.74 115.24 39.84 145.47 39.84 155.59 50.11 105.45 50.11 105.45 30.45 115.27 20.16 105.45 20.16 105.45 10.33 115.33 .03 115.36 0 145.34 0 155.59 10.33 115.33 10.33 115.33 20.16 145.44 20.16 155.59 30.45 115.33 30.45 115.33 39.74"/>
+        <g>
+          <rect x="187.71" width="20.3" height="10.33"/>
+          <polygon points="208.02 39.84 208.02 50.11 187.68 50.11 177.83 39.84 177.78 39.79 177.78 10.33 157.87 10.33 157.87 0 167.76 0 167.76 .03 167.78 0 177.78 0 177.78 .13 187.57 10.33 187.71 10.49 187.71 39.84 208.02 39.84"/>
+          <rect x="157.87" y="39.84" width="19.91" height="10.27"/>
+        </g>
+      </g>
+    </svg>
+  </a>
+  <nav class="nav__links">
+    <a href="home.html#quienes-somos">Nosotros</a>
+    <a href="home.html#metodologia">Metodología</a>
+    <a href="home.html#cursos">Cursos</a>
+    <a href="home.html#contacto">Contacto</a>
+  </nav>
+  <button class="nav__toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="nav__drawer">
+  <a href="home.html#quienes-somos">Nosotros</a>
+  <a href="home.html#metodologia">Metodología</a>
+  <a href="home.html#cursos">Cursos</a>
+  <a href="#inscripcion">Inscribirme</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="course-hero bg-dark" data-nav-theme="transparent">
+  <img class="course-hero__media" src="ASSETS/placeholders/telemetria-1.png" alt="Rendimiento y Telemetría">
+  <div class="course-hero__scrim"></div>
+  <div class="wrap hero__wrap" style="position:relative;z-index:1">
+    <span class="course-hero__eyebrow">Curso · 4 semanas</span>
+    <span class="hero__rule" aria-hidden="true"></span>
+    <h1 class="hero__title">RENDIMIENTO Y TELEMETRÍA</h1>
+    <div class="hero__kicker">
+      <p class="hero__desc">Aprendé a interpretar datos reales para desarrollar un método de entrenamiento profesional.</p>
+      <a href="#inscripcion" class="cta cta--primary glass-cta cta--pill">Inscribirme</a>
+    </div>
+  </div>
+</section>
+
+<!-- ¿PARA QUIÉN ES ESTE CURSO? -->
+<div class="tech-grid-wrap tech-grid-wrap--lines">
+  <div class="tech-grid-bg tech-grid-bg--lines" aria-hidden="true"></div>
+  <section id="para-quien" class="section section--03" data-nav-theme="light">
+    <div class="wrap">
+      <div class="principles">
+        <h3 class="principles__title">¿PARA QUIÉN ES ESTE CURSO?</h3>
+        <p class="principles__lead">No importa cuánto corrés. Importa cuánto querés mejorar.</p>
+
+        <div class="reasons-list">
+          <div class="reasons-item scroll-reveal" data-reveal="left">
+            <span class="reasons-item__num">01</span>
+            <div class="reasons-item__body">
+              <h3 class="reasons-item__title">No sabés dónde perdés tiempo.</h3>
+              <p class="reasons-item__lead">Sentís que podrías ir más rápido, pero no sabés exactamente por qué.</p>
+              <span class="reasons-item__cta">El curso te ayuda a:</span>
+              <ul class="reasons-item__bullets">
+                <li>Interpretar telemetría.</li>
+                <li>Detectar pérdidas de tiempo.</li>
+                <li>Tomar decisiones con datos.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="reasons-item scroll-reveal" data-reveal="right">
+            <span class="reasons-item__num">02</span>
+            <div class="reasons-item__body">
+              <h3 class="reasons-item__title">Tus vueltas son inconsistentes.</h3>
+              <p class="reasons-item__lead">Podés hacer una vuelta rápida, pero no repetirla durante una carrera.</p>
+              <span class="reasons-item__cta">El curso te ayuda a:</span>
+              <ul class="reasons-item__bullets">
+                <li>Mejorar la consistencia.</li>
+                <li>Optimizar frenadas y aceleración.</li>
+                <li>Repetir el rendimiento.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="reasons-item scroll-reveal" data-reveal="left">
+            <span class="reasons-item__num">03</span>
+            <div class="reasons-item__body">
+              <h3 class="reasons-item__title">Entrenás sin un método.</h3>
+              <p class="reasons-item__lead">Acumulás horas de práctica, pero no podés medir si realmente progresás.</p>
+              <span class="reasons-item__cta">El curso te ayuda a:</span>
+              <ul class="reasons-item__bullets">
+                <li>Planificar entrenamientos.</li>
+                <li>Analizar cada sesión.</li>
+                <li>Medir la evolución.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMA DEL CURSO -->
+  <section id="programa" class="section section--04" data-nav-theme="light">
+    <div class="wrap text-center">
+      <h3 class="section-title">Programa del curso</h3>
+      <p class="section-subtitle">6 módulos, de la lectura básica de telemetría al análisis comparativo entre vueltas.</p>
+
+      <div class="module-carousel">
+        <button class="module-carousel__arrow module-carousel__arrow--prev" aria-label="Anterior">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="13,4 7,10 13,16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="module-carousel__arrow module-carousel__arrow--next" aria-label="Siguiente">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="7,4 13,10 7,16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      <div class="module-cards" id="module-cards">
+        <div class="module-card">
+          <svg class="module-panel__frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <div class="module-panel__content">
+            <span class="module-panel__eyebrow">Módulo 01</span>
+            <h3 class="module-panel__title">Fundamentos de telemetría</h3>
+            <p class="module-panel__desc">Qué es un canal, qué es una vuelta de referencia y cómo se estructura un dashboard tipo MoTeC/Atlas.</p>
+            <ul class="module-panel__bullets">
+              <li>Qué es un canal de datos y cómo se registra</li>
+              <li>Vuelta de referencia: qué es y para qué sirve</li>
+              <li>Estructura de un dashboard tipo MoTeC/Atlas</li>
+              <li>Unidades y escalas más comunes por canal</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card">
+          <svg class="module-panel__frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <div class="module-panel__content">
+            <span class="module-panel__eyebrow">Módulo 02</span>
+            <h3 class="module-panel__title">Velocidad y trazada</h3>
+            <p class="module-panel__desc">Lectura del canal de velocidad vs. distancia: puntos de frenado, apex y velocidad de salida de curva.</p>
+            <ul class="module-panel__bullets">
+              <li>Velocidad vs. distancia: cómo leer la curva</li>
+              <li>Identificar el punto de frenado real</li>
+              <li>Velocidad de apex y de salida de curva</li>
+              <li>Comparar trazadas entre dos vueltas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card">
+          <svg class="module-panel__frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <div class="module-panel__content">
+            <span class="module-panel__eyebrow">Módulo 03</span>
+            <h3 class="module-panel__title">Frenada y acelerador</h3>
+            <p class="module-panel__desc">Análisis de presión de freno, trail braking y aplicación progresiva de acelerador a la salida.</p>
+            <ul class="module-panel__bullets">
+              <li>Presión y curva de frenada</li>
+              <li>Trail braking: cuándo y cómo aplicarlo</li>
+              <li>Aplicación progresiva del acelerador</li>
+              <li>Errores comunes de superposición freno/acelerador</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card">
+          <svg class="module-panel__frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <div class="module-panel__content">
+            <span class="module-panel__eyebrow">Módulo 04</span>
+            <h3 class="module-panel__title">Volante y G lateral</h3>
+            <p class="module-panel__desc">Suavidad de inputs, ángulo de dirección y su relación con la aceleración lateral en cada curva.</p>
+            <ul class="module-panel__bullets">
+              <li>Ángulo de dirección vs. distancia</li>
+              <li>Suavidad de inputs y correcciones</li>
+              <li>Relación entre volante y G lateral</li>
+              <li>Detectar sobre-giro en la entrada de curva</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card">
+          <svg class="module-panel__frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <div class="module-panel__content">
+            <span class="module-panel__eyebrow">Módulo 05</span>
+            <h3 class="module-panel__title">Comparación entre vueltas</h3>
+            <p class="module-panel__desc">Superposición de vueltas y delta time por sector para encontrar dónde se gana o se pierde tiempo.</p>
+            <ul class="module-panel__bullets">
+              <li>Superposición de dos o más vueltas</li>
+              <li>Delta time por sector</li>
+              <li>Encontrar dónde se gana y dónde se pierde tiempo</li>
+              <li>Elegir una vuelta de referencia útil</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card">
+          <svg class="module-panel__frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <div class="module-panel__content">
+            <span class="module-panel__eyebrow">Módulo 06</span>
+            <h3 class="module-panel__title">Plan de mejora</h3>
+            <p class="module-panel__desc">Convertir el análisis en un plan de trabajo concreto para tu próxima sesión de entrenamiento.</p>
+            <ul class="module-panel__bullets">
+              <li>De los datos a un plan de acción concreto</li>
+              <li>Priorizar qué corregir primero</li>
+              <li>Definir objetivos medibles para la próxima sesión</li>
+              <li>Seguimiento de progreso entre sesiones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- DASHBOARD INTERACTIVO (Apex Analytics) -->
+<section class="section bg-dark section--analytics-compact" data-nav-theme="dark">
+  <div class="wrap text-center">
+    <div class="analytics-head">
+      <h3 class="section-title" style="margin-bottom:var(--space-1)">Aprendé a leer lo que pasa en cada vuelta</h3>
+    </div>
+
+    <div class="telemetry-hotspot-wrap">
+      <img src="ASSETS/curso-telemetría.png" alt="Dashboard de telemetría" class="telemetry-hotspot-img">
+
+      <!-- Hotspot 1: Mapa del circuito -->
+      <div class="telemetry-hotspot" style="left:16%;top:24%">
+        <div class="telemetry-hotspot__dot"></div>
+        <div class="telemetry-hotspot__tooltip">
+          <strong>Mapa del circuito</strong>
+          Visualizá la pista con los sectores S1, S2 y S3 diferenciados. Identificá en qué zona de la pista se producen las diferencias de tiempo.
+        </div>
+      </div>
+
+      <!-- Hotspot 2: Tiempos por sector -->
+      <div class="telemetry-hotspot" style="left:16%;top:58%">
+        <div class="telemetry-hotspot__dot"></div>
+        <div class="telemetry-hotspot__tooltip">
+          <strong>Tiempos por sector</strong>
+          Comparación de S1, S2 y S3 entre vueltas. Los valores en rojo indican pérdida de tiempo; los verdes, ganancia respecto a la vuelta de referencia.
+        </div>
+      </div>
+
+      <!-- Hotspot 3: Velocidad -->
+      <div class="telemetry-hotspot" style="left:57%;top:18%">
+        <div class="telemetry-hotspot__dot"></div>
+        <div class="telemetry-hotspot__tooltip">
+          <strong>Velocidad (km/h)</strong>
+          Curva de velocidad a lo largo de la vuelta. Compará el perfil entre dos vueltas para detectar diferencias en puntos de frenada y aceleración.
+        </div>
+      </div>
+
+      <!-- Hotspot 4: Freno -->
+      <div class="telemetry-hotspot" style="left:57%;top:33%">
+        <div class="telemetry-hotspot__dot"></div>
+        <div class="telemetry-hotspot__tooltip">
+          <strong>Freno (%)</strong>
+          Intensidad y duración de cada frenada. Permite ver si el piloto frena antes, más fuerte o libera el freno de forma diferente en cada vuelta.
+        </div>
+      </div>
+
+      <!-- Hotspot 5: Acelerador -->
+      <div class="telemetry-hotspot" style="left:57%;top:44%">
+        <div class="telemetry-hotspot__dot"></div>
+        <div class="telemetry-hotspot__tooltip">
+          <strong>Acelerador (%)</strong>
+          Apertura del acelerador en cada punto del circuito. Revela la suavidad y el timing de la aplicación de potencia en la salida de curva.
+        </div>
+      </div>
+
+      <!-- Hotspot 6: Fuerzas G -->
+      <div class="telemetry-hotspot" style="left:57%;top:56%">
+        <div class="telemetry-hotspot__dot"></div>
+        <div class="telemetry-hotspot__tooltip">
+          <strong>Fuerzas G</strong>
+          Fuerzas laterales, longitudinales y combinadas. Muestran la carga que experimenta el piloto y cómo el auto trabaja en cada fase de la curva.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE DEL MÉTODO DE ENTRENAMIENTO -->
+<section class="section bg-dark" data-nav-theme="dark">
+  <div class="wrap text-center">
+    <h2 class="section-title">El método, vuelta por vuelta</h2>
+    <p class="section-lead" style="max-width:520px;margin:0 auto var(--space-8)">Cada sesión sigue el mismo ciclo. Es lo que convierte la práctica suelta en mejora medible.</p>
+
+    <div class="method-shape" id="method-shape">
+      <svg class="method-shape__frame" id="method-shape-frame" viewBox="0 0 1688 918" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" style="stroke:var(--color-success)" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+
+      <div class="method-shape__grid">
+        <div class="method-module">
+          <div class="method-module__content">
+            <span class="method-module__num">01</span>
+            <h3 class="method-module__title">Entrenamiento</h3>
+            <p class="method-module__desc">Realizás una sesión con objetivos definidos.</p>
+            <div class="method-module__media"><span class="method-module__media-label">Imagen: piloto en el simulador</span></div>
+          </div>
+        </div>
+        <div class="method-module">
+          <div class="method-module__content">
+            <span class="method-module__num">02</span>
+            <h3 class="method-module__title">Recolección de datos</h3>
+            <p class="method-module__desc">La sesión genera información de cada acción del piloto.</p>
+            <div class="method-module__media"><span class="method-module__media-label">Imagen: monitor con telemetría</span></div>
+          </div>
+        </div>
+        <div class="method-module">
+          <div class="method-module__content">
+            <span class="method-module__num">03</span>
+            <h3 class="method-module__title">Análisis</h3>
+            <p class="method-module__desc">Se interpretan las variables para detectar oportunidades de mejora.</p>
+            <div class="method-module__media"><span class="method-module__media-label">Imagen: dashboard de telemetría</span></div>
+          </div>
+        </div>
+        <div class="method-module">
+          <div class="method-module__content">
+            <span class="method-module__num">04</span>
+            <h3 class="method-module__title">Correcciones</h3>
+            <p class="method-module__desc">Se definen ajustes concretos para la siguiente salida a pista.</p>
+            <div class="method-module__media"><span class="method-module__media-label">Imagen: coach analizando datos con el piloto</span></div>
+          </div>
+        </div>
+        <div class="method-module">
+          <div class="method-module__content">
+            <span class="method-module__num">05</span>
+            <h3 class="method-module__title">Nueva sesión</h3>
+            <p class="method-module__desc">El piloto aplica las correcciones y vuelve a entrenar.</p>
+            <div class="method-module__media"><span class="method-module__media-label">Imagen: cockpit durante una vuelta</span></div>
+          </div>
+        </div>
+        <div class="method-module">
+          <div class="method-module__content">
+            <span class="method-module__num">06</span>
+            <h3 class="method-module__title">Progreso</h3>
+            <p class="method-module__desc">Se comparan sesiones para medir la evolución del rendimiento.</p>
+            <div class="method-module__media"><span class="method-module__media-label">Imagen: gráfico de evolución</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+	<!-- CASO PRÁCTICO: ANTES/DESPUÉS -->
+<section class="caso-practico bg-light" data-nav-theme="light">
+  <div class="tech-grid-bg tech-grid-bg--lines" aria-hidden="true"></div>
+
+  <!-- Encabezado fuera de la grilla -->
+  <div class="caso-practico__header wrap">
+    <h2 class="section-title">Caso práctico:una sesión real</h2>
+    <p class="caso-practico__sub">Mismo piloto, mismo circuito, tres semanas de diferencia.</p>
+  </div>
+
+  <!-- Grilla sticky -->
+  <div class="caso-practico__grid">
+
+    <!-- COL IZQUIERDA: circuito sticky -->
+    <div class="caso-practico__track-col">
+      <div class="caso-practico__track-wrap">
+        <svg id="track-map-svg" class="track-map" viewBox="0 0 200 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!--
+            Spa-Francorchamps — portrait orientation (rotado 90° respecto a la referencia)
+            Sentido horario desde La Source (top). S/F straight = lado derecho (x≈156).
+          -->
+          <path id="track-map-path" class="track-map__line" d="
+            M 152 42
+            C 155 28 145 14 130 14
+            C 115 14 103 24 100 38
+            C 97  52 104 66 114 72
+            C 118 76 120 82 116 92
+            C 112 102 104 110  98 120
+            C  92 130  88 140  88 152
+            C  88 162  92 170  96 180
+            C 100 190 104 198 102 210
+            C 100 222  94 232  84 236
+            C  74 240  62 236  52 228
+            C  42 220  34 218  28 228
+            L  22 262
+            C  18 276  20 290  28 298
+            C  36 306  48 310  52 322
+            C  56 334  56 348  50 360
+            C  44 372  36 380  32 392
+            C  28 404  30 418  40 426
+            C  50 434  64 436  78 432
+            C  92 428 106 430 118 440
+            C 130 450 138 464 134 480
+            C 130 496 118 506 104 506
+            C  90 506  80 496  76 482
+            C  72 468  76 454  84 446
+            C  92 438 106 432 118 432
+            C 128 432 138 426 138 414
+            C 138 402 128 396 118 398
+            C 108 400 102 410 106 422
+            C 110 432 122 438 136 436
+            C 148 434 156 426 156 414
+            L 156 100
+            C 156  72 154  56 152  42
+            Z
+          " fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Punto animado -->
+          <circle id="track-map-dot" class="track-map__dot" r="5" cx="152" cy="42"/>
+        </svg>
+        <p class="track-map__label">Spa-Francorchamps · 7.004 km</p>
+      </div>
+    </div>
+
+    <!-- COL CENTRAL: ANTES -->
+    <div class="caso-practico__scroll-col">
+      <div class="caso-practico__col-header">
+        <span class="caso-practico__session-tag">Sesión 1</span>
+        <strong class="caso-practico__col-title">Antes</strong>
+      </div>
+
+      <!-- Fila 1: Velocidad -->
+      <div class="caso-practico__row" data-var="velocidad">
+        <span class="caso-practico__var-label">Velocidad máx.</span>
+        <p class="caso-practico__value">204 <span class="caso-practico__unit">km/h</span></p>
+        <p class="caso-practico__note">El piloto levantaba antes de La Source y en Raidillon, perdiendo velocidad de paso.</p>
+      </div>
+
+      <!-- Fila 2: Freno -->
+      <div class="caso-practico__row" data-var="freno">
+        <span class="caso-practico__var-label">Presión de freno</span>
+        <p class="caso-practico__value">68 <span class="caso-practico__unit">%</span></p>
+        <p class="caso-practico__note">Frenadas cortas y suaves. Sin aprovechar el tope de agarre trasero disponible.</p>
+      </div>
+
+      <!-- Fila 3: Tiempo de vuelta -->
+      <div class="caso-practico__row" data-var="tiempo">
+        <span class="caso-practico__var-label">Tiempo de vuelta</span>
+        <p class="caso-practico__value">1:42.<span class="caso-practico__decimals">85</span></p>
+        <p class="caso-practico__note">Vuelta inconsistente con alta variación entre pasadas consecutivas.</p>
+      </div>
+
+      <!-- Fila 4: Fuerza G -->
+      <div class="caso-practico__row" data-var="g">
+        <span class="caso-practico__var-label">Fuerza G lateral</span>
+        <p class="caso-practico__value">2.1 <span class="caso-practico__unit">G</span></p>
+        <p class="caso-practico__note">Subviraje notable en Eau Rouge. El coche no era llevado al límite en las curvas rápidas.</p>
+      </div>
+    </div>
+
+    <!-- COL DERECHA: DESPUÉS -->
+    <div class="caso-practico__scroll-col caso-practico__scroll-col--after">
+      <div class="caso-practico__col-header">
+        <span class="caso-practico__session-tag caso-practico__session-tag--after">Sesión 12</span>
+        <strong class="caso-practico__col-title">Después</strong>
+      </div>
+
+      <!-- Fila 1: Velocidad -->
+      <div class="caso-practico__row" data-var="velocidad">
+        <span class="caso-practico__var-label">Velocidad máx.</span>
+        <p class="caso-practico__value">231 <span class="caso-practico__unit">km/h</span></p>
+        <p class="caso-practico__note">Compromiso de velocidad sostenido a lo largo de toda la vuelta.</p>
+      </div>
+
+      <!-- Fila 2: Freno -->
+      <div class="caso-practico__row" data-var="freno">
+        <span class="caso-practico__var-label">Presión de freno</span>
+        <p class="caso-practico__value">84 <span class="caso-practico__unit">%</span></p>
+        <p class="caso-practico__note">Frenadas al límite con trail brake controlado. Mayor carga trasera en la entrada de curva.</p>
+      </div>
+
+      <!-- Fila 3: Tiempo de vuelta -->
+      <div class="caso-practico__row" data-var="tiempo">
+        <span class="caso-practico__var-label">Tiempo de vuelta</span>
+        <p class="caso-practico__value">1:40.<span class="caso-practico__decimals">41</span></p>
+        <p class="caso-practico__note">Consistencia del 91% sobre 15 vueltas consecutivas.</p>
+      </div>
+
+      <!-- Fila 4: Fuerza G -->
+      <div class="caso-practico__row" data-var="g">
+        <span class="caso-practico__var-label">Fuerza G lateral</span>
+        <p class="caso-practico__value">2.8 <span class="caso-practico__unit">G</span></p>
+        <p class="caso-practico__note">Curvas rápidas trabajadas al límite de adherencia. Línea optimizada en Pouhon.</p>
+      </div>
+    </div>
+
+  </div><!-- /caso-practico__grid -->
+</section>
+
+<!-- FAQ -->
+<section class="section bg-dark text-center" data-nav-theme="dark">
+  <div class="wrap">
+    <h2 class="section-title">Preguntas frecuentes</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>¿Necesito experiencia previa con telemetría?</summary>
+        <p>No. El curso arranca desde los fundamentos: qué es un canal de datos y cómo leer un dashboard tipo MoTeC/Atlas.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué simulador necesito?</summary>
+        <p>El método aplica a cualquier simulador con exportación de telemetría (iRacing, ACC, rFactor 2, entre otros).</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Las sesiones son individuales o grupales?</summary>
+        <p>El análisis de telemetría y el feedback son individuales. La comunidad y algunas sesiones de práctica son grupales.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo combinarlo con otro curso de Apex?</summary>
+        <p>Sí. Rendimiento y Telemetría complementa tanto Técnica de conducción como Competición estratégica.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="inscripcion" class="section bg-light course-cta-final" data-nav-theme="light">
+  <div class="wrap">
+    <h2 class="section-title">Empezá a manejar con datos</h2>
+    <p>4 semanas para dejar de manejar a ciegas y empezar a competir con información real.</p>
+    <a href="home.html#contacto" class="cta cta--primary glass-cta cta--pill">Inscribirme ahora</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="section bg-dark">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__logo"><img src="ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing"></div>
+      <div class="footer__col">
+        <a href="home.html#quienes-somos">Nosotros</a>
+        <a href="home.html#metodologia">Metodología</a>
+        <a href="home.html#cursos">Cursos</a>
+      </div>
+      <div class="footer__col">
+        <a href="home.html#cursos">Coaches</a>
+        <a href="home.html#cursos">Comunidad</a>
+        <a href="home.html#resultados-pilotos">Resultados</a>
+      </div>
+      <div class="footer__col">
+        <a href="home.html#contacto">Contacto</a>
+        <a href="#">Términos</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+    <div class="footer__social">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Twitch">TW</a>
+      <a href="#" aria-label="Discord">DC</a>
+      <a href="#" aria-label="YouTube">YT</a>
+    </div>
+    <div class="footer__divider"></div>
+    <div class="footer__legal">
+      <p>© 2026 Apex Sim Racing</p>
+      <p>Términos · Privacidad</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/curso-telemetria.js"></script>
+
+<!-- Nav theme por sección (GSAP + ScrollTrigger), aislado de main.js -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="js/nav-theme.js"></script>
+<script>
+(function(){
+  const track = document.getElementById('module-cards');
+  if (!track) return;
+  const prev = document.querySelector('.module-carousel__arrow--prev');
+  const next = document.querySelector('.module-carousel__arrow--next');
+  const step = () => track.querySelector('.module-card').offsetWidth + parseInt(getComputedStyle(track).gap);
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
+})();
+</script>
+</body>
+</html>

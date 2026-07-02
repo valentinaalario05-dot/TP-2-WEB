@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" width="560" height="340">
+  <rect width="560" height="340" fill="#1C2628"/>
+  <rect x="0.5" y="0.5" width="559" height="339" fill="none" stroke="#AAB2B8" stroke-width="1" opacity="0.4"/>
+  <line x1="0" y1="34" x2="560" y2="34" stroke="#AAB2B8" stroke-width="1" opacity="0.3"/>
+  <circle cx="18" cy="17" r="4" fill="#AAB2B8" opacity="0.5"/>
+  <circle cx="34" cy="17" r="4" fill="#AAB2B8" opacity="0.5"/>
+  <circle cx="50" cy="17" r="4" fill="#AAB2B8" opacity="0.5"/>
+
+  <g>
+    <rect x="20" y="50" width="160" height="56" rx="8" fill="none" stroke="#AAB2B8" stroke-width="1" opacity="0.5"/>
+    <text x="32" y="75" fill="#F4F3EF" font-family="Arial" font-size="13" opacity="0.7">Vueltas</text>
+    <text x="32" y="95" fill="#124AF7" font-family="monospace" font-size="11" opacity="0.8">128</text>
+
+    <rect x="200" y="50" width="160" height="56" rx="8" fill="none" stroke="#AAB2B8" stroke-width="1" opacity="0.5"/>
+    <text x="212" y="75" fill="#F4F3EF" font-family="Arial" font-size="13" opacity="0.7">Consistencia</text>
+    <text x="212" y="95" fill="#124AF7" font-family="monospace" font-size="11" opacity="0.8">92%</text>
+
+    <rect x="380" y="50" width="160" height="56" rx="8" fill="none" stroke="#AAB2B8" stroke-width="1" opacity="0.5"/>
+    <text x="392" y="75" fill="#F4F3EF" font-family="Arial" font-size="13" opacity="0.7">Mejora</text>
+    <text x="392" y="95" fill="#124AF7" font-family="monospace" font-size="11" opacity="0.8">+4.2s</text>
+  </g>
+
+  <g>
+    <rect x="20" y="124" width="60" height="60" fill="#404C52" opacity="0.6"/>
+    <rect x="90" y="100" width="60" height="84" fill="#404C52" opacity="0.6"/>
+    <rect x="160" y="140" width="60" height="44" fill="#404C52" opacity="0.6"/>
+    <rect x="230" y="80" width="60" height="104" fill="#404C52" opacity="0.6"/>
+    <rect x="300" y="116" width="60" height="68" fill="#404C52" opacity="0.6"/>
+    <rect x="370" y="92" width="60" height="92" fill="#404C52" opacity="0.6"/>
+    <rect x="440" y="128" width="60" height="56" fill="#404C52" opacity="0.6"/>
+  </g>
+
+  <text x="20" y="208" fill="#AAB2B8" font-family="Arial" font-size="11" opacity="0.6">Comparativa de rendimiento</text>
+
+  <rect x="20" y="222" width="520" height="6" rx="3" fill="#404C52" opacity="0.4"/>
+  <rect x="20" y="222" width="340" height="6" rx="3" fill="#124AF7" opacity="0.8"/>
+
+  <rect x="20" y="242" width="520" height="6" rx="3" fill="#404C52" opacity="0.4"/>
+  <rect x="20" y="242" width="208" height="6" rx="3" fill="#FA6F38" opacity="0.8"/>
+
+  <text x="280" y="300" text-anchor="middle" fill="#F4F3EF" font-family="Arial" font-size="13" opacity="0.5">ANALYTICS MOCKUP — reemplazar por captura real</text>
+</svg>

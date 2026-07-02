@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <rect width="800" height="600" fill="#1C2628"/>
+  <rect x="0.5" y="0.5" width="800" height="600" fill="none" stroke="#AAB2B8" stroke-width="1" stroke-dasharray="6 4" opacity="0.5"/>
+  <line x1="0" y1="0" x2="800" y2="600" stroke="#AAB2B8" stroke-width="1" opacity="0.25"/>
+  <line x1="800" y1="0" x2="0" y2="600" stroke="#AAB2B8" stroke-width="1" opacity="0.25"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#F4F3EF" font-family="Arial, sans-serif" font-size="14" opacity="0.85">QUIENES SOMOS</text>
+  <text x="50%" y="62%" text-anchor="middle" dominant-baseline="middle" fill="#AAB2B8" font-family="Arial, sans-serif" font-size="10" opacity="0.6">800x600 — reemplazar</text>
+</svg>
