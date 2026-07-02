@@ -304,7 +304,7 @@ p { font-size: 1.3rem; }
   font-weight: 600;
   font-style: italic;
   font-size: clamp(2.85rem, 10.2vw, 6.3rem);
-  -webkit-text-stroke: var(--outline-width) #ff5e33;
+  -webkit-text-stroke: var(--outline-width) #ebebe9;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }

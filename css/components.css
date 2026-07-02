@@ -595,7 +595,7 @@
   object-fit: cover;
   object-position: center top;
   display: block;
-  opacity: 0.75;
+  border-radius: .75rem;
 }
 
 /* col 2 vacía — las celdas se colocan explícitamente en cols 3 y 4 */
@@ -1506,12 +1506,8 @@
 
 .review-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
-}
-
-@media (min-width: 1024px) {
-  .review-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 .review-card {
@@ -1520,11 +1516,11 @@
   gap: var(--space-2);
   padding: var(--space-4);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.75);
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 8px 24px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   transition: opacity 350ms var(--ease-default);
 }
 
@@ -2550,8 +2546,13 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  color: #2F31F5;
   pointer-events: none;
+  z-index: 0;
+}
+
+.module-panel__frame path {
+  fill: #DBF059;
+  stroke: none;
 }
 
 .module-panel__content {
@@ -2578,7 +2579,7 @@
   font-size: var(--t-caption);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-data);
+  color: #000000;
 }
 
 .module-panel__title {
@@ -2598,20 +2599,22 @@
   display: grid;
   gap: var(--space-1);
   margin-top: var(--space-2);
+  text-align: left;
+  list-style: none;
+  padding: 0;
 }
 
 .module-panel__bullets li {
   font-size: var(--t-body);
   color: rgba(28, 28, 28, 0.75);
-  padding-left: var(--space-4);
-  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
 }
 
 .module-panel__bullets li::before {
   content: "▲";
-  position: absolute;
-  left: 0;
-  top: 0.15em;
+  flex-shrink: 0;
   font-size: 0.6em;
   color: var(--color-accent);
 }
@@ -3347,7 +3350,7 @@
 .module-card {
   scroll-snap-align: start;
   flex: 0 0 calc((100% - 2 * var(--space-4)) / 3);
-  height: 440px;
+  height: 300px;
   position: relative;
   clip-path: url(#module-panel-clip);
 }
@@ -3355,6 +3358,26 @@
 .module-card .module-panel__content {
   opacity: 1;
   transform: none;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.module-card .module-panel__eyebrow {
+  font-size: 0.75rem;
+}
+
+.module-card .module-panel__title {
+  font-size: 1.35rem;
+}
+
+.module-card .module-panel__bullets {
+  text-align: left;
+}
+
+.module-card .module-panel__bullets li {
+  font-size: 0.85rem;
+  white-space: normal;
 }
 
 /* ---- CTA final de inscripción ---- */
@@ -3488,9 +3511,9 @@
 }
 
 .caso-practico__scroll-col--after .caso-practico__col-title {
-  -webkit-text-stroke: 1.5px var(--color-dark);
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  -webkit-text-stroke: unset;
+  -webkit-text-fill-color: unset;
+  color: var(--color-dark);
 }
 
 /* Filas de variables */
