@@ -12,6 +12,7 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+
   var nav = document.querySelector('.nav');
   var sections = document.querySelectorAll('[data-nav-theme]');
   if (!nav || !sections.length) return;
@@ -35,4 +36,36 @@
   });
 
   setTheme(sections[0].getAttribute('data-nav-theme'));
+
+  /* ---- Course cards: scroll-driven emerge desde abajo (scrub) ---- */
+  var courseGrid = document.querySelector('.course-grid--reveal');
+  if (courseGrid) {
+    var cards = Array.from(courseGrid.querySelectorAll('.course-card'));
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      cards.forEach(function (c) { gsap.set(c, { opacity: 1, y: 0 }); });
+    } else {
+      gsap.set(cards, { opacity: 0, y: 90 });
+
+      var startOffsets = ['top 88%', 'top 80%', 'top 72%', 'top 64%'];
+      var endOffsets   = ['top 30%', 'top 22%', 'top 14%', 'top 6%'];
+
+      cards.forEach(function (card, i) {
+        gsap.fromTo(card,
+          { opacity: 0, y: 90 },
+          {
+            opacity: 1,
+            y: 0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: courseGrid,
+              start: startOffsets[i] || 'top 85%',
+              end:   endOffsets[i]   || 'top 25%',
+              scrub: 0.8
+            }
+          }
+        );
+      });
+    }
+  }
 })();

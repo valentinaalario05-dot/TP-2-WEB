@@ -312,10 +312,51 @@ p { font-size: 1.3rem; }
 /* ---- Editorial B: fondo propio ---- */
 
 .editorial--b {
-  background-image: url("../ASSETS/backgrounds/background-editorial2.png");
+  background-color #;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+/* ---- Editorial B + Cursos fusionados ---- */
+.editorial-cursos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-20) 0 var(--space-12);
+}
+
+.editorial-cursos__header {
+  text-align: center;
+  width: 100%;
+}
+
+.editorial-cursos__sub {
+  display: block;
+  text-align: center;
+  margin-bottom: -0.5em;
+}
+
+.editorial-cursos__title {
+  display: block;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  font-family: var(--font-h1-alt);
+  font-weight: var(--weight-h1-alt);
+  font-size: clamp(3rem, 18vw, 100vw);
+  text-align: center;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 4px var(--color-light);
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-top: 8px;
+  margin-bottom: var(--space-10);
+}
+
+.editorial-cursos__body {
+  width: 100%;
 }
 
 /* ---- Editorial A: tipografía/fondo/colores propios (no afecta Editorial B) ---- */
@@ -351,7 +392,7 @@ p { font-size: 1.3rem; }
   z-index: 1;
   font-family: var(--font-h1-alt);
   font-weight: var(--weight-h1-alt);
-  font-size: clamp(2.1rem, 7.2vw, 4.6rem); /* fuente real es más ancha que el fallback usado al calibrar */
+  font-size: clamp(6.1rem, 7.2vw, 4.6rem); /* fuente real es más ancha que el fallback usado al calibrar */
   color: #ffffff;
 }
 
@@ -367,7 +408,7 @@ p { font-size: 1.3rem; }
   font-family: var(--font-display-italic);
   font-weight: 600;
   font-style: italic;
-  font-size: clamp(1.9rem, 6.8vw, 4.2rem);
+  font-size: clamp(5.5rem, 6.8vw, 4.2rem);
   -webkit-text-stroke: 2pt #ffffff;
   -webkit-text-fill-color: transparent;
   color: transparent;
@@ -397,7 +438,7 @@ p { font-size: 1.3rem; }
   letter-spacing: -0.02em;
   text-transform: uppercase;
   margin-bottom: var(--space-4);
-  color: currentColor;
+  color: #000000;
 }
 
 .section-subtitle,
@@ -409,6 +450,7 @@ p { font-size: 1.3rem; }
   letter-spacing: 0;
   opacity: 0.85;
   margin-bottom: var(--space-4);
+  color: #ffffff;
 }
 
 /* ==========================================================================
@@ -440,6 +482,43 @@ p { font-size: 1.3rem; }
     transform: none;
     transition: none;
   }
+}
+
+/* ==========================================================================
+   TEXT REVEAL — overlay wipe (landonorris.com style)
+   Wrapper: overflow hidden. Overlay slides right on .is-revealed.
+   Reusable: add data-text-reveal to any container.
+   ========================================================================== */
+
+.text-reveal-wrap {
+  position: relative;
+  display: block;
+}
+
+/* Contiene y recorta solo el overlay, nunca el texto */
+.text-reveal-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.text-reveal-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-success);
+  transform: translateX(0%);
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.text-reveal-wrap.is-revealed .text-reveal-overlay {
+  transform: translateX(102%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-reveal-overlay { display: none; }
 }
 
 

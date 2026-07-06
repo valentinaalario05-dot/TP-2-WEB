@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
      fila — mismo patrón que .progress-tooltip, evita duplicar markup por fila. */
   var timingDetail = document.getElementById('timing-detail');
   if (timingDetail) {
-    var timingApexRows = document.querySelectorAll('.timing-row.is-apex');
+    var timingApexRows = document.querySelectorAll('.timing-row.is-apex, .rk-row.is-apex');
 
     var fillTimingDetail = function (row) {
       timingDetail.innerHTML =
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
       fillTimingDetail(row);
       if (window.innerWidth >= 1024) {
         var wrapEl = timingDetail.parentElement;
-        var towerEl = wrapEl.querySelector('.timing-tower');
+        var towerEl = wrapEl.querySelector('.timing-tower') || wrapEl.querySelector('.rk-table');
         var towerRight = towerEl.offsetLeft + towerEl.offsetWidth;
         var wrapWidth = wrapEl.clientWidth;
         var gap = 32;
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('click', function (e) {
       if (window.innerWidth >= 1024) return;
-      if (!e.target.closest('.timing-row') && !e.target.closest('.timing-detail')) hideTimingDetail();
+      if (!e.target.closest('.timing-row') && !e.target.closest('.rk-row') && !e.target.closest('.timing-detail')) hideTimingDetail();
     });
   }
 
@@ -932,6 +932,297 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
 
     updateMethod(); /* estado inicial */
+  })();
+
+  /* ---- Telemetría sincronizada ---- */
+  (function () {
+    var svg = document.getElementById('dashboard-svg');
+    if (!svg || typeof gsap === 'undefined') return;
+
+    var NS   = 'http://www.w3.org/2000/svg';
+    var defs = svg.querySelector('defs');
+
+    var trackPath = document.getElementById('track-path');
+    var trackDot  = document.getElementById('track-indicator');
+    var lineVel   = document.getElementById('linea-velocidad');
+    var lineAcc   = document.getElementById('linea-acelerador');
+    var lineFrn   = document.getElementById('linea-freno');
+    var lineAng   = document.getElementById('linea-angulo');
+    var lineRpm   = document.getElementById('linea-rpm');
+
+    var required = [trackPath, trackDot, lineVel, lineAcc, lineFrn, lineAng, lineRpm];
+    if (required.some(function (e) { return !e; })) return;
+
+    /* Usar solo el primer subpath del track-path para que el indicador
+       recorra siempre de izquierda a derecha sin cambiar de dirección */
+    var trackPathD = trackPath.getAttribute('d');
+    var secondMIdx = trackPathD.indexOf('M', 1);
+    var firstSubD  = secondMIdx > 0 ? trackPathD.substring(0, secondMIdx).trim() : trackPathD;
+    var helperPath = document.createElementNS(NS, 'path');
+    helperPath.setAttribute('d', firstSubD);
+    helperPath.style.display = 'none';
+    svg.appendChild(helperPath);
+    var trackLen = helperPath.getTotalLength();
+
+    /* inicializar dasharray en todas las líneas */
+    var lines = [lineVel, lineAcc, lineFrn, lineAng, lineRpm];
+    lines.forEach(function (el) {
+      var len = el.getTotalLength();
+      el._tlen = len;
+      el.style.strokeDasharray  = len;
+      el.style.strokeDashoffset = len;
+    });
+
+    /* masks SVG para revelar los gradientes con el progreso */
+    function makeMask(id, x, maxW) {
+      var m = document.createElementNS(NS, 'mask');
+      m.setAttribute('id', id);
+      m.setAttribute('maskUnits', 'userSpaceOnUse');
+      var r = document.createElementNS(NS, 'rect');
+      r.setAttribute('x', x);      r.setAttribute('y', '0');
+      r.setAttribute('width', '0'); r.setAttribute('height', '480');
+      r.setAttribute('fill', 'white');
+      m.appendChild(r);
+      defs.appendChild(m);
+      return { rect: r, x0: x, maxW: maxW };
+    }
+
+    var mVel = makeMask('m-vel', 240, 227);
+    var mRpm = makeMask('m-rpm', 479, 225);
+    document.getElementById('mascara-velocidad').setAttribute('mask', 'url(#m-vel)');
+    document.getElementById('mascara-rpm').setAttribute('mask', 'url(#m-rpm)');
+
+    /* playheads: línea vertical por cada gráfico */
+    function makePH(x, y1, y2) {
+      var l = document.createElementNS(NS, 'line');
+      l.setAttribute('x1', x);  l.setAttribute('x2', x);
+      l.setAttribute('y1', y1); l.setAttribute('y2', y2);
+      l.setAttribute('stroke', 'rgba(255,255,255,0.5)');
+      l.setAttribute('stroke-width', '1');
+      l.setAttribute('pointer-events', 'none');
+      svg.appendChild(l);
+      return l;
+    }
+
+    var PH = {
+      vel: makePH(240, 65,  200),
+      acc: makePH(478, 60,  185),
+      ang: makePH(715, 84,  166),
+      rpm: makePH(479, 282, 430)
+    };
+
+    /* datos de temperatura de freno a lo largo de la vuelta (11 puntos = 0–1) */
+    var TDATA = {
+      TD: [640, 700, 760, 810, 850, 888, 870, 845, 820, 790, 640],
+      TI: [630, 690, 750, 800, 840, 880, 860, 835, 810, 780, 630],
+      DD: [560, 620, 680, 730, 770, 829, 810, 792, 765, 735, 560],
+      DI: [550, 610, 670, 720, 760, 820, 800, 782, 755, 725, 550]
+    };
+    var TMIN = 400, TMAX = 950;
+
+    var ARCS = {
+      TD: document.getElementById('arc-stroke-TD'),
+      TI: document.getElementById('arc-stroke-TI'),
+      DD: document.getElementById('arc-stroke-DD'),
+      DI: document.getElementById('arc-stroke-DI')
+    };
+    var ARCLEN = {};
+    Object.keys(ARCS).forEach(function (k) {
+      if (!ARCS[k]) return;
+      var len = ARCS[k].getTotalLength();
+      ARCLEN[k] = len;
+      ARCS[k].style.strokeDasharray  = len;
+      ARCS[k].style.strokeDashoffset = len;
+    });
+
+    var VALS = {
+      TD: document.getElementById('val-TD'),
+      TI: document.getElementById('val-TI'),
+      DD: document.getElementById('val-DD'),
+      DI: document.getElementById('val-DI')
+    };
+
+    /* interpolación en array de N puntos */
+    function lerp(arr, t) {
+      var n = arr.length - 1;
+      var i = Math.min(Math.floor(t * n), n - 1);
+      var f = t * n - i;
+      return arr[i] * (1 - f) + arr[i + 1] * f;
+    }
+
+    /* función maestra de sincronización */
+    function syncAll(p) {
+      /* indicador en track map */
+      var pt = helperPath.getPointAtLength(p * trackLen);
+      trackDot.setAttribute('cx', pt.x);
+      trackDot.setAttribute('cy', pt.y);
+
+      /* dashoffset de todas las líneas */
+      lines.forEach(function (el) {
+        el.style.strokeDashoffset = el._tlen * (1 - p);
+      });
+
+      /* masks de gradiente */
+      mVel.rect.setAttribute('width', mVel.maxW * p);
+      mRpm.rect.setAttribute('width', mRpm.maxW * p);
+
+      /* playheads */
+      var xVel = 240 + 227 * p;
+      PH.vel.setAttribute('x1', xVel); PH.vel.setAttribute('x2', xVel);
+      var xAcc = 478 + 227 * p;
+      PH.acc.setAttribute('x1', xAcc); PH.acc.setAttribute('x2', xAcc);
+      var xAng = 715 + 228 * p;
+      PH.ang.setAttribute('x1', xAng); PH.ang.setAttribute('x2', xAng);
+      var xRpm = 479 + 225 * p;
+      PH.rpm.setAttribute('x1', xRpm); PH.rpm.setAttribute('x2', xRpm);
+
+      /* temperatura de freno */
+      Object.keys(TDATA).forEach(function (k) {
+        var temp = Math.round(lerp(TDATA[k], p));
+        if (VALS[k]) {
+          var ts = VALS[k].querySelector('tspan');
+          if (ts) ts.textContent = temp + ' \xB0C';
+        }
+        if (ARCS[k] && ARCLEN[k]) {
+          var ratio = Math.max(0, Math.min(1, (temp - TMIN) / (TMAX - TMIN)));
+          ARCS[k].style.strokeDashoffset = ARCLEN[k] * (1 - ratio);
+        }
+      });
+    }
+
+    /* GSAP: arranca cuando la sección entra en viewport, loop */
+    var section = svg.closest('section');
+    if (!section) return;
+
+    var state = { p: 0 };
+    gsap.to(state, {
+      p: 1,
+      duration: 13,
+      ease: 'none',
+      repeat: -1,
+      repeatDelay: 1,
+      onUpdate: function () { syncAll(state.p); },
+      onRepeat: function () { state.p = 0; syncAll(0); },
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        toggleActions: 'play pause resume pause'
+      }
+    });
+
+    syncAll(0);
+  })();
+
+  /* ---- Coach carousel ---- */
+  (function () {
+    if (window.innerWidth < 1024) return;
+
+    var viewport = document.querySelector('.coach-carousel__viewport');
+    var grid     = document.querySelector('.coach-grid');
+    var btnPrev  = document.querySelector('.coach-carousel__btn--prev');
+    var btnNext  = document.querySelector('.coach-carousel__btn--next');
+    if (!viewport || !grid || !btnPrev || !btnNext) return;
+
+    var cards = grid.querySelectorAll('.coach-card');
+    if (!cards.length) return;
+
+    var offset   = 0;
+    var cardW, gap, step, maxOffset;
+
+    var VISIBLE = 3;
+
+    function measure() {
+      cardW     = cards[0].getBoundingClientRect().width;
+      gap       = parseFloat(getComputedStyle(grid).columnGap) || 0;
+      step      = VISIBLE * (cardW + gap);
+      maxOffset = (cards.length - VISIBLE) * (cardW + gap);
+    }
+
+    function applyTrack() {
+      /* Keep display:grid so padding-bottom:% resolves against column width, not viewport */
+      grid.style.gridTemplateColumns = 'none';
+      grid.style.gridTemplateRows    = 'auto';
+      grid.style.gridAutoFlow        = 'column';
+      grid.style.gridAutoColumns     = cardW + 'px';
+      grid.style.transition          = 'transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)';
+      grid.style.willChange          = 'transform';
+      /* Clip viewport to exactly VISIBLE cards */
+      viewport.style.width  = (VISIBLE * cardW + (VISIBLE - 1) * gap) + 'px';
+      viewport.style.margin = '0 auto';
+    }
+
+    function go(dir) {
+      offset = Math.max(0, Math.min(maxOffset, offset + dir * step));
+      grid.style.transform  = 'translateX(-' + offset + 'px)';
+      btnPrev.disabled = offset <= 0;
+      btnNext.disabled = offset >= maxOffset;
+    }
+
+    measure();
+    applyTrack();
+    go(0);
+
+    btnPrev.addEventListener('click', function () { go(-1); });
+    btnNext.addEventListener('click', function () { go(1); });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (window.innerWidth < 1024) {
+          grid.style.cssText     = '';
+          viewport.style.width   = '';
+          viewport.style.margin  = '';
+          btnPrev.disabled = true;
+          btnNext.disabled = false;
+          offset = 0;
+          return;
+        }
+        offset = 0;
+        measure();
+        applyTrack();
+        go(0);
+      }, 150);
+    });
+  })();
+
+
+  /* ---- Text reveal: overlay wipe (Editorial A) ---- */
+  (function () {
+    var section = document.querySelector('.editorial--a');
+    if (!section) return;
+
+    var lines = section.querySelectorAll('.editorial__line');
+    if (!lines.length) return;
+
+    lines.forEach(function (line) {
+      var wrap = document.createElement('div');
+      wrap.className = 'text-reveal-wrap';
+      line.parentNode.insertBefore(wrap, line);
+      wrap.appendChild(line);
+
+      var clip = document.createElement('span');
+      clip.className = 'text-reveal-clip';
+      var overlay = document.createElement('span');
+      overlay.className = 'text-reveal-overlay';
+      clip.appendChild(overlay);
+      wrap.appendChild(clip);
+    });
+
+    var wraps = section.querySelectorAll('.text-reveal-wrap');
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        wraps.forEach(function (wrap, i) {
+          wrap.querySelector('.text-reveal-overlay').style.transitionDelay = (i * 120) + 'ms';
+          wrap.classList.add('is-revealed');
+        });
+        observer.disconnect();
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(section);
   })();
 
 });
