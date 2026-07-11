@@ -1,0 +1,204 @@
+══════════════════════════════════════════════
+  APEX SIM RACING — Reglas Mobile
+══════════════════════════════════════════════
+
+BREAKPOINT: 768px
+  Mobile  → max-width: 768px
+  Desktop → min-width: 769px
+
+REGLA DE ORO: todos los cambios van SOLO dentro de
+@media (max-width: 768px) { } en home.html.
+Nunca tocar estilos de desktop.
+
+
+──────────────────────────────────────────────
+  ARCHIVOS DEL PROYECTO
+──────────────────────────────────────────────
+
+Desarrollo     → TP-2-WEB/home.html
+CSS externos   → TP-2-WEB/css/components.css (principal)
+                 TP-2-WEB/css/base.css
+                 TP-2-WEB/css/tokens.css
+                 TP-2-WEB/css/glass.css
+Imágenes       → TP-2-WEB/ASSETS/
+
+Los overrides mobile de home.html van en un <style> propio
+al final del <head>, DESPUÉS de los <link> de CSS externos.
+
+
+──────────────────────────────────────────────
+  TOKENS CLAVE
+──────────────────────────────────────────────
+
+--grid-margin-mobile: 20px   (padding lateral del .wrap)
+--space-*: 0.25rem × múltiplos (1=0.25, 4=1rem, 8=2rem, 12=3rem)
+Fuentes: field-gothic-condensed (titulares) / field-gothic-compact (cuerpo)
+Acento:  #DBF059 (verde), #FF5E33 (naranja), #2F31F5 (azul)
+
+
+──────────────────────────────────────────────
+  QUÉ ESTÁ CUBIERTO EN components.css
+  (NO TOCAR — ya tiene mobile)
+──────────────────────────────────────────────
+
+NAV
+  - Hamburger + drawer funcional
+  - nav__cta--mobile visible; nav__links y nav__cta de desktop ocultos
+  - drawer: color de texto oscuro sobre fondo claro
+
+HERO (≤768px en components.css)
+  - min-height: 60svh
+  - layout flex column, gap var(--space-3)
+  - hero__title: clamp(2.5rem, 13vw, 5rem)
+  - CTA: align-self: flex-start
+
+METODOLOGÍA (≤1023px en components.css)
+  - method-timeline: display none
+  - method-cards: display flex / flex-direction column
+  - steps: todos a columna izquierda, sin offset alternado
+
+INGENIERÍA ERGONÓMICA / ERG (≤767px en components.css)
+  - erg-inner: grid-template-columns 1fr (stacks lista + video)
+  - erg-video-wrap: order -1 (video arriba, lista abajo)
+
+CONTACTO (≤768px en components.css)
+  - contact-grid: grid-template-columns 1fr
+  - contact-form inputs: width 100% (ya global)
+
+ANALYTICS — shape-ln (≤767px en components.css)
+  - aspect-ratio: auto + min-height: 460px
+  (el SVG interior SÍ necesita override: ver sección siguiente)
+
+CURSOS — course-grid
+  - flex-direction column por defecto (mobile-first)
+  - Cambia a row solo en ≥1024px
+
+QUIÉNES SOMOS — principles__grid
+  - grid-template-columns 1fr por defecto
+
+SCROLLER COMUNIDAD
+  - marquee JS, overflow hidden, edge-to-edge → sin cambios
+
+
+──────────────────────────────────────────────
+  QUÉ SE AGREGA EN home.html <style>
+  (overrides específicos no cubiertos)
+──────────────────────────────────────────────
+
+@media (max-width: 768px) {
+
+  /* Tipografía */
+  body { font-size: 1rem; }
+  p    { font-size: 1rem; }
+
+  /* section-title: el clamp original (4rem, 6vw, 3.25rem) tiene
+     min > max → siempre queda en 4rem. Se corrige en mobile. */
+  .section-title { font-size: clamp(1.75rem, 8vw, 3rem); }
+
+  /* <br> decorativos en subtítulos → flujo natural */
+  .method-header__sub br,
+  .perf-videos-subtitle br,
+  #setup > .wrap > p br,
+  .section-subtitle br { display: none; }
+
+  /* Analytics: SVG 952×480 desborda → scroll horizontal */
+  .analytics-dash { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #dashboard-svg  { min-width: 680px; }
+
+  /* Coaches: 2 cols → 1 col */
+  .coach-grid { grid-template-columns: 1fr; }
+
+  /* Testimonios: 4 cols → 1 col */
+  .review-grid { grid-template-columns: 1fr; }
+
+  /* Sección "Del Simulador a la Pista":
+     tiene aspect-ratio:2752/1047 inline → deja la sección en 143px. */
+  .section[style*="aspect-ratio"] {
+    aspect-ratio: auto !important;
+    min-height: 320px;
+    background-size: cover !important;
+    background-position: center right !important;
+  }
+
+  /* Footer: columnas se apilan */
+  .footer__top { flex-direction: column; }
+
+  /* method-header subtitle: no cortar con max-width */
+  .method-header__sub { max-width: 100% !important; }
+}
+
+
+──────────────────────────────────────────────
+  SECCIONES SIN CAMBIOS MOBILE
+  (diseño funciona tal cual en mobile)
+──────────────────────────────────────────────
+
+- Editorial A: clamp(2.5rem, 9vw, 7.5rem) ya responsive
+- Editorial B + Cursos: course-grid ya en columna
+- Setup / Volante: imagen y SVG overlay ambos width:100%, escalan solos
+- Partners strip: marquee edge-to-edge, ya OK
+- Resultados / rk-table: clamps ya reducen en mobile
+- Preloader: posición fixed, no afecta layout
+
+
+──────────────────────────────────────────────
+  PATRONES REUTILIZABLES
+──────────────────────────────────────────────
+
+CARRUSEL SCROLL-SNAP (horizontal, touch)
+  .grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  .grid::-webkit-scrollbar { display: none; }
+  .grid .card {
+    flex: 0 0 82vw !important;
+    scroll-snap-align: start !important;
+  }
+
+ESCAPAR PADDING DEL PADRE (cuando el padding recorta el carrusel)
+  #mi-seccion .mi-wrap {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+  }
+  .mi-grid { padding: 0 1.25rem 1rem !important; }
+
+CENTRAR SECCIÓN EN MOBILE
+  .mi-seccion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+OCULTAR/MOSTRAR POR PÁGINA (sin JS)
+  <body class="page-nombre">
+  .page-nombre .mi-btn { display: inline-flex !important; }
+
+PAUSAR ANIMACIONES
+  .animado { animation: none; }
+  (para sliders: eliminar setInterval, dejar solo touch events)
+
+
+──────────────────────────────────────────────
+  REGLAS DE TRABAJO
+──────────────────────────────────────────────
+
+1. Trabajar SOLO en home.html (no tocar index.html durante desarrollo)
+2. Solo agregar dentro de @media (max-width: 768px)
+3. No modificar HTML salvo casos críticos
+4. Nada en dos columnas en mobile
+5. max-width de contenido: 100%
+6. No cambiar estilos de desktop
+7. Sin overflow horizontal
+8. Mantener jerarquía visual del desktop
+9. Mantener todas las animaciones; simplificar solo si rompen rendimiento
+10. Si algo se rompe en desktop después de editar mobile → revisar
+    que @media (min-width: 769px) lo restaure
+
+══════════════════════════════════════════════

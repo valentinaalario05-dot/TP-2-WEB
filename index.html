@@ -18,6 +18,703 @@
 <style>
   [data-section-reveal] { width: fit-content; }
   .analytics-head [data-section-reveal] { margin-left: auto; margin-right: auto; }
+  /* Desktop: contenedor-analytics-mobile se comporta como .wrap text-center */
+  @media (min-width: 769px) {
+    .analytics-mobile-layout { display: none !important; }
+    .coach-mobile-arrows { display: none !important; }
+    .review-dots-mobile { display: none !important; }
+    .contenedor-analytics-mobile {
+      width: 100%;
+      max-width: var(--grid-max-width);
+      margin: 0 auto;
+      padding: 0 var(--grid-margin-mobile);
+      text-align: center;
+    }
+  }
+  @media (min-width: 769px) { .editorial-a-br { display: none; } }
+</style>
+
+<style>
+/* ============================================================
+   APEX — Mobile overrides (max-width: 768px)
+   Solo modifica layout/tamaños en mobile. Desktop intacto.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── Tipografía base ── */
+  body { font-size: 1rem; }
+  p    { font-size: 1rem; }
+
+  /* section-title: el clamp original tiene min > max, siempre queda en 4rem.
+     En mobile lo reemplazamos por una escala más ajustada al viewport. */
+  .section-title {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+  }
+
+  /* ── Hero: altura mobile ── */
+  #hero {
+    min-height: 780px !important;
+  }
+
+  /* ── Nav toggle: contenedor circular liquid glass ── */
+  .nav__toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 5px;
+    transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  }
+  .nav__toggle span {
+    width: 18px;
+  }
+  .nav-light .nav__toggle {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  /* ── Botón Registrarme: liquid glass ── */
+  .nav__cta--mobile {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease, color 300ms ease;
+  }
+  .nav-light .nav__cta--mobile {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* ── Hero: márgenes 20px, CTA ancho completo ── */
+  #hero .hero__wrap {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  #hero .cta.cta--pill {
+    display: block !important;
+    width: 100% !important;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: calc(0.8125rem * 1.1);
+  }
+
+  /* ── Hero desc ── */
+  .hero__desc { font-size: 1.2rem !important; }
+
+  /* ── Editorial A: fondo mobile, 4 líneas centradas, tipografía ── */
+  .editorial--a {
+    background-image: url('ASSETS/mobile/background-editorial-mobile.png') !important;
+    background-attachment: scroll !important;
+    text-align: center;
+    align-items: center;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    overflow: hidden;
+  }
+  .editorial-a-br { display: inline; }
+  .editorial--a .editorial__line {
+    font-size: 3.5rem;
+    word-break: normal;
+    max-width: 100%;
+  }
+  .editorial--a .editorial__line--outline {
+    font-size: 3.75rem;
+    -webkit-text-stroke: 1.02pt #ffffff;
+    display: block;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  /* ── Subtítulos con <br> decorativos — fluyen solos en mobile ── */
+  .method-header__sub br,
+  .perf-videos-subtitle br,
+  #setup > .wrap > p br,
+  .section-subtitle br {
+    display: none;
+  }
+
+  /* ── method-header__title font-size ── */
+  .method-header__title {
+    font-size: clamp(3rem, 6vw, 3.25rem) !important;
+  }
+
+  /* ── Todos los subtítulos con estilo de method-header__sub ── */
+  .perf-videos-subtitle,
+  .section-subtitle,
+  .analytics-head__sub,
+  .experiencia-subtitle {
+    font-family: var(--font-body) !important;
+    font-size: 1.08rem !important;
+    color: #131314 !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Analytics: anular section anterior en mobile ── */
+  .section-analytics {
+    background: transparent !important;
+    clip-path: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  /* ── Analytics: contenedor mobile con frame SVG ── */
+  .contenedor-analytics-mobile {
+    width: 390px !important;
+    max-width: 390px !important;
+    min-height: 725px !important;
+    background-image: url('ASSETS/mobile/contenedor-analytics-mobile.svg') !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    margin: 0 auto !important;
+    padding: 32px 20px 40px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ── Analytics: título izquierda y ocultar dashboard ── */
+  .analytics-head {
+    text-align: left !important;
+    padding-left: 20px !important;
+  }
+  .section-analytics .analytics-head .section-title,
+  .contenedor-analytics-mobile .analytics-head .section-title,
+  .contenedor-analytics-mobile .section-title {
+    text-align: left !important;
+  }
+  .analytics-head [data-section-reveal] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+  .contenedor-analytics-mobile > p {
+    text-align: left !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin: 0 0 var(--space-2) !important;
+  }
+  .analytics-dash {
+    display: none !important;
+  }
+
+  /* ── Analytics mobile: layout trackmap + carrusel ── */
+  .analytics-mobile-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .analytics-mobile-trackmap {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .analytics-mobile-trackmap img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 167px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  .analytics-mobile-charts-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  .analytics-mobile-charts {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .analytics-mobile-pair {
+    display: none !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .analytics-mobile-pair.is-active {
+    display: flex !important;
+  }
+  .analytics-mobile-pair img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 140px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  .analytics-mobile-arrows {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+  .am-arrow {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: background 200ms !important;
+    flex-shrink: 0 !important;
+  }
+  .am-arrow:active {
+    background: rgba(255,255,255,0.18) !important;
+  }
+  .am-arrow-indicator {
+    color: rgba(255,255,255,0.5) !important;
+    font-size: 0.75rem !important;
+    font-family: var(--font-body) !important;
+    min-width: 32px !important;
+    text-align: center !important;
+  }
+
+  /* ── Sección 09 setup: tooltip overlay sobre el volante ── */
+
+  /* Contenedor relativo para anclar el modal */
+  #setup .wheel-media { position: relative !important; }
+
+  /* Cancelar el layout lateral que abre wheel--open */
+  .wheel-media.wheel--open #wheel-stage {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Modal encima (cubriendo) la imagen del volante */
+  #wheel-modal {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 30 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    flex: none !important;
+  }
+
+  #wheel-modal-inner {
+    width: 100% !important;
+    padding: 0.875rem !important;
+    max-height: 100% !important;
+    overflow-y: auto !important;
+    background: rgba(255,255,255,0.96) !important;
+    margin: auto !important;
+  }
+
+  /* Título más pequeño */
+  #wheel-modal-content > div:first-child > div:last-child {
+    font-size: 1.1rem !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Cuerpo de texto más pequeño */
+  #wheel-modal-content p {
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Stats: 3 columnas en una sola fila */
+  #wheel-modal-content div[style*="grid-template-columns"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  #wheel-modal-content div[style*="grid-template-columns"] > div {
+    padding: 6px 4px !important;
+  }
+
+  #wheel-modal-content div[style*="grid-template-columns"] > div > div:first-child {
+    font-size: 0.85rem !important;
+  }
+
+  #wheel-modal-content div[style*="grid-template-columns"] > div > div:last-child {
+    font-size: 0.55rem !important;
+  }
+
+  /* ── Sección 06: botón mute ── */
+  .erg-mute-btn {
+    bottom: 19px !important;
+    right: 12px !important;
+  }
+
+
+  /* ── Sección 07: ocultar tooltip y ajustar espaciado ── */
+  .timing-detail { display: none !important; }
+  .timing-tower-wrap > div:last-child { margin-top: 30px !important; }
+
+  /* ── Divisor elipse + sección 07 ── */
+  .section-divider-ellipse {
+    clip-path: ellipse(57% 49% at 50% 0%) !important;
+  }
+  #resultados-pilotos {
+    margin-top: -35px !important;
+  }
+
+  /* ── Cursos ── */
+  .course-card {
+    height: 630px !important;
+  }
+  .course-card__bullets {
+    font-size: 1.3rem !important;
+  }
+  .editorial-cursos__title {
+    font-size: clamp(3rem, 14vw, 100vw) !important;
+    -webkit-text-stroke: 1.5px var(--color-light) !important;
+  }
+  .course-card__title {
+    font-size: 40px !important;
+  }
+  .course-card__meta {
+    font-size: 1.1rem !important;
+  }
+  .course-card__price {
+    font-size: 42px !important;
+  }
+  .course-card .cta {
+    font-size: 1.5rem !important;
+  }
+
+  /* ── Coaches: carrusel 1 card mobile ── */
+  .coach-carousel__btn { display: none !important; }
+  .coach-carousel__viewport {
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+  .coach-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0 !important;
+    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1) !important;
+    will-change: transform !important;
+    grid-template-columns: none !important;
+  }
+  .coach-grid .coach-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .coach-mobile-arrows {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+
+  /* ── Testimonios + Comunidad: padding top ── */
+  .section:has(#review-grid),
+  section[style*="padding-bottom:118px"] {
+    padding-top: 16px !important;
+  }
+  .section:has(#review-grid) {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  #resultados-pilotos {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ── Testimonios: sin fade en mobile ── */
+  .review-card {
+    transition: none !important;
+    opacity: 1 !important;
+  }
+  .review-card.is-fading {
+    opacity: 1 !important;
+  }
+
+  /* ── Testimonios: carrusel horizontal 1.5 cards ── */
+  .review-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 12px !important;
+    padding: 0 20px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    box-sizing: border-box !important;
+  }
+  .review-grid::-webkit-scrollbar { display: none; }
+  .review-card {
+    flex: 0 0 65vw !important;
+    min-width: 0 !important;
+    scroll-snap-align: start !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+  }
+  /* Dots */
+  .review-dots-mobile {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin-top: 16px !important;
+  }
+  .review-dots-mobile .rdot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.2) !important;
+    transition: background 200ms !important;
+  }
+  .review-dots-mobile .rdot.is-active {
+    background: #000 !important;
+  }
+
+  /* ── Sección "Del Simulador a la Pista" (aspect-ratio inline 2752/1047) ──
+     A 375px el aspect-ratio la dejaría en ~143px de alto. Se elimina en mobile. */
+  .section[style*="aspect-ratio"] {
+    aspect-ratio: auto !important;
+    min-height: 320px;
+    background-size: cover !important;
+    background-position: center right !important;
+  }
+
+  /* ── Camino al automovilismo: imagen mobile a tamaño real (va después para ganar especificidad) ── */
+  .section.bg-dark[style*="2027.png"] > .wrap .section-title {
+    transform: translateY(-31px);
+  }
+  .section.bg-dark[style*="2027.png"] > .wrap > p {
+    transform: translateY(266px);
+    max-width: 100% !important;
+  }
+  .section.bg-dark[style*="2027.png"] > .wrap > a.cta {
+    transform: translateY(250px);
+    display: block !important;
+    width: calc(100vw - 40px) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+  .section.bg-dark[style*="2027.png"] {
+    background-image: url('ASSETS/mobile/2027-mobile.png') !important;
+    background-size: 100% 100% !important;
+    background-position: top center !important;
+    aspect-ratio: 1536 / 2018 !important;
+    min-height: unset !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* ── Footer ── */
+  .footer__top {
+    flex-direction: column;
+  }
+
+  /* ── Method header subtitle ── */
+  .method-header__sub {
+    max-width: 100% !important;
+    font-size: 1.08rem !important;
+  }
+
+  /* ══════════════════════════════════════════
+     04 METODOLOGÍA — mobile layout
+     Línea izq · nodo · título → imagen → card
+     ══════════════════════════════════════════ */
+
+  /* Reset padding del rule 1023px */
+  .method-main {
+    padding: 0 !important;
+    position: relative !important;
+  }
+
+  /* method-cards: flex container con espacio para la línea */
+  .method-cards {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    padding-left: 52px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Línea vertical continua a la izquierda */
+  .method-cards::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(28,28,28,0.12);
+    border-radius: 2px;
+  }
+
+  /* method-step: display:contents → sus hijos participan directamente en
+     el flex de method-cards, permitiendo reordenar head / img / expandable */
+  .method-step {
+    display: contents !important;
+  }
+  .method-step__card {
+    display: contents !important;
+  }
+
+  /* Ocultar SVG frame y separadores */
+  .method-step__frame,
+  .method-step__rule {
+    display: none !important;
+  }
+
+  /* ── Orden de cada bloque ──────────────────
+     DOM plano en method-cards tras display:contents:
+     frame(0) head(0) expandable(0) rule(0) img(0)
+     frame(1) head(1) expandable(1) rule(1) img(1) …
+
+     Orden deseado: head → img → expandable
+  ─────────────────────────────────────────── */
+  [data-step="0"] .method-step__head      { order: 10; }
+  .method-step__img-wrapper[data-step="0"]{ order: 11; }
+  [data-step="0"] .method-step__expandable{ order: 12; }
+
+  [data-step="1"] .method-step__head      { order: 20; }
+  .method-step__img-wrapper[data-step="1"]{ order: 21; }
+  [data-step="1"] .method-step__expandable{ order: 22; }
+
+  [data-step="2"] .method-step__head      { order: 30; }
+  .method-step__img-wrapper[data-step="2"]{ order: 31; }
+  [data-step="2"] .method-step__expandable{ order: 32; }
+
+  [data-step="3"] .method-step__head      { order: 40; }
+  .method-step__img-wrapper[data-step="3"]{ order: 41; }
+  [data-step="3"] .method-step__expandable{ order: 42; }
+
+  /* ── Nodo: punto en la línea via ::before del head ── */
+  .method-step__head {
+    position: relative !important;
+    padding-top: 20px !important;
+    padding-bottom: 9px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .method-step__head::before {
+    content: '';
+    position: absolute;
+    left: -37px; /* centro del dot en x=20px desde borde de method-cards */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(28,28,28,0.15);
+    border: 2px solid rgba(28,28,28,0.2);
+    transition: width .2s, height .2s, left .2s, background .2s, box-shadow .2s;
+  }
+
+  /* Nodo: etapa completada */
+  .method-step.is-done .method-step__head::before {
+    background: var(--color-data);
+    border-color: var(--color-data);
+  }
+
+  /* Nodo: etapa activa */
+  .method-step.is-active .method-step__head::before {
+    left: -39px;
+    width: 14px;
+    height: 14px;
+    background: var(--color-data);
+    border-color: var(--color-data);
+    box-shadow: 0 0 0 4px rgba(47,49,245,0.18);
+  }
+
+  /* ── Imagen: ancho completo ── */
+  .method-step__img-wrapper {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 13px !important;
+  }
+
+  .method-step__img-wrapper .method-step__img {
+    opacity: 1 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 6px;
+  }
+
+  /* ── Card de contenido: siempre visible ── */
+  .method-step__expandable {
+    max-height: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    overflow: visible !important;
+    transition: none !important;
+    padding: 16px !important;
+    margin-bottom: 36px !important;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+  }
+
+  /* ── Colores ── */
+  .method-step__num,
+  .method-step__num h3,
+  .method-step__title,
+  .method-step__title h3,
+  .method-step__head h3,
+  .method-step__head > *,
+  .method-step__desc,
+  .method-step__bullets li {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    -webkit-text-stroke: 0 !important;
+    background: none !important;
+    background-clip: unset !important;
+    -webkit-background-clip: unset !important;
+  }
+
+  .method-step__num {
+    font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+  }
+
+  /* Resaltado: fondo azul, tipografía blanca */
+  .method-step__question {
+    background: #2F31F5 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+
+  .method-step__bullets li::marker {
+    color: #2F31F5 !important;
+  }
+
+  /* Espacio entre cards -15%: 36px → ~31px */
+  .method-step__expandable {
+    margin-bottom: 28px !important;
+  }
+
+  /* ── method-header padding ── */
+  .method-header {
+    padding: 0 var(--space-3) !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -247,12 +944,13 @@
 <!-- 01 HERO -->
 <section id="hero" class="section bg-dark" data-nav-theme="transparent" style="position:sticky;top:0;z-index:1;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding:0">
   <video class="notch-card__media" style="position:absolute;inset:0;object-fit:cover;clip-path:none;border-radius:0" autoplay muted loop playsinline preload="none" poster="">
+    <source src="ASSETS/mobile/hero-video-mobile.mp4.mp4" media="(max-width:768px)" type="video/mp4">
     <source src="ASSETS/hero-video.mp4.mp4" type="video/mp4">
   </video>
   <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(19,19,20,0.75), rgba(19,19,20,0.2))"></div>
   <div class="wrap hero__wrap" style="position:relative;z-index:1">
     <span class="hero__rule" aria-hidden="true"></span>
-    <h1 class="hero__title">DONDE SE DESARROLLAN LOS PILOTOS</h1>
+    <h1 class="hero__title">DONDE SE<br class="hero__title-br"> DESARROLLAN<br class="hero__title-br"> LOS PILOTOS</h1>
     <div class="hero__bottom">
       <p class="hero__desc">Datos, análisis y coaching para construir pilotos más rápidos y consistentes.</p>
     </div>
@@ -263,7 +961,7 @@
 <!-- EDITORIAL A -->
 <section class="editorial bg-dark editorial--a" data-nav-theme="dark">
   <p class="editorial__line">LA PRÓXIMA</p>
-  <p class="editorial__line">GENERACIÓN DE <span class="editorial__line--outline">PILOTOS</span></p>
+  <p class="editorial__line">GENERACIÓN DE <br class="editorial-a-br"><span class="editorial__line--outline">PILOTOS</span></p>
   <p class="editorial__line">EMPIEZA ACÁ</p>
 </section>
 </div><!-- /hero-parallax-container -->
@@ -279,7 +977,7 @@
     <div class="method-header">
       <div class="wrap">
         <div class="text-reveal-wrap" data-section-reveal><h3 class="method-header__title">EL MÉTODO APEX</h3><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
-        <p class="method-header__sub" style="max-width:none">Detrás de cada décima ganada hay un proceso. Datos, análisis y entrenamiento.<br>Trabajamos juntos para acelerar tu evolución como piloto.</p>
+        <p class="method-header__sub" style="max-width:none">Detrás de cada décima ganada hay un proceso. Trabajamos juntos para acelerar tu evolución como piloto.</p>
       </div>
     </div>
 
@@ -412,12 +1110,47 @@
 <div style="position:relative;">
   <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
 
-<section class="bg-dark shape-ln" data-nav-theme="dark">
-  <div class="wrap text-center">
+<section class="bg-dark shape-ln section-analytics" data-nav-theme="dark">
+  <div class="contenedor-analytics-mobile">
     <div class="analytics-head">
       <div class="text-reveal-wrap" data-section-reveal><h3 class="section-title" style="margin-bottom:var(--space-1);color:#ffffff;text-align:center">Apex Analytics</h3><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
          </div>
-    <p style="margin:0 auto var(--space-1)">Software de análisis desarrollado por Apex para transformar la telemetría de cada sesión en decisiones que impulsan el desarrollo del piloto.</p>
+    <p style="margin:0 auto var(--space-1)">Software de análisis desarrollado por Apex para transformar la telemetría en decisiones que impulsan el desarrollo del piloto.</p>
+
+    <!-- Mobile-only: trackmap fijo + carrusel de gráficos -->
+    <div class="analytics-mobile-layout">
+      <div class="analytics-mobile-trackmap">
+        <img src="ASSETS/mobile/trackmap.svg" alt="Track Map">
+      </div>
+      <div class="analytics-mobile-charts-wrap">
+        <div class="analytics-mobile-charts" id="analytics-mobile-charts">
+          <!-- par 0: velocidad + comandos -->
+          <div class="analytics-mobile-pair" data-pair="0">
+            <img src="ASSETS/mobile/velocidad.svg" alt="Velocidad">
+            <img src="ASSETS/mobile/comandos.svg" alt="Comandos">
+          </div>
+          <!-- par 1: frenos + rpm -->
+          <div class="analytics-mobile-pair" data-pair="1">
+            <img src="ASSETS/mobile/freno.svg" alt="Frenos">
+            <img src="ASSETS/mobile/rpm.svg" alt="RPM">
+          </div>
+          <!-- par 2: angulo + resumen -->
+          <div class="analytics-mobile-pair" data-pair="2">
+            <img src="ASSETS/mobile/angulo.svg" alt="Ángulo">
+            <img src="ASSETS/mobile/resumen.svg" alt="Resumen">
+          </div>
+        </div>
+        <div class="analytics-mobile-arrows">
+          <button class="am-arrow am-arrow--prev" id="am-prev" aria-label="Anterior">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 14L6 9L11 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="am-arrow-indicator" id="am-indicator">1 / 3</span>
+          <button class="am-arrow am-arrow--next" id="am-next" aria-label="Siguiente">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4L12 9L7 14" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="analytics-dash">
       <div class="analytics-dash__viz" id="analytics-viz">
@@ -1070,7 +1803,7 @@
         <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="coach-carousel__viewport">
-        <div class="coach-grid">
+        <div class="coach-grid" id="coach-grid-mobile">
           <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
             <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
             <img class="notch-card__media" src="ASSETS/placeholders/coach-01.png" alt="Martín Rossi">
@@ -1136,6 +1869,15 @@
       <button class="coach-carousel__btn coach-carousel__btn--next" aria-label="Siguiente">
         <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
+      <!-- Mobile-only arrows -->
+      <div class="coach-mobile-arrows">
+        <button class="am-arrow am-arrow--prev" id="coach-prev" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 14L6 9L11 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="am-arrow am-arrow--next" id="coach-next" aria-label="Siguiente">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div><!-- /coach-carousel -->
   </div><!-- /wrap -->
 </section>
@@ -1298,6 +2040,7 @@
   <div class="wrap">
     <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">Lo que dicen nuestros pilotos</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
     <div class="review-grid" id="review-grid" style="margin-top:30px;"></div>
+    <div class="review-dots-mobile" id="review-dots-mobile" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -1352,7 +2095,7 @@
   <div class="wrap">
     <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title" style="color:#000000;text-align:left;">DEL SIMULADOR A LA PISTA</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
     <p style="max-width:640px;text-align:left;color:#000000;">
-      Apex está construyendo una academia donde el rendimiento sea el<br> punto de partida para futuras oportunidades en equipos de competición.
+      Apex está construyendo una academia donde el<br> rendimiento sea el punto de partida para futuras<br> oportunidades en equipos de competición.
     </p>
     <a href="#cursos" class="cta cta--primary glass-cta cta--ranking" style="display:inline-block;margin-top:1.5rem;">Comenzá tu entrenamiento</a>
   </div>
@@ -1462,6 +2205,35 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+/* Acordeón mobile method-step — necesario porque display:contents en
+   method-step hace que el IntersectionObserver de main.js no detecte
+   intersección (el elemento no genera caja). Solo corre en ≤768px. */
+(function () {
+  if (window.innerWidth > 768) return;
+  document.addEventListener('DOMContentLoaded', function () {
+    var steps = document.querySelectorAll('.method-step');
+    if (!steps.length) return;
+    var prevActive = null;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.35) return;
+        var step = entry.target.closest
+          ? entry.target.closest('[data-step]')
+          : (function (el) { while (el && !el.hasAttribute('data-step')) el = el.parentElement; return el; })(entry.target);
+        if (!step) return;
+        if (prevActive && prevActive !== step) prevActive.classList.remove('is-active');
+        step.classList.add('is-active');
+        prevActive = step;
+      });
+    }, { threshold: [0.35], rootMargin: '-5% 0px -5% 0px' });
+    steps.forEach(function (s) {
+      var head = s.querySelector('.method-step__head');
+      obs.observe(head || s);
+    });
+  });
+})();
+</script>
 
 <!-- Nav theme por sección (GSAP + ScrollTrigger), aislado de main.js -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -1490,6 +2262,108 @@
   } else {
     init();
   }
+})();
+</script>
+<script>
+/* Testimonios mobile: 8 cards fijas + bloquear rotación */
+(function(){
+  if (window.innerWidth > 768) return;
+  var grid = document.getElementById('review-grid');
+  if (!grid) return;
+
+  /* Capturá la primera tanda (ya renderizada por main.js) */
+  var firstPage = grid.innerHTML;
+  var locked = false;
+  var descriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+
+  Object.defineProperty(grid, 'innerHTML', {
+    configurable: true,
+    get: function() { return descriptor.get.call(this); },
+    set: function(v) {
+      if (locked) return;
+      locked = true;
+      /* Limpiá is-fading y combiná las 2 tandas de 4 → 8 cards */
+      var clean = firstPage.replace(/\bis-fading\b/g, '');
+      descriptor.set.call(this, clean + v);
+    }
+  });
+})();
+
+/* Testimonios mobile: dots */
+(function(){
+  if (window.innerWidth > 768) return;
+  var grid = document.getElementById('review-grid');
+  var dotsWrap = document.getElementById('review-dots-mobile');
+  if (!grid || !dotsWrap) return;
+
+  function buildDots() {
+    var cards = grid.querySelectorAll('.review-card');
+    if (!cards.length) return;
+    dotsWrap.innerHTML = '';
+    cards.forEach(function(_, i) {
+      var d = document.createElement('span');
+      d.className = 'rdot' + (i === 0 ? ' is-active' : '');
+      dotsWrap.appendChild(d);
+    });
+  }
+
+  function updateDots() {
+    var dots = dotsWrap.querySelectorAll('.rdot');
+    if (!dots.length) return;
+    var cardW = grid.querySelector('.review-card') ? grid.querySelector('.review-card').offsetWidth + 12 : 1;
+    var idx = Math.round(grid.scrollLeft / cardW);
+    dots.forEach(function(d, i){ d.classList.toggle('is-active', i === idx); });
+  }
+
+  /* Re-build dots whenever JS re-renders the grid */
+  var observer = new MutationObserver(function(){ buildDots(); updateDots(); });
+  observer.observe(grid, { childList: true });
+
+  buildDots();
+  grid.addEventListener('scroll', updateDots, { passive: true });
+})();
+
+/* Coaches mobile carousel */
+(function(){
+  if (window.innerWidth > 768) return;
+  var grid = document.getElementById('coach-grid-mobile');
+  var prev = document.getElementById('coach-prev');
+  var next = document.getElementById('coach-next');
+  if (!grid || !prev || !next) return;
+  var cards = grid.querySelectorAll('.coach-card');
+  if (!cards.length) return;
+  var current = 0;
+  var total = cards.length;
+  function go(idx) {
+    current = (idx + total) % total;
+    grid.style.transform = 'translateX(-' + (current * 100) + '%)';
+  }
+  prev.addEventListener('click', function(){ go(current - 1); });
+  next.addEventListener('click', function(){ go(current + 1); });
+})();
+
+/* Analytics mobile carousel */
+(function(){
+  var pairs = document.querySelectorAll('.analytics-mobile-pair');
+  var indicator = document.getElementById('am-indicator');
+  var prev = document.getElementById('am-prev');
+  var next = document.getElementById('am-next');
+  if (!pairs.length || !prev || !next) return;
+  var current = 0;
+  function show(idx) {
+    pairs.forEach(function(p){ p.classList.remove('is-active'); });
+    pairs[idx].classList.add('is-active');
+    if (indicator) indicator.textContent = (idx + 1) + ' / ' + pairs.length;
+  }
+  show(0);
+  prev.addEventListener('click', function(){
+    current = (current - 1 + pairs.length) % pairs.length;
+    show(current);
+  });
+  next.addEventListener('click', function(){
+    current = (current + 1) % pairs.length;
+    show(current);
+  });
 })();
 </script>
 </body>
