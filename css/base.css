@@ -285,7 +285,7 @@ p { font-size: 1.3rem; }
   font-weight: var(--weight-h1);
   font-size: var(--t-editorial);
   line-height: 1.25;
-  letter-spacing: -0.03em;
+  letter-spacing: -0em;
   text-transform: uppercase;
 }
 
@@ -341,17 +341,17 @@ p { font-size: 1.3rem; }
   display: block;
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  font-family: var(--font-h1-alt);
+  font-family: var(--font-display-italic);
   font-weight: var(--weight-h1-alt);
-  font-size: clamp(3rem, 18vw, 100vw);
+  font-size: clamp(2rem, 8vw, 100vw);
   text-align: center;
   line-height: 0.9;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  -webkit-text-stroke: 4px var(--color-light);
+  -webkit-text-stroke: 3px var(--color-light);
   -webkit-text-fill-color: transparent;
   color: transparent;
-  margin-top: 8px;
+  margin-top: 20px;
   margin-bottom: var(--space-10);
 }
 
@@ -362,7 +362,7 @@ p { font-size: 1.3rem; }
 /* ---- Editorial A: tipografía/fondo/colores propios (no afecta Editorial B) ---- */
 
 .editorial--a {
-  background-image: url("../ASSETS/backgrounds/background-editorial1.png");
+  background-image: url("../ASSETS/backgrounds/background-editorial-black.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -441,6 +441,7 @@ p { font-size: 1.3rem; }
   color: #000000;
 }
 
+
 .section-subtitle,
 .section-lead {
   font-family: var(--font-body);
@@ -450,7 +451,7 @@ p { font-size: 1.3rem; }
   letter-spacing: 0;
   opacity: 0.85;
   margin-bottom: var(--space-4);
-  color: #ffffff;
+  color: #000000;
 }
 
 /* ==========================================================================

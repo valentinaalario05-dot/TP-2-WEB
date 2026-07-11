@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #131313;
+        opacity: .75;
+        stroke-width: .57px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-4 {
+        stroke: #131313;
+        stroke-linecap: round;
+      }
+
+      .cls-5 {
+        opacity: .8;
+      }
+
+      .cls-2 {
+        stroke-dasharray: 10.6 7.71;
+        stroke-width: 1px;
+      }
+
+      .cls-2, .cls-3 {
+        opacity: .25;
+        stroke: #020202;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke-dasharray: 10.57 7.69;
+      }
+    </style>
+  </defs>
+  <g>
+    <line class="cls-3" x1="83.11" y1="2.85" x2="83.11" y2="803.53"/>
+    <line class="cls-3" x1="161.23" y1="2.85" x2="161.23" y2="803.53"/>
+    <line class="cls-3" x1="239.36" y1="2.85" x2="239.36" y2="803.53"/>
+    <line class="cls-3" x1="317.49" y1="2.85" x2="317.49" y2="803.53"/>
+    <line class="cls-3" x1="395.62" y1="2.85" x2="395.62" y2="803.53"/>
+    <line class="cls-3" x1="473.74" y1="2.85" x2="473.74" y2="803.53"/>
+    <line class="cls-3" x1="551.87" y1="2.85" x2="551.87" y2="803.53"/>
+    <line class="cls-3" x1="630" y1="2.85" x2="630" y2="803.53"/>
+    <line class="cls-3" x1="708.13" y1="2.85" x2="708.13" y2="803.53"/>
+    <line class="cls-3" x1="786.26" y1="2.85" x2="786.26" y2="803.53"/>
+    <line class="cls-3" x1="4.21" y1="75.62" x2="802.85" y2="75.62"/>
+    <line class="cls-3" x1="4.21" y1="150.68" x2="802.85" y2="150.68"/>
+    <line class="cls-3" x1="4.21" y1="225.74" x2="802.85" y2="225.74"/>
+    <line class="cls-3" x1="4.21" y1="300.81" x2="802.85" y2="300.81"/>
+    <line class="cls-3" x1="4.21" y1="375.87" x2="802.85" y2="375.87"/>
+    <line class="cls-3" x1="4.21" y1="450.94" x2="802.85" y2="450.94"/>
+    <line class="cls-3" x1="4.21" y1="526" x2="802.85" y2="526"/>
+    <line class="cls-3" x1="4.21" y1="601.06" x2="802.85" y2="601.06"/>
+    <line class="cls-3" x1="4.21" y1="676.13" x2="802.85" y2="676.13"/>
+    <line class="cls-3" x1="4.21" y1="751.19" x2="802.85" y2="751.19"/>
+    <line class="cls-2" x1="-1.13" y1="14.17" x2="801.26" y2="14.17"/>
+  </g>
+  <g class="cls-5">
+    <line class="cls-4" x1="83.11" y1="68.66" x2="83.11" y2="82.66"/>
+    <line class="cls-4" x1="76.11" y1="75.66" x2="90.11" y2="75.66"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="551.87" y1="218.75" x2="551.87" y2="232.75"/>
+    <line class="cls-4" x1="544.87" y1="225.75" x2="558.87" y2="225.75"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="629.97" y1="7.18" x2="629.97" y2="21.18"/>
+    <line class="cls-4" x1="622.97" y1="14.18" x2="636.97" y2="14.18"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="83.13" y1="368.89" x2="83.13" y2="382.89"/>
+    <line class="cls-4" x1="76.13" y1="375.89" x2="90.13" y2="375.89"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="786.23" y1="293.84" x2="786.23" y2="307.84"/>
+    <line class="cls-4" x1="779.23" y1="300.84" x2="793.23" y2="300.84"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="317.45" y1="443.87" x2="317.45" y2="457.87"/>
+    <line class="cls-4" x1="310.45" y1="450.87" x2="324.45" y2="450.87"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="161.24" y1="594.23" x2="161.24" y2="608.23"/>
+    <line class="cls-4" x1="154.24" y1="601.23" x2="168.24" y2="601.23"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="708.1" y1="669.13" x2="708.1" y2="683.13"/>
+    <line class="cls-4" x1="701.1" y1="676.13" x2="715.1" y2="676.13"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="395.68" y1="744.2" x2="395.68" y2="758.2"/>
+    <line class="cls-4" x1="388.68" y1="751.2" x2="402.68" y2="751.2"/>
+  </g>
+  <g>
+    <line class="cls-4" x1="317.55" y1="68.56" x2="317.55" y2="82.56"/>
+    <line class="cls-4" x1="310.55" y1="75.56" x2="324.55" y2="75.56"/>
+  </g>
+  <rect class="cls-1" x="80.93" y="223.6" width="4.3" height="4.3"/>
+  <rect class="cls-1" x="549.76" y="73.49" width="4.3" height="4.3"/>
+  <rect class="cls-1" x="627.97" y="523.92" width="4.3" height="4.3"/>
+  <rect class="cls-1" x="315.3" y="223.51" width="4.3" height="4.3"/>
+  <rect class="cls-1" x="784.1" y="148.41" width="4.3" height="4.3"/>
+  <rect class="cls-1" x="471.73" y="523.29" width="4.3" height="4.3"/>
+  <rect class="cls-1" x="80.93" y="748.96" width="4.3" height="4.3"/>
+</svg>

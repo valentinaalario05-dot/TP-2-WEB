@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-dasharray: 1.25 .91;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        fill: none;
+        stroke: #020202;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2, .cls-5, .cls-6 {
+        stroke-width: .3px;
+      }
+
+      .cls-2 {
+        stroke-dasharray: 2.37 1.72;
+      }
+
+      .cls-3 {
+        stroke-dasharray: 10.57 7.69;
+      }
+
+      .cls-3, .cls-4 {
+        opacity: .25;
+      }
+
+      .cls-4 {
+        stroke-dasharray: 11.12 8.09;
+        stroke-width: 1.05px;
+      }
+
+      .cls-5 {
+        stroke-dasharray: 1.42 1.03;
+      }
+
+      .cls-6 {
+        stroke-dasharray: 4.71 3.42;
+      }
+    </style>
+  </defs>
+  <line class="cls-3" x1="83.11" y1="2.85" x2="83.11" y2="803.53"/>
+  <line class="cls-3" x1="161.23" y1="2.85" x2="161.23" y2="803.53"/>
+  <line class="cls-3" x1="239.36" y1="2.85" x2="239.36" y2="803.53"/>
+  <line class="cls-3" x1="317.49" y1="2.85" x2="317.49" y2="803.53"/>
+  <line class="cls-3" x1="395.62" y1="2.85" x2="395.62" y2="803.53"/>
+  <line class="cls-3" x1="473.74" y1="2.85" x2="473.74" y2="803.53"/>
+  <line class="cls-3" x1="551.87" y1="2.85" x2="551.87" y2="803.53"/>
+  <line class="cls-3" x1="630" y1="2.85" x2="630" y2="803.53"/>
+  <line class="cls-3" x1="708.13" y1="2.85" x2="708.13" y2="803.53"/>
+  <line class="cls-3" x1="786.26" y1="2.85" x2="786.26" y2="803.53"/>
+  <line class="cls-3" x1="4.21" y1="75.62" x2="802.85" y2="75.62"/>
+  <line class="cls-3" x1="4.21" y1="150.68" x2="802.85" y2="150.68"/>
+  <line class="cls-3" x1="4.21" y1="225.74" x2="802.85" y2="225.74"/>
+  <line class="cls-3" x1="4.21" y1="300.81" x2="802.85" y2="300.81"/>
+  <line class="cls-3" x1="4.21" y1="375.87" x2="802.85" y2="375.87"/>
+  <line class="cls-3" x1="4.21" y1="450.94" x2="802.85" y2="450.94"/>
+  <line class="cls-3" x1="4.21" y1="526" x2="802.85" y2="526"/>
+  <line class="cls-3" x1="4.21" y1="601.06" x2="802.85" y2="601.06"/>
+  <line class="cls-3" x1="4.21" y1="676.13" x2="802.85" y2="676.13"/>
+  <line class="cls-3" x1="4.21" y1="751.19" x2="802.85" y2="751.19"/>
+  <line class="cls-4" x1="-81.74" y1="14.17" x2="801.26" y2="14.17"/>
+  <g>
+    <circle class="cls-6" cx="767.97" cy="11.99" r="137.2"/>
+    <circle class="cls-2" cx="12.53" cy="295.76" r="68.98"/>
+    <ellipse class="cls-1" cx="278.15" cy="714.16" rx="36.89" ry="36.08"/>
+    <circle class="cls-5" cx="828.02" cy="780.14" r="41.41"/>
+  </g>
+</svg>

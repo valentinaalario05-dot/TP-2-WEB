@@ -15,6 +15,10 @@
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/glass.css">
 <link rel="stylesheet" href="css/preloader.css">
+<style>
+  [data-section-reveal] { width: fit-content; }
+  .analytics-head [data-section-reveal] { margin-left: auto; margin-right: auto; }
+</style>
 </head>
 <body>
 
@@ -40,6 +44,27 @@
         L0.159563 0.976164 C0.156215 0.969643 0.151605 0.965960 0.146789 0.965960
         H0.017773 C0.007957 0.965960 0.000000 0.950970 0.000000 0.932478
         V0.082031 Z
+      "/>
+    </clipPath>
+
+    <!-- Perfiles card shape (ASSETS/perfiles.svg viewBox 0 0 276 279), normalizado
+         a objectBoundingBox (x /276, y /279). Notch superior-izquierdo. -->
+    <clipPath id="perfiles-clip" clipPathUnits="objectBoundingBox">
+      <path d="
+        M0.99725,0.97742
+        c0,0.01068,-0.00877,0.01935,-0.01957,0.01935
+        H0.02232
+        c-0.01080,0,-0.01957,-0.00867,-0.01957,-0.01935
+        V0.11437
+        c0,-0.01068,0.00877,-0.01935,0.01957,-0.01935
+        h0.33134
+        c0.01710,0,0.03330,-0.00771,0.04395,-0.02093
+        l0.04033,-0.05004
+        c0.01065,-0.01323,0.02685,-0.02093,0.04395,-0.02093
+        h0.49583
+        c0.01080,0,0.01957,0.00867,0.01957,0.01935
+        v0.95505
+        Z
       "/>
     </clipPath>
 
@@ -70,10 +95,114 @@
 <!-- PRELOADER -->
 <div id="preloader">
   <div class="preloader__stage">
-    <svg class="preloader__gauge" id="preloader-gauge" viewBox="0 0 300 300"></svg>
-    <div class="preloader__logo">
-      <img src="ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing">
-    </div>
+    <svg class="preloader__loading-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210">
+      <defs>
+        <style>
+          .st0 { stroke: #dbf059; stroke-dasharray: 28 6; stroke-width: 11.5px; }
+          .st0, .st1, .st2, .st3, .st4, .st5, .st6 { fill: none; stroke-miterlimit: 10; }
+          .st1 { stroke-width: .7px; }
+          .st1, .st2, .st3, .st4, .st5, .st6 { stroke: #ebebeb; }
+          .st1, .st3, .st5 { stroke-linecap: round; }
+          .st2 { stroke-width: .2px; }
+          .st3 { stroke-width: .5px; }
+          .st4, .st5 { stroke-width: .2px; }
+          .st7 { fill: #ebebeb; }
+          .st5 { stroke-dasharray: .2 1; }
+          .st6 { stroke-width: .3px; }
+        </style>
+      </defs>
+      <circle id="loader" class="st0" cx="105.2" cy="105.3" r="88.4"/>
+      <g>
+        <path class="st7" d="M40.8,117.8v-1.3h2.2v1.3c0,.7.3,1,.9,1s1-.3,1-1v-1c0-.7-.3-1-1-1h-1.2v-1.5h1.2c.6,0,.9-.2.9-.9v-1c0-.7-.3-.9-.9-.9s-.9.3-.9.9v1.2h-2.2v-1.2c0-1.7,1.1-2.6,3.1-2.6s3.1.9,3.1,2.6v.6c0,1.1-.4,1.8-1.4,2h0c1,.2,1.5,1,1.5,2.1v.7c0,1.7-1.1,2.6-3.2,2.6s-3.1-1-3.1-2.6Z"/>
+        <path class="st7" d="M58.1,149.8l1.4-.9c.6-.4.9-.7.9-1.6v-.5c0-.7-.3-1-.9-1s-.9.3-.9,1v1.1h-2.2v-1.1c0-1.7,1.1-2.7,3.1-2.7s3.1,1,3.1,2.7v.4c0,1.4-.4,2.1-1.8,3l-1.4.9c-.5.3-.7.6-.7,1.4v.3h4v1.8h-6.3v-2c0-1.3.3-2,1.7-2.9Z"/>
+        <path class="st7" d="M46.7,87.2h-3.6v-1.5l2.2-7.1h3.4v7.1h1v1.6h-1v1.7h-2.1v-1.7ZM46.7,85.6v-5.5h0l-1.6,5.5h1.6Z"/>
+        <path class="st7" d="M64.3,56.8v-1h2.2v1c0,.7.3,1,.9,1s.9-.3.9-1v-2.3c0-.6-.3-.9-.9-.9s-.9.3-.9.9v.4h-2.1v-5.9h5.8v1.7h-3.8v2.3c.4-.7.9-1,1.8-1,1.4,0,2.2.8,2.2,2.3v2.5c0,1.7-1,2.6-3.1,2.6s-3.1-1-3.1-2.6Z"/>
+        <path class="st7" d="M100.8,43.9v-5.3c0-1.7,1.1-2.6,3.1-2.6s3.2,1,3.2,2.6v.7h-2.2v-.8c0-.7-.3-1-.9-1s-.9.3-.9,1v2.3c.4-.7,1.1-1,1.9-1,1.4,0,2.2.8,2.2,2.4v1.7c0,1.7-1.1,2.6-3.2,2.6s-3.1-1-3.1-2.6ZM104,44.9c.6,0,.9-.3.9-1v-1.7c0-.6-.3-.9-.9-.9s-.7.1-1,.4v2.2c0,.7.3,1,.9,1Z"/>
+        <path class="st7" d="M144.4,50.8h-3.4v-1.7h5.7v1.6s-2.8,8.7-2.8,8.7h-2.2l2.8-8.6Z"/>
+        <path class="st7" d="M103.4,166.8c-.4.2-.8.3-1.3.3v-1.8c1.1,0,2-.6,2-1.4h1.6v10.3h-2.2v-7.4Z"/>
+        <path class="st7" d="M160.3,86.2v-.3c0-1.2.5-2,1.5-2.2h0c-1-.3-1.4-1.1-1.4-2.3v-.3c0-1.8,1.2-2.7,3.1-2.7s3.1.9,3.1,2.7v.3c0,1.2-.4,2-1.4,2.3h0c1,.3,1.5,1.1,1.5,2.3v.3c0,1.8-1.2,2.8-3.2,2.8s-3.2-.9-3.2-2.8ZM163.5,87.3c.7,0,1-.4,1-1.1v-.9c0-.7-.3-1.1-1-1.1s-1,.4-1,1.1v.9c0,.7.3,1.1,1,1.1ZM163.5,82.9c.6,0,.9-.4.9-1.1v-.8c0-.7-.3-1.1-.9-1.1s-.9.4-.9,1.1v.8c0,.7.3,1.1.9,1.1Z"/>
+        <path class="st7" d="M169.2,112.9v5.3c0,1.7-1.1,2.6-3.1,2.6s-3.2-1-3.2-2.6v-.7h2.2v.8c0,.7.3,1,.9,1s.9-.3.9-1v-2.3c-.4.7-1.1,1-1.9,1-1.4,0-2.2-.8-2.2-2.4v-1.7c0-1.7,1.1-2.6,3.2-2.6s3.1,1,3.1,2.6ZM166,115.5c.4,0,.7-.1,1-.4v-2.2c0-.7-.3-1-.9-1s-.9.3-.9,1v1.7c0,.6.3.9.9.9Z"/>
+        <g>
+          <path class="st7" d="M148.6,146.8c-.4.2-.8.3-1.3.3v-1.8c1.1,0,2-.6,2-1.4h1.6v10.3h-2.2v-7.4Z"/>
+          <path class="st7" d="M152.2,151.4v-4.8c0-2,1.2-2.9,3.2-2.9s3.2.9,3.2,2.9v4.8c0,2-1.2,2.9-3.2,2.9s-3.2-.9-3.2-2.9ZM155.3,152.7c.7,0,1-.4,1-1.1v-5.1c0-.7-.3-1.1-1-1.1s-1,.4-1,1.1v5.1c0,.7.3,1.1,1,1.1Z"/>
+        </g>
+      </g>
+      <g>
+        <circle class="st4" cx="104.4" cy="105.4" r="50.6"/>
+        <path class="st4" d="M104.4,153.2c-26.3,0-47.7-21.4-47.7-47.7s21.4-47.7,47.7-47.7,47.7,21.4,47.7,47.7-21.4,47.7-47.7,47.7Z"/>
+        <path class="st4" d="M104.4,150.3c-24.8,0-44.9-20.1-44.9-44.9s20.1-44.9,44.9-44.9,44.9,20.1,44.9,44.9-20.1,44.9-44.9,44.9Z"/>
+        <line class="st4" x1="67.7" y1="71.1" x2="71.4" y2="74.8"/>
+        <line class="st6" x1="129.4" y1="142.9" x2="133" y2="147.2"/>
+        <line class="st4" x1="55.8" y1="91.4" x2="61.2" y2="93.1"/>
+        <line class="st4" x1="146.1" y1="122.4" x2="151.4" y2="124.3"/>
+        <line class="st4" x1="128.7" y1="67.6" x2="132" y2="63"/>
+        <line class="st4" x1="70.3" y1="142.8" x2="73.9" y2="138.3"/>
+        <line class="st4" x1="143.2" y1="82.7" x2="147.8" y2="79.4"/>
+        <line class="st4" x1="149.1" y1="101.8" x2="154.9" y2="101.6"/>
+        <line class="st4" x1="55.5" y1="118" x2="61" y2="116.3"/>
+        <line class="st4" x1="104.4" y1="54.9" x2="104.4" y2="60.5"/>
+        <line class="st2" x1="102.7" y1="150.2" x2="102.7" y2="156"/>
+      </g>
+      <g>
+        <circle class="st4" cx="105" cy="105" r="104.9"/>
+        <circle class="st3" cx="105" cy="105" r="94.6"/>
+        <circle class="st5" cx="105" cy="105" r="97.6"/>
+      </g>
+      <g>
+        <line class="st1" x1="103.8" y1="27" x2="103.8" y2="30.8"/>
+        <line class="st1" x1="91.5" y1="28.2" x2="92.1" y2="32"/>
+        <line class="st1" x1="79.6" y1="31.2" x2="80.8" y2="34.9"/>
+        <line class="st1" x1="68.4" y1="36.2" x2="70.1" y2="39.6"/>
+        <line class="st1" x1="58" y1="42.8" x2="60.3" y2="45.9"/>
+        <line class="st1" x1="48.8" y1="50.9" x2="51.5" y2="53.6"/>
+        <line class="st1" x1="41" y1="60.4" x2="44.1" y2="62.7"/>
+        <line class="st1" x1="34.7" y1="71" x2="38.2" y2="72.7"/>
+        <line class="st1" x1="30.2" y1="82.4" x2="33.9" y2="83.6"/>
+        <line class="st1" x1="27.6" y1="94.4" x2="31.4" y2="95"/>
+        <line class="st1" x1="26.8" y1="106.7" x2="30.7" y2="106.7"/>
+        <line class="st1" x1="28" y1="119" x2="31.8" y2="118.3"/>
+        <line class="st1" x1="31.1" y1="130.9" x2="34.8" y2="129.7"/>
+        <line class="st1" x1="36" y1="142.1" x2="39.5" y2="140.4"/>
+        <line class="st1" x1="42.6" y1="152.5" x2="45.7" y2="150.2"/>
+        <line class="st1" x1="50.8" y1="161.7" x2="53.5" y2="159"/>
+        <line class="st1" x1="60.3" y1="169.5" x2="62.5" y2="166.4"/>
+        <line class="st1" x1="70.9" y1="175.7" x2="72.6" y2="172.3"/>
+        <line class="st1" x1="82.3" y1="180.2" x2="83.5" y2="176.6"/>
+        <line class="st1" x1="94.3" y1="182.9" x2="94.9" y2="179.1"/>
+        <line class="st1" x1="106.1" y1="183.6" x2="106.1" y2="179.8"/>
+        <line class="st1" x1="118.8" y1="182.5" x2="118.2" y2="178.7"/>
+        <line class="st1" x1="130.7" y1="179.4" x2="129.5" y2="175.7"/>
+        <line class="st1" x1="142" y1="174.5" x2="140.2" y2="171"/>
+        <line class="st1" x1="152.4" y1="167.9" x2="150.1" y2="164.7"/>
+        <line class="st1" x1="161.5" y1="159.2" x2="158.9" y2="156.4"/>
+        <line class="st1" x1="169.4" y1="150.2" x2="166.3" y2="148"/>
+        <line class="st1" x1="175.6" y1="139.6" x2="172.2" y2="137.9"/>
+        <line class="st1" x1="180.1" y1="128.2" x2="176.4" y2="127"/>
+        <line class="st1" x1="182.8" y1="116.2" x2="179" y2="115.6"/>
+        <line class="st1" x1="183.5" y1="103.9" x2="179.7" y2="103.9"/>
+        <line class="st1" x1="182.3" y1="91.7" x2="178.5" y2="92.3"/>
+        <line class="st1" x1="179.2" y1="79.8" x2="175.6" y2="81"/>
+        <line class="st1" x1="174.3" y1="68.5" x2="170.9" y2="70.3"/>
+        <line class="st1" x1="167.7" y1="58.1" x2="164.6" y2="60.4"/>
+        <line class="st1" x1="159.6" y1="48.9" x2="156.9" y2="51.7"/>
+        <line class="st1" x1="150.1" y1="41.1" x2="147.8" y2="44.2"/>
+        <line class="st1" x1="139.5" y1="34.9" x2="137.7" y2="38.3"/>
+        <line class="st1" x1="128" y1="30.4" x2="126.9" y2="34"/>
+        <line class="st1" x1="116" y1="27.7" x2="115.4" y2="31.5"/>
+      </g>
+      <g id="logo">
+        <g>
+          <path class="st7" d="M85.1,100.2l-3.7-3.7h-10.7s-3.5,3.7-3.5,3.7v3.5h3.5l-3.5,3.7v7h3.5v-3.7h0,0v-3.4h10.7v3.3h0s0,0,0,0v3.7h3.7v-7l-3.6-3.7h3.6v-3.5h0ZM81.5,103.7h-10.7v-3.5h10.7v3.5Z"/>
+          <polygon class="st7" points="104.2 100.2 104.2 107.4 89.8 107.4 89.8 110.7 89.7 110.7 89.8 110.7 89.8 114.4 86.2 114.4 86.2 107.4 89.7 103.7 100.5 103.7 100.5 100.2 89.8 100.2 89.8 103.7 89.7 103.7 86.2 103.7 86.2 100.2 89.8 96.5 89.8 96.5 100.5 96.5 104.2 100.2"/>
+          <polygon class="st7" points="108.5 110.7 108.4 110.7 119.3 110.7 122.9 114.4 104.9 114.4 104.9 107.4 108.5 103.7 104.9 103.7 104.9 100.2 108.5 96.5 108.5 96.5 119.2 96.5 122.9 100.2 108.5 100.2 108.5 103.7 119.3 103.7 122.9 107.4 108.5 107.4 108.5 110.7"/>
+          <g>
+            <rect class="st7" x="134.4" y="96.5" width="7.3" height="3.7"/>
+            <polygon class="st7" points="141.7 110.7 141.7 114.4 134.4 114.4 130.9 110.7 130.8 110.7 130.8 100.2 123.7 100.2 123.7 96.5 127.3 96.5 127.3 96.5 127.3 96.5 130.8 96.5 130.8 96.5 134.3 100.2 134.4 100.2 134.4 110.7 141.7 110.7"/>
+            <rect class="st7" x="123.7" y="110.7" width="7.1" height="3.7"/>
+          </g>
+        </g>
+      </g>
+    </svg>
   </div>
 </div>
 <script src="js/preloader.js"></script>
@@ -123,7 +252,7 @@
   <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(19,19,20,0.75), rgba(19,19,20,0.2))"></div>
   <div class="wrap hero__wrap" style="position:relative;z-index:1">
     <span class="hero__rule" aria-hidden="true"></span>
-    <h1 class="hero__title">MÁS QUE SIM RACING</h1>
+    <h1 class="hero__title">DONDE SE DESARROLLAN LOS PILOTOS</h1>
     <div class="hero__bottom">
       <p class="hero__desc">Datos, análisis y coaching para construir pilotos más rápidos y consistentes.</p>
     </div>
@@ -141,14 +270,15 @@
 
 <!-- 04 METODOLOGÍA APEX -->
 <section id="metodologia" class="section--04 bg-dark" data-nav-theme="dark">
-  <div class="tech-grid-bg" aria-hidden="true"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
+
 
   <div class="method-stage">
 
     <!-- Cabecera visible durante todo el scroll de la sección -->
     <div class="method-header">
       <div class="wrap">
-        <h3 class="method-header__title">EL MÉTODO APEX</h3>
+        <div class="text-reveal-wrap" data-section-reveal><h3 class="method-header__title">EL MÉTODO APEX</h3><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
         <p class="method-header__sub" style="max-width:none">Detrás de cada décima ganada hay un proceso. Datos, análisis y entrenamiento.<br>Trabajamos juntos para acelerar tu evolución como piloto.</p>
       </div>
     </div>
@@ -279,12 +409,15 @@
 </div><!-- /tech-grid-wrap -->
 
 <!-- 05 APEX ANALYTICS -->
+<div style="position:relative;">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
+
 <section class="bg-dark shape-ln" data-nav-theme="dark">
   <div class="wrap text-center">
     <div class="analytics-head">
-      <h3 class="section-title" style="margin-bottom:var(--space-1);color:#ffffff">Apex Analytics</h3>
+      <div class="text-reveal-wrap" data-section-reveal><h3 class="section-title" style="margin-bottom:var(--space-1);color:#ffffff;text-align:center">Apex Analytics</h3><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
          </div>
-    <p style="margin:0 auto var(--space-3)">Software de análisis desarrollado por Apex para transformar la telemetría de cada sesión en decisiones que impulsan el desarrollo del piloto.</p>
+    <p style="margin:0 auto var(--space-1)">Software de análisis desarrollado por Apex para transformar la telemetría de cada sesión en decisiones que impulsan el desarrollo del piloto.</p>
 
     <div class="analytics-dash">
       <div class="analytics-dash__viz" id="analytics-viz">
@@ -555,6 +688,29 @@
       .cls-30 {
         font-size: 23.47px;
       }
+
+      /* coaches section: center text-reveal-wrap */
+      .coaches-wrap [data-section-reveal] {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      /* espacio entre subtítulo y cards */
+      .coaches-wrap .coach-carousel {
+        margin-top: var(--space-8);
+      }
+      /* carousel 10% más chico en layout real: el JS mide correctamente */
+      .coaches-wrap .coach-carousel {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      /* reducir espacio entre sección volante y coaches */
+      .section--coaches {
+        padding-top: var(--space-3);
+      }
+      @media (min-width: 1024px) {
+        .section--coaches { padding-top: var(--space-3); }
+      }
     </style>
     <clipPath id="clippath">
       <polygon class="cls-19" points="704.44 308.19 695.93 308.19 695.93 324.12 688.39 324.12 688.39 337.59 645.61 337.59 645.61 323.81 638.56 323.81 638.56 306.66 608.41 306.66 608.41 321.97 577.54 321.97 577.54 337.8 500.31 337.8 500.31 325.24 487.27 325.24 487.27 309.82 479.17 309.82 479.17 421.02 704.84 421.02 704.44 308.19"/>
@@ -709,164 +865,127 @@
     </div>
   </div>
 </section>
+</div><!-- /analytics-bg-wrap -->
 
-<!-- 06 PROGRESO QUE PODÉS MEDIR -->
-<section class="section bg-light" data-nav-theme="light">
+<!-- 06 INGENIERÍA PARA EL RENDIMIENTO -->
+<section class="section bg-light erg-section" data-nav-theme="light">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
+
   <div class="wrap">
-    <h2 class="section-title">Progreso que podés medir</h2>
-    <p>No entrenamos por horas, entrenamos por resultados.</p>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">Ingeniería para el rendimiento</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
+    <p class="perf-videos-subtitle">En competición, ningún detalle se deja al azar.<br> En Apex aplicamos el mismo criterio a cada entrenamiento.</p>
 
-    <div class="about-grid" style="margin-top:var(--space-8)">
-      <img class="about-grid__media" src="ASSETS/placeholders/progreso.png" alt="Proceso de aprendizaje">
+    <div class="erg-inner">
 
-      <div class="progress-chart">
-        <svg class="progress-chart__svg" viewBox="0 0 410 220">
-          <line class="progress-chart__grid" x1="40" y1="10" x2="400" y2="10"/>
-          <line class="progress-chart__grid" x1="40" y1="55" x2="400" y2="55"/>
-          <line class="progress-chart__grid" x1="40" y1="100" x2="400" y2="100"/>
-          <line class="progress-chart__grid" x1="40" y1="145" x2="400" y2="145"/>
-          <line class="progress-chart__grid" x1="40" y1="190" x2="400" y2="190"/>
+      <!-- Izquierda: flechas + lista -->
+      <div class="erg-left">
 
-          <text class="progress-chart__axis-label progress-chart__axis-label--y" x="32" y="10">105</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--y" x="32" y="55">90</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--y" x="32" y="100">75</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--y" x="32" y="145">60</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--y" x="32" y="190">45</text>
+        <div class="erg-arrows">
+          <button class="erg-arrow" id="erg-prev" aria-label="Anterior">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="erg-arrow" id="erg-next" aria-label="Siguiente">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 3v8M3 7l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
 
-          <text class="progress-chart__axis-label progress-chart__axis-label--x" x="40" y="208">S 1</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--x" x="130" y="208">S 5</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--x" x="220" y="208">S 10</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--x" x="310" y="208">S 15</text>
-          <text class="progress-chart__axis-label progress-chart__axis-label--x" x="400" y="208">S 20</text>
+        <ul class="erg-list" role="list">
 
-          <line class="progress-chart__crosshair" id="progress-crosshair-v" x1="0" y1="0" x2="0" y2="0"/>
-          <line class="progress-chart__crosshair" id="progress-crosshair-h" x1="0" y1="0" x2="0" y2="0"/>
+          <li class="erg-item is-active" data-erg="0" role="button" tabindex="0">
+            <div class="erg-item__card">
+              <div class="erg-item__header">
+                <span class="erg-item__plus" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <h5 class="erg-item__title">POSICIÓN</h5>
+              </div>
+              <div class="erg-item__body">
+                <p>Una postura correcta aumenta el control y la consistencia durante toda la sesión.</p>
+              </div>
+            </div>
+          </li>
 
-          <path class="progress-chart__curve" d="M40,151 C75,148 100,142 130,136 C160,130 190,124 220,112 C250,100 280,88 310,76 C335,66 365,58 400,52"/>
+          <li class="erg-item" data-erg="1" role="button" tabindex="0">
+            <div class="erg-item__card">
+              <div class="erg-item__header">
+                <span class="erg-item__plus" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <h5 class="erg-item__title">VISIÓN</h5>
+              </div>
+              <div class="erg-item__body">
+                <p>La distancia y el campo visual correctos mejoran la percepción de velocidad, frenadas y referencias.</p>
+              </div>
+            </div>
+          </li>
 
-          <g class="progress-chart__point" tabindex="0" role="button" aria-label="Sesión 1">
-            <circle class="progress-chart__hit" cx="40" cy="151" r="16"/>
-            <circle class="progress-chart__dot" cx="40" cy="151" r="5"/>
-          </g>
-          <g class="progress-chart__point" tabindex="0" role="button" aria-label="Sesión 5">
-            <circle class="progress-chart__hit" cx="130" cy="136" r="16"/>
-            <circle class="progress-chart__dot" cx="130" cy="136" r="5"/>
-          </g>
-          <g class="progress-chart__point" tabindex="0" role="button" aria-label="Sesión 10">
-            <circle class="progress-chart__hit" cx="220" cy="112" r="16"/>
-            <circle class="progress-chart__dot" cx="220" cy="112" r="5"/>
-          </g>
-          <g class="progress-chart__point" tabindex="0" role="button" aria-label="Sesión 15">
-            <circle class="progress-chart__hit" cx="310" cy="76" r="16"/>
-            <circle class="progress-chart__dot" cx="310" cy="76" r="5"/>
-          </g>
-          <g class="progress-chart__point" tabindex="0" role="button" aria-label="Sesión 20">
-            <circle class="progress-chart__hit" cx="400" cy="52" r="16"/>
-            <circle class="progress-chart__dot" cx="400" cy="52" r="5"/>
-          </g>
-        </svg>
-        <div class="progress-tooltip" id="progress-tooltip"></div>
+          <li class="erg-item" data-erg="2" role="button" tabindex="0">
+            <div class="erg-item__card">
+              <div class="erg-item__header">
+                <span class="erg-item__plus" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <h5 class="erg-item__title">Controles</h5>
+              </div>
+              <div class="erg-item__body">
+                <p>Configuramos volante, pedales y force feedback para transmitir información precisa.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="erg-item" data-erg="3" role="button" tabindex="0">
+            <div class="erg-item__card">
+              <div class="erg-item__header">
+                <span class="erg-item__plus" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <h5 class="erg-item__title">Precisión</h5>
+              </div>
+              <div class="erg-item__body">
+                <p>Un simulador correctamente calibrado genera datos confiables para entrenar.</p>
+              </div>
+            </div>
+          </li>
+
+        </ul>
       </div>
+
+      <!-- Derecha: 4 videos con crossfade -->
+      <div class="erg-video-wrap">
+        <video class="erg-video is-active" data-erg="0" src="ASSETS/videos/volante.mp4"  autoplay muted loop playsinline></video>
+        <video class="erg-video"            data-erg="1" src="ASSETS/videos/monitor.mp4"  loop playsinline></video>
+        <video class="erg-video"            data-erg="2" src="ASSETS/videos/pedales.mp4"  loop playsinline></video>
+        <video class="erg-video"            data-erg="3" src="ASSETS/videos/closeup.mp4"  loop playsinline></video>
+        <button class="erg-mute-btn" id="erg-mute" aria-label="Activar audio" aria-pressed="false">
+          <!-- Ícono muted -->
+          <svg class="erg-mute-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 7.5h3l4-3.5v11L6 11.5H3v-4Z" fill="currentColor"/>
+            <line x1="13" y1="7" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="17" y1="7" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <!-- Ícono unmuted -->
+          <svg class="erg-unmute-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none">
+            <path d="M3 7.5h3l4-3.5v11L6 11.5H3v-4Z" fill="currentColor"/>
+            <path d="M13 7.5a4 4 0 0 1 0 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 5a7 7 0 0 1 0 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- 10 COACHES -->
-<section class="section bg-light" data-nav-theme="light">
-  <div class="wrap text-center">
-    <h2 class="section-title">Aprendé de la experiencia</h2>
-    <div class="coach-carousel">
-      <button class="coach-carousel__btn coach-carousel__btn--prev" aria-label="Anterior" disabled>
-        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="coach-carousel__viewport">
-        <div class="coach-grid">
-          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
-            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
-            <img class="notch-card__media" src="ASSETS/placeholders/coach-01.png" alt="Martín Rossi">
-            <h3 class="coach-card__title">Martín Rossi</h3>
-            <div class="coach-card__sheet glass-sheet">
-              <h1>Martín Rossi</h1>
-              <h2>Director Deportivo &amp; Driver Coach</h2>
-              <p>Lidera la metodología de entrenamiento y supervisa la evolución integral de cada alumno.</p>
-              <h2>Especialidades</h2>
-              <p>▲ Consistencia<br>▲ Desarrollo de pilotos<br>▲ Preparación para competición</p>
-            </div>
-          </div>
-          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
-            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
-            <img class="notch-card__media" src="ASSETS/placeholders/coach-02.png" alt="Nicolás Fernández">
-            <h3 class="coach-card__title">Nicolás Fernández</h3>
-            <div class="coach-card__sheet glass-sheet">
-              <h1>Nicolás Fernández</h1>
-              <h2>Performance Analyst</h2>
-              <p>Identifica las oportunidades de mejora a través del análisis de vueltas y métricas de rendimiento.</p>
-              <h2>Especialidades</h2>
-              <p>▲ Telemetría<br>▲ Análisis de datos<br>▲ Evaluación de desempeño</p>
-            </div>
-          </div>
-          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
-            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
-            <img class="notch-card__media" src="ASSETS/placeholders/coach-03.png" alt="Sebastián Gutiérrez">
-            <h3 class="coach-card__title">Sebastián Gutiérrez</h3>
-            <div class="coach-card__sheet glass-sheet">
-              <h1>Sebastián Gutiérrez</h1>
-              <h2>Racecraft Coach</h2>
-              <p>Especializado en situaciones de carrera, adelantamientos, defensa de posición y toma de decisiones bajo presión.</p>
-              <h2>Especialidades</h2>
-              <p>▲ Toma de decisiones<br>▲ Toma de decisiones<br>▲ Entrenador de carreras</p>
-            </div>
-          </div>
-          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
-            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
-            <img class="notch-card__media" src="ASSETS/placeholders/coach-04.png" alt="Lucas Martínez">
-            <h3 class="coach-card__title">Lucas Martínez</h3>
-            <div class="coach-card__sheet glass-sheet">
-              <h1>Lucas Martínez</h1>
-              <h2>Driving Technique Coach</h2>
-              <p>Optimiza frenadas, trazadas y aplicación de acelerador para construir una conducción más eficiente y consistente.</p>
-              <h2>Especialidades</h2>
-              <p>▲ Técnica de frenado<br>▲ Línea de carrera<br>▲ Toma de curvas</p>
-            </div>
-          </div>
-          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
-            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
-            <img class="notch-card__media" src="ASSETS/placeholders/coach-05.png" alt="Agustín Pereyra">
-            <h3 class="coach-card__title">Agustín Pereyra</h3>
-            <div class="coach-card__sheet glass-sheet">
-              <h1>Agustín Pereyra</h1>
-              <h2>Simulator Training Coach</h2>
-              <p>Diseña sesiones de práctica específicas para acelerar el aprendizaje y consolidar habilidades.</p>
-              <h2>Especialidades</h2>
-              <p>▲ Programas de capacitación<br>▲ Formación de conductores<br>▲ Planificación de sesiones</p>
-            </div>
-          </div>
-          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
-            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
-            <img class="notch-card__media" src="ASSETS/placeholders/coach-06.png" alt="Facundo Morales">
-            <h3 class="coach-card__title">Facundo Morales</h3>
-            <div class="coach-card__sheet glass-sheet">
-              <h1>Facundo Morales</h1>
-              <h2>Community & Driver Support</h2>
-              <p>Acompaña a los alumnos durante todo su recorrido dentro de Apex. Asegura una experiencia de aprendizaje colaborativa.</p>
-              <h2>Especialidades</h2>
-              <p>▲ Mentoría<br>▲ Trabajo en equipo<br>▲ Apoyo a los conductores</p>
-            </div>
-          </div>
-        </div><!-- /coach-grid -->
-      </div><!-- /coach-carousel__viewport -->
-      <button class="coach-carousel__btn coach-carousel__btn--next" aria-label="Siguiente">
-        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div><!-- /coach-carousel -->
-  </div><!-- /wrap -->
-</section>
-
 <!-- 09 CONFIGURAMOS TU SETUP -->
 <section class="section bg-light" id="setup" data-nav-theme="light">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
   <div class="wrap">
-    <h2 class="section-title">Configuramos tu volante</h2>
-    <p>Cada milímetro de configuración importa. Nuestro proceso de calibración personalizada analiza tu biomecánica, estilo y hardware para definir el setup óptimo que maximiza tu rendimiento.</p>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">Ajuste APEX</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
+    <p>Nuestro proceso de calibración personalizada analiza tu biomecánica,<br> estilo y hardware para definir el setup óptimo que maximiza tu rendimiento.</p>
 
     <div class="wheel-media" style="position:relative;overflow:visible;height:auto">
       <div id="wheel-stage" style="position:relative;cursor:none">
@@ -938,8 +1057,95 @@
   </div>
 </section>
 
+<!-- 10 COACHES -->
+<section class="section bg-light section--coaches" data-nav-theme="light">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
+  <div class="wrap text-center coaches-wrap">
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">TU EQUIPO DE COMPETICIÓN</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
+<p>Especialistas que convierten datos, experiencia y método en decisiones para desarrollar tu rendimiento como piloto.</p>
+    
+
+      <div class="coach-carousel">
+      <button class="coach-carousel__btn coach-carousel__btn--prev" aria-label="Anterior" disabled>
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="coach-carousel__viewport">
+        <div class="coach-grid">
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-01.png" alt="Martín Rossi">
+            <span class="coach-card__name-label">Martín Rossi</span>
+            <h3 class="coach-card__title">Martín Rossi</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Director Deportivo &amp; Driver Coach</h1>
+              <p>Lidera la metodología de entrenamiento y supervisa la evolución integral de cada alumno.</p>
+            </div>
+          </div>
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-02.png" alt="Nicolás Fernández">
+            <span class="coach-card__name-label">Nicolás Fernández</span>
+            <h3 class="coach-card__title">Nicolás Fernández</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Performance Analyst</h1>
+              <p>Identifica las oportunidades de mejora a través del análisis de vueltas y métricas de rendimiento.</p>
+            </div>
+          </div>
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-03.png" alt="Sebastián Gutiérrez">
+            <span class="coach-card__name-label">Sebastián Gutiérrez</span>
+            <h3 class="coach-card__title">Sebastián Gutiérrez</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Racecraft Coach</h1>
+              <p>Especializado en situaciones de carrera, adelantamientos, defensa de posición y toma de decisiones bajo presión.</p>
+            </div>
+          </div>
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-04.png" alt="Lucas Martínez">
+            <span class="coach-card__name-label">Lucas Martínez</span>
+            <h3 class="coach-card__title">Lucas Martínez</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Driving Technique Coach</h1>
+              <p>Optimiza frenadas, trazadas y aplicación de acelerador para construir una conducción más eficiente y consistente.</p>
+            </div>
+          </div>
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-05.png" alt="Agustín Pereyra">
+            <span class="coach-card__name-label">Agustín Pereyra</span>
+            <h3 class="coach-card__title">Agustín Pereyra</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Simulator Training Coach</h1>
+              <p>Diseña sesiones de práctica específicas para acelerar el aprendizaje y consolidar habilidades.</p>
+            </div>
+          </div>
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-06.png" alt="Facundo Morales">
+            <span class="coach-card__name-label">Facundo Morales</span>
+            <h3 class="coach-card__title">Facundo Morales</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Community &amp; Driver Support</h1>
+              <p>Acompaña a los alumnos durante todo su recorrido dentro de Apex. Asegura una experiencia de aprendizaje colaborativa.</p>
+            </div>
+          </div>
+        </div><!-- /coach-grid -->
+      </div><!-- /coach-carousel__viewport -->
+      <button class="coach-carousel__btn coach-carousel__btn--next" aria-label="Siguiente">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div><!-- /coach-carousel -->
+  </div><!-- /wrap -->
+</section>
+
+<div class="gradient-blue-wrap">
+<div class="footer-bg-gradient"></div>
+
 <!-- 02 PARTNERS -->
-<section class="section--partners-strip bg-light" data-nav-theme="light">
+<section class="section--partners-strip" data-nav-theme="light" style="background:transparent">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
   <div class="wrap">
   </div>
   <div class="partners-panel partners-panel--strip">
@@ -965,7 +1171,7 @@
 </section>
 
 <!-- EDITORIAL B + 12 CURSOS (fusionados) -->
-<section id="cursos" class="editorial-cursos editorial--b bg-dark" data-nav-theme="dark" style="background:#000000">
+<section id="cursos" class="editorial-cursos editorial--b" data-nav-theme="dark" style="background:#000000">
 
   <!-- Cabecera editorial -->
   <div class="editorial-cursos__header">
@@ -977,48 +1183,51 @@
   <div class="wrap text-center editorial-cursos__body">
     <div class="course-grid course-grid--reveal">
       <a href="curso-rendimiento-telemetria.html" class="course-card glass-card">
-        <img class="course-card__media" src="ASSETS/placeholders/course-4.png" alt="Setup">
-        <h1 class="course-card__title">Optimización del Setup</h1>
-        <ul class="course-card__bullets"><li>Calibración del volante</li><li>Ajustes del vehículo</li><li>Optimización por circuito</li></ul>
-        <h1 class="course-card__price">$245.000</h1>
-        <span class="cta cta--primary glass-cta">Ver más</span>
-      </a>
-      <span class="course-divider"></span>
-      <a href="curso-rendimiento-telemetria.html" class="course-card glass-card">
         <img class="course-card__media" src="ASSETS/placeholders/course-1.png" alt="Foundations">
-        <h1 class="course-card__title">Técnica de conducción</h1>
-        <ul class="course-card__bullets"><li>Configuración del puesto de manejo</li><li>Aceleración y transferencia de peso</li><li>Puntos de frenado</li></ul>
-        <h1 class="course-card__price">$265.000</h1>
+        <div class="course-card__body">
+          <h1 class="course-card__title">Técnica de conducción</h1>
+          <p class="course-card__meta">8 semanas / certificación apex</p>
+          <ul class="course-card__bullets"><li>Configuración del puesto de manejo</li><li>Aceleración y transferencia de peso</li><li>Puntos de frenado</li></ul>
+          <h1 class="course-card__price">$265.000</h1>
+        </div>
         <span class="cta cta--primary glass-cta">Ver más</span>
       </a>
       <span class="course-divider"></span>
       <a href="curso-rendimiento-telemetria.html" class="course-card glass-card">
         <span class="course-card__label-best">más elegido</span>
         <img class="course-card__media" src="ASSETS/placeholders/course-2.png" alt="Competition">
-        <h1 class="course-card__title">Rendimiento y telemetría</h1>
-        <ul class="course-card__bullets"><li>Identificación de pérdidas de tiempo</li><li>Lectura de telemetría</li><li>Análisis de inputs</li></ul>
-        <h1 class="course-card__price">$230.000</h1>
+        <div class="course-card__body">
+          <h1 class="course-card__title">Rendimiento y telemetría</h1>
+          <p class="course-card__meta">8 semanas / certificación apex</p>
+          <ul class="course-card__bullets"><li>Identificación de pérdidas de tiempo</li><li>Lectura de telemetría</li><li>Análisis de inputs</li></ul>
+          <h1 class="course-card__price">$230.000</h1>
+        </div>
         <span class="cta cta--primary glass-cta">Ver más</span>
       </a>
       <span class="course-divider"></span>
       <a href="curso-rendimiento-telemetria.html" class="course-card course-card--elite glass-card">
         <img class="course-card__media" src="ASSETS/placeholders/course-3.png" alt="Elite">
-        <h1 class="course-card__title">Competición estratégica</h1>
-        <ul class="course-card__bullets"><li>Adelantamientos y defensa</li><li>Estrategias de carrera</li><li>Gestión de neumáticos</li></ul>
-        <h1 class="course-card__price">$250.000</h1>
+        <div class="course-card__body">
+          <h1 class="course-card__title">Competición estratégica</h1>
+          <p class="course-card__meta">8 semanas / certificación apex</p>
+          <ul class="course-card__bullets"><li>Adelantamientos y defensa</li><li>Estrategias de carrera</li><li>Gestión de neumáticos</li></ul>
+          <h1 class="course-card__price">$250.000</h1>
+        </div>
         <span class="cta cta--primary glass-cta">Ver más</span>
       </a>
     </div>
   </div>
 </section>
 
-<div id="divider-cursos" class="section-divider-ellipse" style="background:#000000"></div>
+</div>
+
+<div class="section-divider-ellipse" style="background:#000000"></div>
 
 <!-- 07 RESULTADOS DE LOS ALUMNOS -->
 <section id="resultados-pilotos" class="section bg-light" data-nav-theme="light">
-  <div class="tech-grid-bg" aria-hidden="true" style="transform: translate(0px, 0px);"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
   <div class="wrap">
-    <h2 class="section-title">RENDIMIENTO APEX</h2>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">RENDIMIENTO APEX</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
 
     <!-- Stats hero block: 4 cols iguales — foto | vacío | stat-izq | stat-der -->
     <div class="apex-stats">
@@ -1033,7 +1242,7 @@
             <span class="rk-head__ev">EV.</span>
           </div>
 
-          <div class="rk-row is-apex" data-photo="ASSETS/placeholders/nahuel-esposito.jpeg" data-categoria="TC2000" data-victorias="5" data-podios="9" data-consistencia="94%">
+          <div class="rk-row is-apex" data-photo="ASSETS/placeholders/nahuel-esposito.jpeg" data-categoria="TC 2000" data-victorias="5" data-podios="9" data-consistencia="94%" data-tiempo="18 meses">
             <span class="rk-row__pos">01</span>
             <span class="rk-row__name">Lucas Bianchi</span>
             <span class="rk-row__badge"><img src="ASSETS/logo-apex.svg.svg" alt="APEX"></span>
@@ -1041,7 +1250,7 @@
             <span class="rk-row__delta rk-row__delta--up"><i></i>2</span>
           </div>
 
-          <div class="rk-row is-apex" data-photo="ASSETS/placeholders/tomas-aguirre.jpeg" data-categoria="Fórmula Pampeana" data-victorias="4" data-podios="8" data-consistencia="91%">
+          <div class="rk-row is-apex" data-photo="ASSETS/placeholders/tomas-aguirre.jpeg" data-categoria="Fórmula Pampeana" data-victorias="4" data-podios="8" data-consistencia="91%" data-tiempo="12 meses">
             <span class="rk-row__pos">02</span>
             <span class="rk-row__name">Martín Souza</span>
             <span class="rk-row__badge"><img src="ASSETS/logo-apex.svg.svg" alt="APEX"></span>
@@ -1065,7 +1274,7 @@
             <span class="rk-row__delta rk-row__delta--up"><i></i>3</span>
           </div>
 
-          <div class="rk-row is-apex" data-photo="ASSETS/placeholders/ramiro-olivera.jpeg" data-categoria="TC Pista" data-victorias="2" data-podios="5" data-consistencia="85%">
+          <div class="rk-row is-apex" data-photo="ASSETS/placeholders/ramiro-olivera.jpeg" data-categoria="TC Pista" data-victorias="2" data-podios="5" data-consistencia="85%" data-tiempo="9 meses">
             <span class="rk-row__pos">05</span>
             <span class="rk-row__name">Tomás Gómez</span>
             <span class="rk-row__badge"><img src="ASSETS/logo-apex.svg.svg" alt="APEX"></span>
@@ -1085,18 +1294,18 @@
 
 <!-- 11 TESTIMONIOS -->
 <section class="section bg-light" data-nav-theme="light">
-  <div class="tech-grid-bg" aria-hidden="true" style="transform: translate(0px, 0px);"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
   <div class="wrap">
-    <h2 class="section-title">Lo que dicen nuestros pilotos</h2>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">Lo que dicen nuestros pilotos</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
     <div class="review-grid" id="review-grid"></div>
   </div>
 </section>
 
 <!-- 08 COMUNIDAD -->
 <section class="section bg-light" data-nav-theme="light">
-  <div class="tech-grid-bg" aria-hidden="true" style="transform: translate(0px, 0px);"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;background:url('ASSETS/backgrounds/background%20system/noise-grain.png') repeat;"></div>
   <div class="wrap">
-    <h2 class="section-title">Entrenás solo, competís en equipo</h2>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">Entrenás solo, competís en equipo</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
     <div class="scroller">
       <div class="scroller__item">
         <div class="notch-card notch-card--helmet glass-card" style="height:0;padding-bottom:100%">
@@ -1141,7 +1350,7 @@
 <!-- EL CAMINO HACIA EL AUTOMOVILISMO REAL -->
 <section class="section bg-dark text-center" data-nav-theme="dark">
   <div class="wrap">
-    <h2 class="section-title" style="color:#ffffff">El camino hacia el automovilismo real</h2>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title" style="color:#ffffff">El camino hacia el automovilismo real</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
     <p style="max-width:640px;margin:0 auto">
       El automovilismo virtual ya no es una alternativa, es una nueva puerta de entrada al deporte.<br>
       Apex está construyendo el camino para la próxima generación de pilotos.
@@ -1152,12 +1361,50 @@
 <!-- 13 CONTACTO -->
 <section id="contacto" class="section bg-light" data-nav-theme="light">
   <div class="wrap">
-    <h2 class="section-title">¿Listo para empezar?</h2>
+    <div class="text-reveal-wrap" data-section-reveal><h2 class="section-title">¿Listo para empezar?</h2><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
+    <p class="section-subtitle">¿Tenés dudas o ya decidiste dar el siguiente paso? Escribinos y te ayudamos a encontrar el entrenamiento ideal para vos.</p>
     <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-info__item">
+          <div class="contact-info__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="contact-info__text">
+            <span class="contact-info__label">Mail</span>
+            <span class="contact-info__value">apexsimracing@gmail.com</span>
+          </div>
+          <a href="mailto:apexsimracing@gmail.com" class="contact-info__arrow" aria-label="Enviar email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </div>
+        <div class="contact-info__item">
+          <div class="contact-info__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="contact-info__text">
+            <span class="contact-info__label">WhatsApp</span>
+            <span class="contact-info__value">+54 9 11 0000-0000</span>
+          </div>
+          <a href="https://wa.me/5491100000000" target="_blank" rel="noopener" class="contact-info__arrow" aria-label="Escribir por WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </div>
+        <div class="contact-info__item">
+          <div class="contact-info__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-info__text">
+            <span class="contact-info__label">Dirección</span>
+            <span class="contact-info__value">Buenos Aires, Argentina</span>
+          </div>
+          <span class="contact-info__arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </span>
+        </div>
+      </div>
       <form class="contact-form">
         <input type="text" name="nombre" placeholder="Nombre" required>
         <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="telefono" placeholder="Teléfono">
         <textarea name="mensaje" placeholder="Mensaje" required></textarea>
         <button type="submit" class="cta cta--primary glass-cta">Enviar</button>
       </form>
@@ -1206,5 +1453,30 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="js/nav-theme.js"></script>
+<script>
+(function () {
+  function init() {
+    var wraps = document.querySelectorAll('[data-section-reveal]');
+    if (!wraps.length) return;
+    if (!('IntersectionObserver' in window)) {
+      wraps.forEach(function (w) { w.classList.add('is-revealed'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+    wraps.forEach(function (w) { obs.observe(w); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 </html>

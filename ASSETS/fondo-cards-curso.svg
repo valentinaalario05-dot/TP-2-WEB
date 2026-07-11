@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 303">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 1.35px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill: none;
+      }
+
+      .cls-1, .cls-4 {
+        stroke: #dbf059;
+        stroke-linejoin: bevel;
+      }
+
+      .cls-2 {
+        stroke: #ebebeb;
+        stroke-dasharray: 3.5 2.54;
+        stroke-miterlimit: 10;
+        stroke-width: .2px;
+      }
+
+      .cls-5 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-6 {
+        clip-path: url(#clippath-3);
+      }
+
+      .cls-4 {
+        stroke-width: 2.5px;
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-8 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-3" x="182.89" y=".24" width="116.97" height="23.1"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-3" x=".1" y="285.18" width="55.57" height="17.87" rx="4.84" ry="4.84"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect class="cls-3" x="-4.42" y="290.45" width="63.27" height="12.5"/>
+    </clipPath>
+    <clipPath id="clippath-3">
+      <rect class="cls-3" x=".19" y=".51" width="82.38" height="71.15"/>
+    </clipPath>
+  </defs>
+  <g class="cls-8">
+    <g>
+      <line class="cls-4" x1="186.22" y1="25.35" x2="201.53" y2="-1.44"/>
+      <line class="cls-4" x1="201.24" y1="25.35" x2="216.56" y2="-1.44"/>
+      <line class="cls-4" x1="216.27" y1="25.35" x2="231.59" y2="-1.44"/>
+      <line class="cls-4" x1="231.3" y1="25.35" x2="246.62" y2="-1.44"/>
+      <line class="cls-4" x1="246.33" y1="25.35" x2="261.64" y2="-1.44"/>
+      <line class="cls-4" x1="261.35" y1="25.35" x2="276.67" y2="-1.44"/>
+      <line class="cls-4" x1="276.38" y1="25.35" x2="291.7" y2="-1.44"/>
+      <line class="cls-4" x1="291.41" y1="25.35" x2="306.73" y2="-1.44"/>
+    </g>
+  </g>
+  <g class="cls-5">
+    <g class="cls-7">
+      <g>
+        <line class="cls-1" x1="-2.63" y1="304.03" x2="5.66" y2="289.54"/>
+        <line class="cls-1" x1="5.5" y1="304.03" x2="13.79" y2="289.54"/>
+        <line class="cls-1" x1="13.63" y1="304.03" x2="21.92" y2="289.54"/>
+        <line class="cls-1" x1="21.76" y1="304.03" x2="30.04" y2="289.54"/>
+        <line class="cls-1" x1="29.89" y1="304.03" x2="38.17" y2="289.54"/>
+        <line class="cls-1" x1="38.02" y1="304.03" x2="46.3" y2="289.54"/>
+        <line class="cls-1" x1="46.14" y1="304.03" x2="54.43" y2="289.54"/>
+      </g>
+    </g>
+  </g>
+  <g class="cls-6">
+    <circle class="cls-2" cx="-19.73" cy="-30.46" r="102"/>
+  </g>
+</svg>

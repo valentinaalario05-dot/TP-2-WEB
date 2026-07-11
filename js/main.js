@@ -222,15 +222,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var timingApexRows = document.querySelectorAll('.timing-row.is-apex, .rk-row.is-apex');
 
     var fillTimingDetail = function (row) {
+      var pos = row.querySelector('.rk-row__pos') ? row.querySelector('.rk-row__pos').textContent.trim() : '';
       timingDetail.innerHTML =
-        '<svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>' +
         '<img class="timing-detail__photo" src="' + row.dataset.photo + '" alt="">' +
         '<div class="timing-detail__sheet">' +
-          '<span class="timing-detail__cat">' + row.dataset.categoria + '</span>' +
-          '<div>' +
-            '<div class="timing-detail__title">' + row.dataset.victorias + '<span>victorias</span></div>' +
-            '<div class="timing-detail__caption">' + row.dataset.podios + ' podios · ' + row.dataset.consistencia + ' consistencia</div>' +
-          '</div>' +
+          '<p class="timing-detail__stat">Posición actual: <span>#' + pos + '</span></p>' +
+          '<p class="timing-detail__stat">Podios: <span>' + row.dataset.podios + '</span></p>' +
+          '<p class="timing-detail__stat">Categoría: <span>' + row.dataset.categoria + '</span></p>' +
+          '<p class="timing-detail__stat">Tiempo en Apex: <span>' + (row.dataset.tiempo || '—') + '</span></p>' +
         '</div>';
     };
 
@@ -351,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var rotY = dx * 10;
       var shine = 'radial-gradient(circle at ' + (50 + dx * 30) + '% ' + (50 + dy * 30) + '%, rgba(255,255,255,0.08) 0%, transparent 60%)';
 
-      tilt.style.transform = 'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.02)';
+      tilt.style.transform = 'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
       img.style.filter = 'brightness(' + (1.05 + Math.abs(dx) * 0.08) + ') contrast(1.05)';
       stage.style.setProperty('--shine', shine);
 
@@ -361,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     stage.addEventListener('mouseleave', function () {
-      tilt.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+      tilt.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
       img.style.filter = 'brightness(1.05) contrast(1.05)';
       cursor.style.opacity = '0';
     });
@@ -932,6 +931,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
 
     updateMethod(); /* estado inicial */
+
+    /* Re-calcular --expansion cuando las fuentes Adobe terminan de cargar:
+       field-gothic-condensed es mucho más angosta que la fallback (Arial/sans),
+       por lo que el alto de los steps puede cambiar en la primera carga. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { requestAnimationFrame(updateMethod); });
+    }
   })();
 
   /* ---- Telemetría sincronizada ---- */
@@ -1132,7 +1138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var VISIBLE = 3;
 
     function measure() {
-      cardW     = cards[0].getBoundingClientRect().width;
+      cardW     = cards[0].offsetWidth;
       gap       = parseFloat(getComputedStyle(grid).columnGap) || 0;
       step      = VISIBLE * (cardW + gap);
       maxOffset = (cards.length - VISIBLE) * (cardW + gap);
@@ -1158,9 +1164,33 @@ document.addEventListener('DOMContentLoaded', function () {
       btnNext.disabled = offset >= maxOffset;
     }
 
-    measure();
-    applyTrack();
-    go(0);
+    /* Inicializa en window.load pero espera a que el preloader haya quitado
+       overflow:hidden del html antes de medir. En primera carga lenta, window.load
+       puede dispararse después de que el preloader se descartó (1450 ms), haciendo
+       que el scrollbar ya esté visible y el contenedor sea ~15 px más angosto —
+       lo que congela las cards con gridAutoColumns incorrecto via applyTrack(). */
+    window.addEventListener('load', function () {
+      if (window.innerWidth < 1024) return;
+
+      function init() {
+        offset = 0;
+        measure();
+        applyTrack();
+        go(0);
+      }
+
+      if (document.documentElement.classList.contains('is-loading')) {
+        var mo = new MutationObserver(function () {
+          if (!document.documentElement.classList.contains('is-loading')) {
+            mo.disconnect();
+            requestAnimationFrame(init);
+          }
+        });
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      } else {
+        requestAnimationFrame(init);
+      }
+    });
 
     btnPrev.addEventListener('click', function () { go(-1); });
     btnNext.addEventListener('click', function () { go(1); });
@@ -1223,6 +1253,133 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.3 });
 
     observer.observe(section);
+  })();
+
+  /* ── COCKPIT: navegación de ítems + crossfade de video ── */
+  (function () {
+    var items  = Array.prototype.slice.call(document.querySelectorAll('.erg-item'));
+    var videos = Array.prototype.slice.call(document.querySelectorAll('.erg-video'));
+    var prev   = document.getElementById('erg-prev');
+    var next   = document.getElementById('erg-next');
+    if (!items.length || !videos.length) return;
+
+    var current = 0;
+
+    function activate(index) {
+      var n = ((index % items.length) + items.length) % items.length;
+      if (n === current) return;
+
+      items[current].classList.remove('is-active');
+      videos[current].classList.remove('is-active');
+      videos[current].pause();
+
+      current = n;
+
+      items[current].classList.add('is-active');
+      videos[current].classList.add('is-active');
+      videos[current].currentTime = 0;
+      videos[current].play().catch(function(){});
+    }
+
+    items.forEach(function (item, i) {
+      item.addEventListener('click', function () { activate(i); });
+      item.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(i); }
+      });
+    });
+
+    prev.addEventListener('click', function () { activate(current - 1); });
+    next.addEventListener('click', function () { activate(current + 1); });
+
+    var wrap = document.querySelector('.erg-video-wrap');
+    if (wrap && 'IntersectionObserver' in window) {
+      var wrapObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            videos[current].play().catch(function(){});
+          } else {
+            videos.forEach(function (v) { v.pause(); });
+          }
+        });
+      }, { threshold: 0.2 });
+      wrapObserver.observe(wrap);
+    }
+  })();
+
+  /* ── COCKPIT: toggle mute/unmute en todos los videos ── */
+  (function () {
+    var btn        = document.getElementById('erg-mute');
+    var videos     = Array.prototype.slice.call(document.querySelectorAll('.erg-video'));
+    var iconMuted  = btn && btn.querySelector('.erg-mute-icon');
+    var iconSound  = btn && btn.querySelector('.erg-unmute-icon');
+    if (!btn || !videos.length) return;
+
+    var muted = true;
+
+    btn.addEventListener('click', function () {
+      muted = !muted;
+      videos.forEach(function (v) { v.muted = muted; });
+      btn.setAttribute('aria-pressed', String(!muted));
+      btn.setAttribute('aria-label', muted ? 'Activar audio' : 'Silenciar');
+      iconMuted.style.display = muted  ? '' : 'none';
+      iconSound.style.display = muted  ? 'none' : '';
+    });
+  })();
+
+  /* ── Reproducción secuencial al entrar en viewport, loop continuo ── */
+  (function () {
+    var v1 = document.getElementById('perf-vid-1');
+    var v2 = document.getElementById('perf-vid-2');
+    var v3 = document.getElementById('perf-vid-3');
+    if (!v1 || !v2 || !v3) return;
+
+    var videos = [v1, v2, v3];
+    var started = false;
+
+    function chipOf(v) {
+      return v.parentElement && v.parentElement.querySelector('.perf-video-chip');
+    }
+
+    function setChipActive(v, active) {
+      var chip = chipOf(v);
+      if (!chip) return;
+      chip.classList.toggle('perf-video-chip--active', active);
+    }
+
+    function startVideo(v) {
+      setChipActive(v, true);
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {
+        v.muted = true;
+        v.play().catch(function(){});
+      });
+    }
+
+    videos.forEach(function (v, i) {
+      v.addEventListener('ended', function () {
+        setChipActive(v, false);
+        var next = videos[(i + 1) % videos.length];
+        startVideo(next);
+      });
+      v.addEventListener('pause', function () {
+        setChipActive(v, false);
+      });
+      v.addEventListener('play', function () {
+        setChipActive(v, true);
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          startVideo(v1);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    io.observe(document.querySelector('.perf-videos-section'));
   })();
 
 });

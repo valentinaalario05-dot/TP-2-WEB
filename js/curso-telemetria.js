@@ -4,6 +4,23 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ---- Text reveal: observer global para todos los títulos de la página ---- */
+  (function () {
+    var wraps = document.querySelectorAll('.text-reveal-wrap[data-section-reveal]');
+    if (!wraps.length || !('IntersectionObserver' in window)) {
+      wraps.forEach(function (w) { w.classList.add('is-revealed'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    wraps.forEach(function (w) { obs.observe(w); });
+  })();
+
   /* ---- Dashboard Apex Analytics: grilla de 8 cuadrantes (4×2) ----
      Generado por este script (no por js/main.js, que arma el dashboard de
      6 cuadrantes de home.html): un único dataset de vuelta sintético
@@ -461,28 +478,65 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })();
 
-  /* ---- Caso práctico: punto animado sobre el circuito según scroll ---- */
+  /* ---- Caso práctico: navegación por flechas ---- */
   (function () {
-    var section  = document.querySelector('.caso-practico');
-    var path     = document.getElementById('track-map-path');
-    var dot      = document.getElementById('track-map-dot');
-    if (!section || !path || !dot) return;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var panels   = document.getElementById('cp-panels');
+    var btnPrev  = document.getElementById('cp-prev');
+    var btnNext  = document.getElementById('cp-next');
+    if (!panels || !btnPrev || !btnNext) return;
 
-    var totalLen = path.getTotalLength();
+    var vars = [
+      {
+        label:  'Velocidad máx.',
+        before: { value: '204 <span class="cp-unit">km/h</span>', note: 'El piloto levantaba antes de La Source y en Raidillon, perdiendo velocidad de paso.' },
+        after:  { value: '231 <span class="cp-unit">km/h</span>', note: 'Compromiso de velocidad sostenido a lo largo de toda la vuelta.' }
+      },
+      {
+        label:  'Presión de freno',
+        before: { value: '68 <span class="cp-unit">%</span>',     note: 'Frenadas cortas y suaves. Sin aprovechar el tope de agarre trasero disponible.' },
+        after:  { value: '84 <span class="cp-unit">%</span>',     note: 'Frenadas al límite con trail brake controlado. Mayor carga trasera en la entrada de curva.' }
+      },
+      {
+        label:  'Tiempo de vuelta',
+        before: { value: '1:42.<span class="cp-dec">85</span>',   note: 'Vuelta inconsistente con alta variación entre pasadas consecutivas.' },
+        after:  { value: '1:40.<span class="cp-dec">41</span>',   note: 'Consistencia del 91% sobre 15 vueltas consecutivas.' }
+      },
+      {
+        label:  'Fuerza G lateral',
+        before: { value: '2.1 <span class="cp-unit">G</span>',    note: 'Subviraje notable en Eau Rouge. El coche no era llevado al límite en las curvas rápidas.' },
+        after:  { value: '2.8 <span class="cp-unit">G</span>',    note: 'Curvas rápidas trabajadas al límite de adherencia. Línea optimizada en Pouhon.' }
+      }
+    ];
 
-    function update() {
-      var rect       = section.getBoundingClientRect();
-      var scrollable = section.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      var progress = Math.max(0, Math.min(1, -rect.top / scrollable));
-      var pt = path.getPointAtLength(progress * totalLen);
-      dot.setAttribute('cx', pt.x.toFixed(2));
-      dot.setAttribute('cy', pt.y.toFixed(2));
+    var current = 0;
+    var animating = false;
+
+    function render(idx) {
+      var v = vars[idx];
+      document.getElementById('cp-var-before').textContent  = v.label;
+      document.getElementById('cp-value-before').innerHTML  = v.before.value;
+      document.getElementById('cp-note-before').textContent = v.before.note;
+      document.getElementById('cp-var-after').textContent   = v.label;
+      document.getElementById('cp-value-after').innerHTML   = v.after.value;
+      document.getElementById('cp-note-after').textContent  = v.after.note;
     }
 
-    window.addEventListener('scroll', update, { passive: true });
-    update();
+    function go(dir) {
+      if (animating) return;
+      animating = true;
+      panels.classList.add('is-animating');
+      setTimeout(function () {
+        current = (current + dir + vars.length) % vars.length;
+        render(current);
+        panels.classList.remove('is-animating');
+        animating = false;
+      }, 350);
+    }
+
+    btnPrev.addEventListener('click', function () { go(-1); });
+    btnNext.addEventListener('click', function () { go(1); });
+
+    render(0);
   })();
 
   /* ---- Programa del curso: timeline de 6 módulos ----

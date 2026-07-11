@@ -45,27 +45,31 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       cards.forEach(function (c) { gsap.set(c, { opacity: 1, y: 0 }); });
     } else {
-      gsap.set(cards, { opacity: 0, y: 90 });
+      gsap.set(cards, { opacity: 0, y: 50 });
 
-      var startOffsets = ['top 88%', 'top 80%', 'top 72%', 'top 64%'];
-      var endOffsets   = ['top 30%', 'top 22%', 'top 14%', 'top 6%'];
-
+      var section = document.querySelector('#cursos');
       cards.forEach(function (card, i) {
-        gsap.fromTo(card,
-          { opacity: 0, y: 90 },
-          {
-            opacity: 1,
-            y: 0,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: courseGrid,
-              start: startOffsets[i] || 'top 85%',
-              end:   endOffsets[i]   || 'top 25%',
-              scrub: 0.8
-            }
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          delay: i * 0.15,
+          scrollTrigger: {
+            trigger: section || courseGrid,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
           }
-        );
+        });
       });
     }
+  }
+  /* Refrescar posiciones de ScrollTrigger cuando las fuentes Adobe terminan de
+     cargar. field-gothic-condensed es significativamente más angosta que la
+     fallback (sans-serif), causando reflow en el contenido sobre #cursos y
+     desplazando el trigger calculado al inicio. Sin este refresh, las course
+     cards pueden animar en el scroll incorrecto en la primera carga. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
   }
 })();

@@ -89,8 +89,8 @@
   --grid-gutter-tablet:  20px;
   --grid-margin-tablet:  40px;
   --grid-gutter-desktop: 24px;
-  --grid-margin-desktop: 80px;
-  --grid-max-width:      1440px;
+  --grid-margin-desktop: 200px;
+  --grid-max-width:      1920px;
 
   /* ---- Breakpoints (referencia, usados en media queries) ---- */
   --bp-md:  768px;
