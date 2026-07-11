@@ -123,7 +123,7 @@ p { font-size: 1.3rem; }
 }
 
 @media (min-width: 1024px) {
-  .section { padding: var(--space-20) 0; }
+  .section { padding: var(--space-10) 0; }
 }
 
 .bg-dark  { background: var(--color-dark);  color: var(--color-text-on-dark); }
@@ -451,7 +451,7 @@ p { font-size: 1.3rem; }
   letter-spacing: 0;
   opacity: 0.85;
   margin-bottom: var(--space-4);
-  color: #000000;
+  color: #ffffff;
 }
 
 /* ==========================================================================
@@ -493,7 +493,7 @@ p { font-size: 1.3rem; }
 
 .text-reveal-wrap {
   position: relative;
-  display: block;
+  display: inline-block;
 }
 
 /* Contiene y recorta solo el overlay, nunca el texto */
