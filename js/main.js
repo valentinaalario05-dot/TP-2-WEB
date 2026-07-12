@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.stopPropagation();
         modalContent.innerHTML =
           '<div style="margin-bottom:20px;">' +
-            '<div style="font-family:tachyon,sans-serif;color:' + d.color + ';font-size:0.7rem;letter-spacing:0.12em;margin-bottom:8px;">' + d.subtitle + '</div>' +
+            '<div style="font-family:\'field-gothic-no-47\',sans-serif;color:#2F31F5;font-size:0.7rem;letter-spacing:0.12em;margin-bottom:8px;">' + d.subtitle + '</div>' +
             '<div style="font-family:\'field-gothic-no-47\',sans-serif;font-weight:800;color:#000000;font-size:1.6rem;letter-spacing:-0.03em;text-transform:uppercase;line-height:1;">' + d.title + '</div>' +
           '</div>' +
           '<div style="width:40px;height:2px;background:' + d.color + ';margin-bottom:20px;"></div>' +
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">' +
             d.stats.map(function (s) {
               return '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:12px 8px;text-align:center;">' +
-                '<div style="font-family:tachyon,sans-serif;color:' + d.color + ';font-size:1rem;margin-bottom:4px;">' + s.value + '</div>' +
+                '<div style="font-family:\'field-gothic-no-47\',sans-serif;color:#2F31F5;font-size:1rem;margin-bottom:4px;">' + s.value + '</div>' +
                 '<div style="font-family:\'field-gothic-no-53\',sans-serif;color:#000000;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;">' + s.label + '</div>' +
               '</div>';
             }).join('') +

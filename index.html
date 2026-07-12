@@ -21,6 +21,7 @@
   /* Desktop: contenedor-analytics-mobile se comporta como .wrap text-center */
   @media (min-width: 769px) {
     .analytics-mobile-layout { display: none !important; }
+    .analytics-subtitle-mobile { display: none !important; }
     .coach-mobile-arrows { display: none !important; }
     .review-dots-mobile { display: none !important; }
     .contenedor-analytics-mobile {
@@ -198,7 +199,11 @@
     margin-right: 0 !important;
     width: 100% !important;
   }
-  .contenedor-analytics-mobile > p {
+  .contenedor-analytics-mobile > p:not(.analytics-subtitle-mobile) {
+    display: none !important;
+  }
+  .analytics-subtitle-mobile {
+    display: block !important;
     text-align: left !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
@@ -1195,6 +1200,7 @@
       <div class="text-reveal-wrap" data-section-reveal><h3 class="section-title" style="margin-bottom:var(--space-1);color:#ffffff;text-align:center">Apex Analytics</h3><span class="text-reveal-clip"><span class="text-reveal-overlay"></span></span></div>
          </div>
     <p style="margin:0 auto var(--space-1)">Software de análisis desarrollado por Apex para transformar la telemetría en decisiones que impulsan el desarrollo del piloto.</p>
+    <p class="analytics-subtitle-mobile" style="margin:0 auto var(--space-1)">Software de análisis desarrollado por Apex para convertir datos en rendimiento.</p>
 
     <!-- Mobile-only: trackmap fijo + carrusel de gráficos -->
     <div class="analytics-mobile-layout">
@@ -2403,7 +2409,8 @@
   var total = cards.length;
   function go(idx) {
     current = (idx + total) % total;
-    grid.style.transform = 'translateX(-' + (current * 100) + '%)';
+    var cardW = grid.parentElement.offsetWidth;
+    grid.style.transform = 'translateX(-' + (current * cardW) + 'px)';
   }
   prev.addEventListener('click', function(){ go(current - 1); });
   next.addEventListener('click', function(){ go(current + 1); });

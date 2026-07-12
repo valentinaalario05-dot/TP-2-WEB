@@ -2742,6 +2742,31 @@ footer.section.bg-dark {
     color: var(--color-dark);
   }
 
+  /* ---- Hamburger: contenedor circular liquid glass ---- */
+  .nav__toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 5px;
+    transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  }
+  .nav__toggle span {
+    width: 18px;
+  }
+  .nav-light .nav__toggle {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(0, 0, 0, 0.06);
+  }
+
   /* ---- Hamburger → X cuando el drawer está abierto ---- */
   .nav__toggle.is-open span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
@@ -2846,6 +2871,23 @@ footer.section.bg-dark {
   .course-card {
     max-width: 100%;
     min-height: auto;
+  }
+
+  /* ---- Hero del curso (mobile) ---- */
+  .course-hero {
+    height: 800px !important;
+    min-height: 800px !important;
+  }
+
+  .course-hero .course-hero__media {
+    content: url('../ASSETS/mobile/hero-curso-mobile.png');
+  }
+
+  .course-hero .cta.cta--primary.glass-cta.cta--pill {
+    width: calc(100vw - 40px) !important;
+    display: block !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
   }
 }
 
@@ -3210,7 +3252,7 @@ footer.section.bg-dark {
   display: grid;
   grid-template-columns: 25% 1fr;
   gap: var(--space-10);
-  align-items: start;
+  align-items: stretch;
 }
 
 /* Left nav */
@@ -3268,14 +3310,16 @@ footer.section.bg-dark {
 
 .module-explorer__panel-wrap {
   position: relative;
-  /* El SVG define el alto natural del wrapper */
+  height: 0;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 /* SVG de fondo: fluye en el documento y da altura al wrapper */
 .module-explorer__frame {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   pointer-events: none;
 }
 
