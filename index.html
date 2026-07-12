@@ -232,65 +232,76 @@
     object-fit: contain !important;
     object-position: center !important;
   }
-  .analytics-mobile-charts-wrap {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-  }
-  .analytics-mobile-charts {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  .analytics-mobile-pair {
-    display: none !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  .analytics-mobile-pair.is-active {
+  /* ── Analytics tabs outer (scroll + hint) ── */
+  .am-tabs-outer {
     display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 4px !important;
+    padding: 4px 0 10px !important;
   }
-  .analytics-mobile-pair img {
+  .am-tabs-row {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .am-tabs-row::-webkit-scrollbar { display: none; }
+  .am-tab {
+    flex: 0 0 calc(33.33% - 4px) !important;
+    padding: 6px 0 !important;
+    border-radius: 20px !important;
+    background: rgba(255,255,255,0.08) !important;
+    backdrop-filter: blur(12px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    color: rgba(255,255,255,0.65) !important;
+    font-size: 0.70rem !important;
+    font-family: var(--font-body) !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    transition: background 180ms, border-color 180ms, color 180ms !important;
+    letter-spacing: 0.03em !important;
+  }
+  .am-tab.is-active {
+    background: rgba(100,200,50,0.18) !important;
+    border-color: rgba(100,200,50,0.55) !important;
+    color: #7ed936 !important;
+  }
+  .am-scroll-hint {
+    flex-shrink: 0 !important;
+    color: rgba(255,255,255,0.45) !important;
+    font-size: 1.1rem !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    user-select: none !important;
+  }
+  /* ── Analytics chart display ── */
+  .am-chart-display {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .am-chart-frame {
+    width: 95% !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(255,255,255,0.35) !important;
+    background: none !important;
+    border-radius: 4px !important;
+    padding: 6px !important;
+  }
+  .am-chart-frame img {
     display: block !important;
     width: 100% !important;
-    max-width: 100% !important;
-    height: 140px !important;
+    height: auto !important;
     object-fit: contain !important;
-    object-position: center !important;
-  }
-  .analytics-mobile-arrows {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    gap: 8px !important;
-    margin-top: 8px !important;
-  }
-  .am-arrow {
-    width: 32px !important;
-    height: 32px !important;
-    border-radius: 50% !important;
-    background: rgba(255,255,255,0.08) !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    transition: background 200ms !important;
-    flex-shrink: 0 !important;
-  }
-  .am-arrow:active {
-    background: rgba(255,255,255,0.18) !important;
-  }
-  .am-arrow-indicator {
-    color: rgba(255,255,255,0.5) !important;
-    font-size: 0.75rem !important;
-    font-family: var(--font-body) !important;
-    min-width: 32px !important;
-    text-align: center !important;
   }
 
   /* ── Sección 09 setup: tooltip overlay sobre el volante ── */
@@ -353,6 +364,19 @@
 
   #wheel-modal-content div[style*="grid-template-columns"] > div > div:last-child {
     font-size: 0.55rem !important;
+  }
+
+  /* ── Sección 13 contacto ── */
+  .contact-info {
+    gap: 20px !important;
+  }
+  .contact-form .cta {
+    display: block !important;
+    width: calc(100vw - 40px) !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   /* ── Sección 06: botón mute ── */
@@ -423,6 +447,11 @@
     justify-content: flex-end !important;
     gap: 8px !important;
     margin-top: 12px !important;
+  }
+
+  /* ── Comunidad: imágenes carrusel −15% ── */
+  section[style*="padding-bottom:118px"] .scroller__item {
+    flex: 0 0 calc((100vw - 56px) * 0.85) !important;
   }
 
   /* ── Testimonios + Comunidad: padding top ── */
@@ -498,7 +527,7 @@
   }
 
   /* ── Camino al automovilismo: imagen mobile a tamaño real (va después para ganar especificidad) ── */
-  .section.bg-dark[style*="2027.png"] > .wrap .section-title {
+  .section.bg-dark[style*="2027.png"] > .wrap .text-reveal-wrap {
     transform: translateY(-31px);
   }
   .section.bg-dark[style*="2027.png"] > .wrap > p {
@@ -525,8 +554,58 @@
   }
 
   /* ── Footer ── */
+  footer.section.bg-dark .wrap {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    padding: 32px 20px 24px !important;
+    box-sizing: border-box !important;
+    row-gap: var(--space-5) !important;
+    column-gap: var(--space-3) !important;
+    align-items: start !important;
+  }
+  /* Sacar footer__top del flujo para que sus hijos participen en el grid del wrap */
   .footer__top {
-    flex-direction: column;
+    display: contents !important;
+  }
+  /* 3 cols de links: fila 1, centradas dentro de su celda */
+  .footer__col:nth-child(2) { grid-column: 1 !important; grid-row: 1 !important; align-items: center !important; text-align: center !important; }
+  .footer__col:nth-child(3) { grid-column: 2 !important; grid-row: 1 !important; align-items: center !important; text-align: center !important; }
+  .footer__col:nth-child(4) { grid-column: 3 !important; grid-row: 1 !important; align-items: center !important; text-align: center !important; }
+  /* Logo: fila 2 ancho completo, centrado */
+  .footer__logo {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-top: 35px !important;
+  }
+  .footer__tagline { font-size: 15px !important; text-align: center !important; }
+  /* Social: fila 3, fila horizontal debajo del logo */
+  .footer__social {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 0 !important;
+    gap: var(--space-3) !important;
+  }
+  /* Divider: fila 4 */
+  .footer__divider {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+  }
+  /* Legal: fila 5 */
+  .footer__legal {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: var(--space-1) !important;
   }
 
   /* ── Method header subtitle ── */
@@ -1122,32 +1201,20 @@
       <div class="analytics-mobile-trackmap">
         <img src="ASSETS/mobile/trackmap.svg" alt="Track Map">
       </div>
-      <div class="analytics-mobile-charts-wrap">
-        <div class="analytics-mobile-charts" id="analytics-mobile-charts">
-          <!-- par 0: velocidad + comandos -->
-          <div class="analytics-mobile-pair" data-pair="0">
-            <img src="ASSETS/mobile/velocidad.svg" alt="Velocidad">
-            <img src="ASSETS/mobile/comandos.svg" alt="Comandos">
-          </div>
-          <!-- par 1: frenos + rpm -->
-          <div class="analytics-mobile-pair" data-pair="1">
-            <img src="ASSETS/mobile/freno.svg" alt="Frenos">
-            <img src="ASSETS/mobile/rpm.svg" alt="RPM">
-          </div>
-          <!-- par 2: angulo + resumen -->
-          <div class="analytics-mobile-pair" data-pair="2">
-            <img src="ASSETS/mobile/angulo.svg" alt="Ángulo">
-            <img src="ASSETS/mobile/resumen.svg" alt="Resumen">
-          </div>
+      <div class="am-tabs-outer">
+        <div class="am-tabs-row">
+          <button class="am-tab is-active" data-chart="velocidad">Velocidad</button>
+          <button class="am-tab" data-chart="comandos">Comandos</button>
+          <button class="am-tab" data-chart="freno">Freno</button>
+          <button class="am-tab" data-chart="rpm">RPM</button>
+          <button class="am-tab" data-chart="angulo">Ángulo</button>
+          <button class="am-tab" data-chart="resumen">Resumen</button>
         </div>
-        <div class="analytics-mobile-arrows">
-          <button class="am-arrow am-arrow--prev" id="am-prev" aria-label="Anterior">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 14L6 9L11 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <span class="am-arrow-indicator" id="am-indicator">1 / 3</span>
-          <button class="am-arrow am-arrow--next" id="am-next" aria-label="Siguiente">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4L12 9L7 14" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
+        <span class="am-scroll-hint">&#8250;</span>
+      </div>
+      <div class="am-chart-display">
+        <div class="am-chart-frame">
+          <img id="am-chart-img" src="ASSETS/mobile/velocidad.svg" alt="Velocidad">
         </div>
       </div>
     </div>
@@ -2344,26 +2411,28 @@
 
 /* Analytics mobile carousel */
 (function(){
-  var pairs = document.querySelectorAll('.analytics-mobile-pair');
-  var indicator = document.getElementById('am-indicator');
-  var prev = document.getElementById('am-prev');
-  var next = document.getElementById('am-next');
-  if (!pairs.length || !prev || !next) return;
-  var current = 0;
-  function show(idx) {
-    pairs.forEach(function(p){ p.classList.remove('is-active'); });
-    pairs[idx].classList.add('is-active');
-    if (indicator) indicator.textContent = (idx + 1) + ' / ' + pairs.length;
+  var tabs = document.querySelectorAll('.am-tab');
+  var chartImg = document.getElementById('am-chart-img');
+  var tabsRow = document.querySelector('.am-tabs-row');
+  var hint = document.querySelector('.am-scroll-hint');
+  if (!tabs.length || !chartImg) return;
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t){ t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      var chart = tab.getAttribute('data-chart');
+      chartImg.src = 'ASSETS/mobile/' + chart + '.svg';
+      chartImg.alt = tab.textContent;
+    });
+  });
+  if (hint && tabsRow) {
+    hint.style.cursor = 'pointer';
+    hint.style.pointerEvents = 'auto';
+    hint.addEventListener('click', function() {
+      var tabWidth = tabs[0] ? tabs[0].offsetWidth + 6 : 90;
+      tabsRow.scrollBy({ left: tabWidth * 3, behavior: 'smooth' });
+    });
   }
-  show(0);
-  prev.addEventListener('click', function(){
-    current = (current - 1 + pairs.length) % pairs.length;
-    show(current);
-  });
-  next.addEventListener('click', function(){
-    current = (current + 1) % pairs.length;
-    show(current);
-  });
 })();
 </script>
 </body>
