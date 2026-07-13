@@ -1679,14 +1679,23 @@
   color: #ffffff;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  transition: background var(--duration-base) ease, color var(--duration-base) ease !important;
+  transition: background var(--duration-base) ease, border-color var(--duration-base) ease, color var(--duration-base) var(--ease-default) !important;
 }
 
-.course-card .cta::before { display: none !important; }
+.course-card .cta::before {
+  display: block !important;
+  background: #2F31F5 !important;
+  left: 50% !important;
+  top: 50% !important;
+}
+
+.course-card .cta:hover::before {
+  transform: translate(-50%, -50%) scale(20) !important;
+}
 
 .course-card .cta:hover {
-  background: var(--color-data) !important;
-  border-color: var(--color-data) !important;
+  background: transparent !important;
+  border-color: #2F31F5 !important;
   color: #ffffff !important;
   transform: none !important;
 }

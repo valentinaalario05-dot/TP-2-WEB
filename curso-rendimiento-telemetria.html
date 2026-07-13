@@ -19,6 +19,43 @@
 .module-accordion__body { display: none; }
 .module-nav__icon { display: none; }
 
+.telemetry-hotspot__tooltip { border-left: 3px solid #DBF059; }
+
+.caso-practico__card { height: auto; min-height: 285px; }
+
+/* ── Hover uniforme: blob azul en todos los CTAs de esta página ── */
+.experiencia-card__cta.glass-cta::before {
+  display: block !important;
+  background: #2F31F5 !important;
+  left: 50% !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+.experiencia-card__cta:hover {
+  background: transparent !important;
+  border-color: #2F31F5 !important;
+  color: var(--color-light) !important;
+}
+.cta--contact::before {
+  display: block !important;
+  background: #2F31F5 !important;
+}
+.cta--contact:hover {
+  background: transparent !important;
+  border-color: #2F31F5 !important;
+}
+.course-card .cta::before {
+  display: block !important;
+  background: #2F31F5 !important;
+  left: 50% !important;
+}
+.course-card .cta:hover {
+  background: transparent !important;
+  border-color: #2F31F5 !important;
+  color: var(--color-dark) !important;
+  transform: none !important;
+}
+
 @media (max-width: 768px) {
   .nav {
     box-sizing: border-box;

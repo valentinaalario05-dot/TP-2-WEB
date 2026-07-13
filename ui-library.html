@@ -1,0 +1,2591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX — UI Library</title>
+<link rel="stylesheet" href="https://use.typekit.net/ljr5kxo.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/glass.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+
+/* ============================================================
+   RESET BODY
+============================================================ */
+body {
+  background: #0d0d0e;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.55;
+  font-family: "field-gothic-compact", sans-serif;
+}
+
+/* ============================================================
+   NAVBAR
+============================================================ */
+.lib-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 64px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 0 40px;
+  background: rgba(13,13,14,0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+.lib-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lib-nav__logo svg {
+  height: 22px;
+  width: auto;
+  fill: #fff;
+}
+
+.lib-nav__logo-tag {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  border-left: 1px solid rgba(255,255,255,0.15);
+  padding-left: 10px;
+  margin-left: 2px;
+}
+
+.lib-nav__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 28px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  justify-self: center;
+}
+
+.lib-nav__links a {
+  color: #ffffff;
+  transition: color 0.15s;
+}
+
+.lib-nav__links a:hover { color: #fff; }
+.lib-nav__links a.active { color: #fff; }
+
+.lib-nav__version {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 9999px;
+  padding: 4px 12px;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+============================================================ */
+.lib-main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 128px 56px 160px;
+}
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+.lib-page-header {
+  margin-top: -128px;
+  margin-bottom: 96px;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-top: 128px;
+  padding-left: calc(50vw - 50% + 56px);
+  padding-right: calc(50vw - 50% + 56px);
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background-image: url('ASSETS/backgrounds/background-editorial-black.png');
+  background-repeat: repeat;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.lib-page-header__eyebrow {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.lib-page-header h1 {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 6vw, 5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin-bottom: 20px;
+}
+
+.lib-section-title {
+  letter-spacing: 0.04em;
+}
+
+.lib-page-header__desc {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #ffffff;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SECTION BLOCK
+============================================================ */
+.lib-section {
+  margin-bottom: 120px;
+  scroll-margin-top: 80px;
+}
+
+.lib-section__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 64px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.lib-section__number {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+.lib-section__title {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 4vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* ============================================================
+   SUB-SECTION
+============================================================ */
+.lib-sub {
+  margin-bottom: 80px;
+}
+
+.lib-sub__eyebrow {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.lib-sub__title {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 3.5rem;
+  color: #DBF059;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.lib-sub__desc {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #ffffff;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* ============================================================
+   COMPONENT DOC BLOCK
+============================================================ */
+.lib-component {
+  margin-bottom: 64px;
+}
+
+.lib-component__header {
+  margin-bottom: 20px;
+}
+
+.lib-component__eyebrow {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.lib-component__name {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 3.5rem;
+  color: #DBF059;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.lib-component__desc {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #ffffff;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* ============================================================
+   PREVIEW CARD
+============================================================ */
+.lib-preview {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 40px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.lib-preview--dark   { background: #131314; }
+.lib-preview--light  { background: #d5d7d6; color: #131314; }
+.lib-preview--center { justify-content: center; }
+.lib-preview--col    { flex-direction: column; align-items: flex-start; }
+
+.lib-variant-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.lib-variant-label {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  display: block;
+}
+
+/* ============================================================
+   COLOR SWATCHES
+============================================================ */
+.container-items {
+  display: flex;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  padding: 32px 0 48px;
+  gap: 0;
+}
+
+.item-color {
+  position: relative;
+  flex: 1;
+  width: 0;
+  aspect-ratio: 4 / 5;
+  border: none;
+  outline: none;
+  background: none;
+  transition: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  cursor: pointer;
+}
+
+.item-color::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color);
+  border-radius: 6px;
+  transform: scale(1.2);
+  pointer-events: none;
+  transition: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.item-color::before {
+  position: absolute;
+  content: attr(aria-color);
+  left: 65%;
+  bottom: 52px;
+  font-size: 8px;
+  line-height: 12px;
+  transform: translateX(-50%);
+  padding: 2px 0.25rem;
+  background-color: #ffffff;
+  color: #131314;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.item-color:hover {
+  transform: scale(1.5);
+  z-index: 99999;
+}
+
+.item-color:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.item-color__info {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 10px 12px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.item-color__name {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 0.935rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.item-color__hex {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  display: block;
+  margin-bottom: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  cursor: text;
+  pointer-events: all;
+}
+
+.item-color__use {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.605rem;
+  line-height: 1.35;
+  color: var(--text);
+  opacity: 0.5;
+  display: block;
+}
+
+.item-color:active::after {
+  transform: scale(1.1);
+}
+
+.item-color:focus::before {
+  content: "✅ Copiado";
+}
+
+.item-color:hover + .item-color {
+  transform: scale(1.3);
+  z-index: 9999;
+}
+
+.item-color:hover + .item-color + .item-color {
+  transform: scale(1.15);
+  z-index: 999;
+}
+
+.item-color:has(+ .item-color:hover) {
+  transform: scale(1.3);
+  z-index: 9999;
+}
+
+.item-color:has(+ .item-color + .item-color:hover) {
+  transform: scale(1.15);
+  z-index: 999;
+}
+
+/* legacy selectors (unused, kept for reference) */
+.color-swatch__use {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+/* ============================================================
+   TYPE SCALE
+============================================================ */
+.type-scale {
+  display: flex;
+  flex-direction: column;
+}
+
+.type-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 180px;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.type-row__label {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+}
+
+.type-row__sample { line-height: 1.05; }
+
+.type-row__meta {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #ffffff;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   CONTENEDORES
+============================================================ */
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 48px;
+}
+
+.contenedor-item {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contenedor-item__preview {
+  padding: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+}
+
+.contenedor-item__preview svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.contenedor-item__preview--narrow {
+  padding: 20px 22%;
+}
+
+.contenedor-item__name {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  display: block;
+}
+
+.contenedor-item__use {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: #ffffff;
+  opacity: 0.5;
+  display: block;
+  line-height: 1.45;
+}
+
+/* ============================================================
+   NAV MOCK
+============================================================ */
+.nav-mock {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.nav-mock__logo {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.nav-mock__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 28px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+/* ============================================================
+   CARDS
+============================================================ */
+.cards-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.notch-card-demo {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  overflow: hidden;
+  clip-path: polygon(
+    0 0, 100% 0,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    0 100%
+  );
+  background: #404C52;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.notch-card-demo__eyebrow {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  color: #fff;
+}
+
+.coach-demo {
+  position: relative;
+  width: 160px;
+  height: 200px;
+  background: linear-gradient(160deg, #2a2f34 0%, #1a1e22 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.coach-demo__name {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #DBF059;
+  color: #131314;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+}
+
+.coach-demo__sheet {
+  position: absolute;
+  inset: 0;
+  background: #404C52;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 16px;
+  opacity: 0;
+  clip-path: ellipse(100% 0% at 50% 0px);
+  transform: translateY(-40px);
+  transition: opacity 0.3s ease, clip-path 0.75s ease, transform 0.75s ease;
+}
+
+.coach-demo:hover .coach-demo__sheet {
+  opacity: 1;
+  clip-path: ellipse(150% 150% at 50% 0px);
+  transform: translateY(0);
+}
+
+.coach-demo__sheet h3 {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #FF5E33;
+}
+
+.coach-demo__sheet p {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.72rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.review-mini {
+  width: 220px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
+  backdrop-filter: blur(18px) saturate(140%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-mini__head { display: flex; align-items: center; gap: 8px; }
+
+.review-mini__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FF5E33, #2F31F5);
+  flex-shrink: 0;
+}
+
+.review-mini__name {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1c1c1c;
+}
+
+.review-mini__cat {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #FF5E33;
+}
+
+.review-mini__quote {
+  font-family: "field-gothic-compact", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: #000;
+}
+
+.review-mini__result {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #1c1c1c;
+  border-top: 1px solid rgba(28,28,28,0.1);
+  padding-top: 8px;
+}
+
+.course-mini {
+  width: 200px;
+  height: 280px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px) saturate(140%);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s;
+}
+
+.course-mini:hover { border-color: #FF5E33; }
+
+.course-mini__media {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(160deg, #222 0%, #404C52 100%);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.course-mini__media-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.course-mini__best {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #DBF059;
+  color: #131314;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 12px 3px 8px;
+  border-radius: 0 4px 4px 0;
+  z-index: 2;
+}
+
+.course-mini__body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.course-mini__eyebrow {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.course-mini__title {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.1;
+}
+
+.course-mini__price {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.course-mini__cta {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 16px;
+  border-radius: 700px;
+  background: #FF5E33;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.course-mini__cta:hover { background: #2F31F5; }
+
+/* ============================================================
+   FORM
+============================================================ */
+.form-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.form-demo input,
+.form-demo textarea,
+.form-demo select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(19,19,20,0.15);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "field-gothic-compact", sans-serif;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #131314;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-demo input:focus,
+.form-demo textarea:focus {
+  border-color: #2F31F5;
+  box-shadow: 0 0 0 3px rgba(47,49,245,0.1);
+}
+
+.form-demo textarea { min-height: 80px; resize: vertical; }
+
+/* ============================================================
+   FAQ
+============================================================ */
+.faq-demo {
+  width: 100%;
+  max-width: 560px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.faq-demo .faq-item {
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.faq-demo .faq-item summary {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.faq-demo .faq-item summary:hover {
+  color: #131314;
+  background: #DBF059;
+}
+
+.faq-demo .faq-item[open]::before {
+  background: #DBF059;
+}
+
+.faq-demo .faq-item p {
+  color: #ffffff;
+}
+
+/* ============================================================
+   BADGES & TAGS
+============================================================ */
+.badge-apex {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: #FF5E33;
+  border: 1px solid rgba(255,94,51,0.4);
+  border-radius: 4px;
+  padding: 2px 6px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.tag-session {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.tag-session--before { background: rgba(255,255,255,0.1); color: #ffffff; }
+.tag-session--after  { background: rgba(219,240,89,0.15); color: #DBF059; }
+
+.lib-eyebrow {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.lib-section-label {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+  display: block;
+}
+
+.lib-label-best {
+  background: #DBF059;
+  color: #131314;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px 3px 8px;
+  display: inline-block;
+}
+
+/* ============================================================
+   HOTSPOT
+============================================================ */
+.hotspot-demo {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: rgba(219,240,89,0.15);
+  border: 3px solid #DBF059;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-circle::before {
+  content: "";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 2px solid #DBF059;
+  animation: hotspot-pulse 2s ease-out infinite;
+}
+
+@keyframes hotspot-pulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.hotspot-dot {
+  width: 8px;
+  height: 8px;
+  background: #DBF059;
+  border-radius: 9999px;
+}
+
+/* ============================================================
+   CHIPS
+============================================================ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chip--accent  { background: rgba(255,94,51,0.12);  color: #FF5E33; border: 1px solid rgba(255,94,51,0.2); }
+.chip--data    { background: rgba(47,49,245,0.12);  color: #7b7cf8; border: 1px solid rgba(47,49,245,0.2); }
+.chip--success { background: rgba(219,240,89,0.1);  color: #DBF059; border: 1px solid rgba(219,240,89,0.18); }
+.chip--neutral { background: rgba(170,178,184,0.08);color: #AAB2B8; border: 1px solid rgba(170,178,184,0.14); }
+
+/* ============================================================
+   CTA SECTION DEMO
+============================================================ */
+.cta-section-demo {
+  width: 100%;
+  background: #FF5E33;
+  border-radius: 8px;
+  padding: 40px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cta-section-demo__text {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+}
+
+/* ============================================================
+   RANKING
+============================================================ */
+.rk-demo { width: 100%; max-width: 480px; }
+
+.rk-demo-head {
+  display: grid;
+  grid-template-columns: 52px 1fr 64px 64px;
+  padding: 0 0 8px 14px;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.3;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 0;
+}
+
+.rk-demo-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 64px 64px;
+  align-items: center;
+  padding: 10px 0 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.15s;
+  cursor: pointer;
+  position: relative;
+}
+
+.rk-demo-row:hover { background: #DBF059; }
+.rk-demo-row:hover .rk-demo-pos  { -webkit-text-stroke-color: #131314; }
+.rk-demo-row:hover .rk-demo-name { color: #131314; }
+.rk-demo-row:hover .rk-demo-pts  { color: #131314; }
+
+.rk-demo-row.apex::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #2F31F5;
+}
+
+.rk-demo-pos {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 1.75rem;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.5);
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.rk-demo-row.apex .rk-demo-pos { -webkit-text-stroke-color: #2F31F5; }
+
+.rk-demo-name {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rk-demo-pts {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.rk-demo-delta { text-align: center; font-family: "field-gothic-condensed", sans-serif; font-weight: 800; font-size: 0.9rem; }
+.rk-demo-delta--up   { color: #2F31F5; }
+.rk-demo-delta--down { color: #FF5E33; }
+
+/* ============================================================
+   MOTION SECTION
+============================================================ */
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.motion-card {
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+}
+
+.motion-card__preview {
+  height: 168px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #131314;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.motion-card__info {
+  padding: 20px 24px 24px;
+}
+
+.motion-card__eyebrow {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 500;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FF5E33;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.motion-card__name {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.motion-card__desc {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #ffffff;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+
+.motion-card__use {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+/* Text reveal demo */
+.text-reveal-demo {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.text-reveal-demo__text {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.text-reveal-demo__clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.text-reveal-demo__overlay {
+  position: absolute;
+  inset: 0;
+  background: #DBF059;
+  transform: translateX(0%);
+  transition: transform 0.85s cubic-bezier(0.76,0,0.24,1);
+}
+
+.text-reveal-demo.revealed .text-reveal-demo__overlay {
+  transform: translateX(102%);
+}
+
+/* Scroll reveal demo */
+.scroll-reveal-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 16px 24px;
+  cursor: pointer;
+}
+
+.scroll-reveal-line {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-default), transform 0.4s var(--ease-default);
+}
+
+.scroll-reveal-line:nth-child(2) { transition-delay: 90ms; }
+.scroll-reveal-line:nth-child(3) { transition-delay: 180ms; }
+
+.scroll-reveal-demo.playing .scroll-reveal-line {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass CTA bubble demo */
+.cta-bubble-demo {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px) saturate(140%);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18), inset 0 1px 0 #FFFFFF;
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.22s var(--ease-default);
+}
+
+.cta-bubble-demo::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #FF5E33;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s var(--ease-default);
+  z-index: -1;
+}
+
+.cta-bubble-demo:hover::before { transform: translate(-50%, -50%) scale(20); }
+.cta-bubble-demo:hover { color: #131314; }
+
+/* Marquee demo */
+.marquee-demo {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-demo__track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marquee-loop 8s linear infinite;
+}
+
+.marquee-demo:hover .marquee-demo__track { animation-play-state: paused; }
+
+@keyframes marquee-loop {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-demo__item {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  white-space: nowrap;
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* Nav drawer demo */
+.drawer-demo {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+}
+
+.drawer-demo__panel {
+  position: absolute;
+  inset: 0;
+  background: #d5d7d6;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease-default);
+}
+
+.drawer-demo__panel.open { transform: translateX(0); }
+
+.drawer-demo__panel a {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #131314;
+}
+
+.drawer-demo__trigger {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Method demo */
+.method-demo {
+  width: 100%;
+  padding: 8px 20px;
+}
+
+.method-demo__item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+}
+
+.method-demo__head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.method-demo__num {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  -webkit-text-stroke: 1.5px #fff;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.method-demo__title {
+  font-family: "field-gothic-condensed", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.method-demo__body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: max-height 0.5s ease, opacity 0.4s ease 0.08s, transform 0.4s ease 0.08s;
+}
+
+.method-demo__item.open .method-demo__body {
+  max-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.method-demo__body p {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #ffffff;
+  padding: 10px 0 4px;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   DIVIDER
+============================================================ */
+.lib-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 96px 0;
+}
+
+/* ============================================================
+   HELPER: small muted text
+============================================================ */
+.lib-note {
+  font-family: "field-gothic-compact", sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   MOBILE — 390 × 844 · márgenes 20px
+============================================================ */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  header.nav {
+    padding: 0 20px !important;
+  }
+
+  .nav__links {
+    display: none !important;
+  }
+
+  /* Main layout */
+  .lib-main {
+    padding: 112px 20px 80px;
+  }
+
+  /* Page header */
+  .lib-page-header {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 112px;
+    padding-bottom: 40px;
+    min-height: 100svh;
+    margin-bottom: 64px;
+  }
+
+  .lib-page-header h1 {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  .lib-page-header__desc {
+    font-size: 0.9rem;
+  }
+
+  /* Section header */
+  .lib-section {
+    margin-bottom: 72px;
+  }
+
+  .lib-section__header {
+    margin-bottom: 40px;
+  }
+
+  .lib-section__title {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  /* Sub section */
+  .lib-sub {
+    margin-bottom: 56px;
+  }
+
+  .lib-sub__title {
+    font-size: 2.25rem;
+  }
+
+  .lib-sub__desc {
+    font-size: 0.85rem;
+  }
+
+  /* Component doc */
+  .lib-component {
+    margin-bottom: 48px;
+  }
+
+  .lib-component__name {
+    font-size: 2.25rem;
+  }
+
+  /* Preview card */
+  .lib-preview {
+    padding: 24px 16px;
+    gap: 16px;
+  }
+
+  /* Color swatches */
+  .container-items {
+    padding: 16px 0 32px;
+  }
+
+  .item-color__name {
+    font-size: 0.75rem;
+  }
+
+  .item-color__hex {
+    font-size: 0.75rem;
+  }
+
+  .item-color__use {
+    font-size: 0.5rem;
+  }
+
+  /* Typography scale */
+  .type-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px 0;
+  }
+
+  .type-row__meta {
+    font-size: 0.65rem;
+    opacity: 0.6;
+  }
+
+  /* Contenedores */
+  .contenedor-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Cards row — horizontal scroll */
+  .cards-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .cards-row::-webkit-scrollbar { display: none; }
+
+  /* Preview containers with cards — allow horizontal scroll */
+  .lib-preview:has(.lib-variant-group .course-mini),
+  .lib-preview:has(.lib-variant-group .notch-card-demo) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    align-items: flex-start;
+  }
+
+  /* Nav mock — hide center links */
+  .nav-mock__links {
+    display: none;
+  }
+
+  /* CTA section demo — stack vertically */
+  .cta-section-demo {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 20px;
+    gap: 20px;
+  }
+
+  .cta-section-demo__text {
+    font-size: 1.5rem;
+  }
+
+  /* Ranking */
+  .rk-demo {
+    max-width: 100%;
+  }
+
+  .rk-demo-head,
+  .rk-demo-row {
+    grid-template-columns: 44px 1fr 52px 48px;
+    padding-left: 10px;
+  }
+
+  .rk-demo-pos {
+    font-size: 1.4rem;
+  }
+
+  .rk-demo-name {
+    font-size: 0.9rem;
+  }
+
+  /* Motion grid — single column */
+  .motion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Divider */
+  .lib-divider {
+    margin: 56px 0;
+  }
+
+  /* Hotspots row */
+  .lib-preview.lib-preview--center {
+    gap: 24px;
+  }
+
+  /* Badges preview — wrap tight */
+  .lib-preview[style*="align-items:flex-start"] {
+    gap: 16px;
+  }
+
+  /* FAQ */
+  .faq-demo {
+    max-width: 100%;
+  }
+
+  /* Form */
+  .form-demo {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<header class="nav nav--right glass-nav" style="position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:0 40px;color:#fff;">
+  <a href="#" class="nav__logo" aria-label="Apex Sim Racing">
+    <svg class="nav__logo-svg" viewBox="0 0 208.02 50.11" role="img" aria-label="Apex Sim Racing">
+      <g>
+        <path d="M50.15,10.33L39.89,0H9.91l-.02.02L0,10.33v9.83h9.81L0,30.45v19.65h9.88v-10.27h-.1l.1-.1v-9.28h30.01v9.26l.12.13h-.12v10.27h10.25v-19.65l-10.15-10.29h10.15v-9.83ZM39.89,20.16H9.88v-9.83h30.01v9.83Z"/>
+        <polygon points="103.32 10.33 103.32 30.45 63.07 30.45 63.07 39.73 62.97 39.84 63.07 39.84 63.07 50.11 53.18 50.11 53.18 30.45 63 20.16 93.08 20.16 93.08 10.33 63.07 10.33 63.07 20.08 63 20.16 53.18 20.16 53.18 10.33 63.07 .02 63.09 0 93.08 0 103.32 10.33"/>
+        <polygon points="115.33 39.74 115.24 39.84 145.47 39.84 155.59 50.11 105.45 50.11 105.45 30.45 115.27 20.16 105.45 20.16 105.45 10.33 115.33 .03 115.36 0 145.34 0 155.59 10.33 115.33 10.33 115.33 20.16 145.44 20.16 155.59 30.45 115.33 30.45 115.33 39.74"/>
+        <g>
+          <rect x="187.71" width="20.3" height="10.33"/>
+          <polygon points="208.02 39.84 208.02 50.11 187.68 50.11 177.83 39.84 177.78 39.79 177.78 10.33 157.87 10.33 157.87 0 167.76 0 167.76 .03 167.78 0 177.78 0 177.78 .13 187.57 10.33 187.71 10.49 187.71 39.84 208.02 39.84"/>
+          <rect x="157.87" y="39.84" width="19.91" height="10.27"/>
+        </g>
+      </g>
+    </svg>
+  </a>
+
+  <nav class="nav__links" style="font-size:0.8rem;">
+    <a href="#foundations">Foundations</a>
+    <a href="#components">Components</a>
+    <a href="#motion">Motion</a>
+  </nav>
+
+</header>
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+  <defs>
+    <clipPath id="coach-notch-clip" clipPathUnits="objectBoundingBox">
+      <path d="M0.019656 0.001217 h0.960442 a0.018428 0.018248 0 0 1 0.018428 0.018248 v0.868572 a0.018428 0.018248 0 0 1 -0.018428 0.018248 H0.647247 a0.057738 0.057183 0 0 0 -0.045135 0.021529 l-0.040537 0.050365 a0.055287 0.054750 0 0 1 -0.043226 0.020615 H0.019656 A0.018428 0.018248 0 0 1 0.001229 0.980535 V0.019465 A0.018428 0.018248 0 0 1 0.019656 0.001217 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<main class="lib-main">
+
+  <!-- PAGE HEADER -->
+  <header class="lib-page-header">
+    <span class="lib-page-header__eyebrow">Sistema Visual · v1.0</span>
+    <h1>APEX<br>Sistema Visual</h1>
+    <p class="lib-page-header__desc">
+      El sistema visual que impulsa todas las experiencias digitales de Apex.
+    </p>
+  </header>
+
+
+  <!-- ============================================================
+       01 — FOUNDATIONS
+  ============================================================ -->
+  <section class="lib-section" id="foundations">
+    <div class="lib-section__header">
+      <span class="lib-section__number">01</span>
+      <h2 class="lib-section__title">Foundations</h2>
+    </div>
+
+
+    <!-- COLORS -->
+    <div class="lib-sub" id="colors">
+      <span class="lib-sub__eyebrow">Foundations · Color</span>
+      <div class="lib-sub__title">Colors</div>
+      <p class="lib-sub__desc">Paleta de 8 colores semánticos. Los fondos (dark / light) alternan entre secciones. Los acentos (orange, blue, green) se usan para jerarquía de información y estados.</p>
+
+      <div class="container-items">
+        <button class="item-color" style="--color:#131314;--text:#ffffff" aria-color="Dark · #131314" aria-label="Dark">
+          <div class="item-color__info">
+            <span class="item-color__name">Dark</span>
+            <input class="item-color__hex" readonly value="#131314" onclick="this.select()">
+            <span class="item-color__use">Fondo principal, hero, secciones oscuras</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#d5d7d6;--text:#131314" aria-color="Light · #D5D7D6" aria-label="Light">
+          <div class="item-color__info">
+            <span class="item-color__name">Light</span>
+            <input class="item-color__hex" readonly value="#D5D7D6" onclick="this.select()">
+            <span class="item-color__use">Secciones claras, fondo alternado</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#FFFFFF;--text:#131314" aria-color="White · #FFFFFF" aria-label="White">
+          <div class="item-color__info">
+            <span class="item-color__name">White</span>
+            <input class="item-color__hex" readonly value="#FFFFFF" onclick="this.select()">
+            <span class="item-color__use">Texto sobre oscuro, íconos</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#404C52;--text:#ffffff" aria-color="Surface · #404C52" aria-label="Surface">
+          <div class="item-color__info">
+            <span class="item-color__name">Surface</span>
+            <input class="item-color__hex" readonly value="#404C52" onclick="this.select()">
+            <span class="item-color__use">Cards sobre fondo oscuro, coach sheet</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#FF5E33;--text:#ffffff" aria-color="Accent · #FF5E33" aria-label="Accent">
+          <div class="item-color__info">
+            <span class="item-color__name">Accent</span>
+            <input class="item-color__hex" readonly value="#FF5E33" onclick="this.select()">
+            <span class="item-color__use">CTA principal, highlights, hover states</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#2F31F5;--text:#ffffff" aria-color="Data · #2F31F5" aria-label="Data">
+          <div class="item-color__info">
+            <span class="item-color__name">Data</span>
+            <input class="item-color__hex" readonly value="#2F31F5" onclick="this.select()">
+            <span class="item-color__use">Telemetría, datos, badge APEX, deltas positivos</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#DBF059;--text:#131314" aria-color="Success · #DBF059" aria-label="Success">
+          <div class="item-color__info">
+            <span class="item-color__name">Success</span>
+            <input class="item-color__hex" readonly value="#DBF059" onclick="this.select()">
+            <span class="item-color__use">Text reveal, hotspots, tags "después", FAQ open</span>
+          </div>
+        </button>
+        <button class="item-color" style="--color:#AAB2B8;--text:#131314" aria-color="Neutral · #AAB2B8" aria-label="Neutral">
+          <div class="item-color__info">
+            <span class="item-color__name">Neutral</span>
+            <input class="item-color__hex" readonly value="#AAB2B8" onclick="this.select()">
+            <span class="item-color__use">Bordes secundarios, texto muted</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- TYPOGRAPHY -->
+    <div class="lib-sub" id="typography">
+      <span class="lib-sub__eyebrow">Foundations · Tipografía</span>
+      <div class="lib-sub__title">Typography</div>
+      <p class="lib-sub__desc">Tres familias de Field Gothic con pesos diferenciados. Transducer solo para tratamiento outline editorial.</p>
+
+      <div class="type-scale">
+
+        <div class="type-row">
+          <div class="type-row__label">H1 — Hero</div>
+          <div class="type-row__sample" style="font-family:'field-gothic-condensed',sans-serif;font-weight:900;font-size:clamp(2.25rem,6vw,3.5rem);text-transform:uppercase;color:#fff">Sim Racing Pro</div>
+          <div class="type-row__meta">field-gothic-condensed<br>weight 900<br>clamp(2.25rem, 6vw, 3.5rem)</div>
+        </div>
+        <div class="type-row">
+          <div class="type-row__label">H2 — Títulos</div>
+          <div class="type-row__sample" style="font-family:'field-gothic-condensed',sans-serif;font-weight:700;font-size:clamp(1.75rem,4vw,2.5rem);text-transform:uppercase;color:#fff">Metodología Apex</div>
+          <div class="type-row__meta">field-gothic-condensed<br>weight 700<br>clamp(1.75rem, 4vw, 2.5rem)</div>
+        </div>
+        <div class="type-row">
+          <div class="type-row__label">H3 — Destacado</div>
+          <div class="type-row__sample" style="font-family:'field-gothic-condensed',sans-serif;font-weight:800;font-size:clamp(1.25rem,2.4vw,1.5rem);text-transform:uppercase;color:#fff">Cursos disponibles</div>
+          <div class="type-row__meta">field-gothic-condensed<br>weight 800<br>clamp(1.25rem, 2.4vw, 1.5rem)</div>
+        </div>
+        <div class="type-row">
+          <div class="type-row__label">H4 — Lectura</div>
+          <div class="type-row__sample" style="font-family:'field-gothic-compact',sans-serif;font-weight:400;font-size:1rem;color:#fff">Entrenamiento de alta intensidad para pilotos comprometidos</div>
+          <div class="type-row__meta">field-gothic-compact<br>weight 400<br>1rem</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-row__label">Outline editorial</div>
+          <div class="type-row__sample" style="font-family:'transducer',sans-serif;font-weight:600;font-style:italic;font-size:clamp(2rem,5vw,3.5rem);-webkit-text-stroke:2px #fff;-webkit-text-fill-color:transparent;color:transparent;text-transform:uppercase">GENERACIÓN</div>
+          <div class="type-row__meta">transducer<br>weight 600 italic<br>Editorial outline</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- CONTENEDORES -->
+    <div class="lib-sub" id="contenedores">
+      <span class="lib-sub__eyebrow">Foundations · Forma</span>
+      <div class="lib-sub__title">Contenedores</div>
+      <p class="lib-sub__desc">Las cuatro siluetas de contenedor que definen el sistema visual de APEX. Cada forma está normalizada a objectBoundingBox y se aplica como clip-path SVG.</p>
+
+      <div class="contenedor-grid">
+
+        <!-- Apex Analytics — ln-shape-clip, 1688×896 -->
+        <div class="contenedor-item">
+          <div class="contenedor-item__preview">
+            <svg viewBox="-2 -2 1692 900" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 73.5 C0 56.9 13.4 43.5 30.0 43.5 H641.5 C665.6 43.5 688.8 34.3 706.3 17.7 C718.8 6.3 734.2 0 750.7 0 H936.3 C954.2 0 971.5 6.3 985.3 17.7 C1005.5 34.4 1030.8 43.5 1057.0 43.5 H1658.2 C1674.8 43.5 1688 56.9 1688 73.5 V835.5 C1688 852.1 1674.8 865.9 1658.2 865.9 H1499.4 C1492.0 865.9 1485.0 868.6 1479.5 873.6 L1462.6 888.7 C1457.8 893.9 1450.0 896 1442.6 896 H302.8 C294.7 896 286.8 892.7 281.2 887.3 L269.4 874.8 C263.7 869.0 255.9 865.9 247.8 865.9 H30.0 C13.4 865.9 0 852.1 0 835.5 Z" fill="rgba(255,255,255,0.04)" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <span class="contenedor-item__name">Apex Analytics</span>
+          <span class="contenedor-item__use">Notch superior centrado + recortes inferiores en ambos extremos.</span>
+        </div>
+
+        <!-- Coach Cards — coach-notch-clip, 407×411 -->
+        <div class="contenedor-item">
+          <div class="contenedor-item__preview contenedor-item__preview--narrow">
+            <svg viewBox="-2 -2 411 415" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 0.5 h391 a7.5 7.5 0 0 1 7.5 7.5 v357 a7.5 7.5 0 0 1 -7.5 7.5 H263 a23.5 23.5 0 0 0 -18.4 8.8 l-16.5 20.7 a22.5 22.5 0 0 1 -17.6 8.5 H8 A7.5 7.5 0 0 1 0.5 403 V8 A7.5 7.5 0 0 1 8 0.5 Z" fill="rgba(255,255,255,0.04)" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <span class="contenedor-item__name">Coach Cards</span>
+          <span class="contenedor-item__use">Notch inferior-derecho con lengüeta diagonal saliente.</span>
+        </div>
+
+        <!-- Method Step Card — perfiles-clip, 276×279 -->
+        <div class="contenedor-item">
+          <div class="contenedor-item__preview contenedor-item__preview--narrow">
+            <svg viewBox="-2 -2 280 283" xmlns="http://www.w3.org/2000/svg">
+              <path d="M275.2 272.7 c0 2.98 -2.42 5.4 -5.4 5.4 H6.16 c-2.98 0 -5.4 -2.42 -5.4 -5.4 V31.91 c0 -2.98 2.42 -5.4 5.4 -5.4 h91.45 c4.72 0 9.19 -2.15 12.13 -5.84 l11.13 -13.96 c2.94 -3.69 7.41 -5.84 12.13 -5.84 h136.85 c2.98 0 5.4 2.42 5.4 5.4 v266.46 Z" fill="rgba(255,255,255,0.04)" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <span class="contenedor-item__name">Method Step Card</span>
+          <span class="contenedor-item__use">Notch superior-izquierdo con lengüeta diagonal entrante.</span>
+        </div>
+
+        <!-- Module Explorer — module-panel-clip, 1688×918 -->
+        <div class="contenedor-item">
+          <div class="contenedor-item__preview">
+            <svg viewBox="-2 -2 1692 922" xmlns="http://www.w3.org/2000/svg">
+              <path d="M73 12V479.986C73 488.276 68.3402 495.862 60.9461 499.61L12.0539 524.39C4.65976 528.138 0 535.724 0 544.014V905.5C0 912.127 5.37261 917.5 12 917.5H1600.5C1607.13 917.5 1612.5 912.127 1612.5 905.5V790.173C1612.5 782.328 1616.68 775.078 1623.46 771.142L1676.54 740.358C1683.32 736.422 1687.5 729.172 1687.5 721.327V12C1687.5 5.37256 1682.13 0 1675.5 0H85C78.3726 0 73 5.37262 73 12Z" fill="rgba(255,255,255,0.04)" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <span class="contenedor-item__name">Module Explorer</span>
+          <span class="contenedor-item__use">Escalón izquierdo a mitad de altura + notch inferior-derecho.</span>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <div class="lib-divider"></div>
+
+
+  <!-- ============================================================
+       02 — COMPONENTS
+  ============================================================ -->
+  <section class="lib-section" id="components">
+    <div class="lib-section__header">
+      <span class="lib-section__number">02</span>
+      <h2 class="lib-section__title">Components</h2>
+    </div>
+
+
+    <style>
+      .cta.cta--primary.glass-cta.cta--hero-preview { background: #FF5E33; border-color: #FF5E33; }
+      .cta.cta--primary.glass-cta.cta--hero-preview::before { background: #2F31F5; }
+      .cta.cta--primary.glass-cta.cta--hero-preview:hover { color: var(--color-white); border-color: #2F31F5; }
+    </style>
+
+    <!-- BUTTONS -->
+    <div class="lib-component" id="buttons">
+      <div class="lib-component__header">
+        <span class="lib-component__eyebrow">Component</span>
+        <div class="lib-component__name">Buttons</div>
+      </div>
+      <div class="lib-preview lib-preview--dark" style="flex-direction:row;align-items:flex-start;gap:48px;">
+
+        <!-- Botón 1 -->
+        <div style="display:flex;flex-direction:row;align-items:center;gap:32px;">
+          <div style="max-width:200px;">
+            <p style="font-family:'field-gothic-condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:#DBF059;margin:0 0 6px;">primary + glass</p>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.6);line-height:1.5;margin:0;">Botón principal de acción. Fondo naranja (#FF5E33), borde naranja. Hover: fondo y borde viran a azul (#2F31F5) con expansión desde la izquierda.</p>
+          </div>
+          <a class="cta cta--primary glass-cta cta--hero-preview" href="#" onclick="return false">Inscribirme</a>
+        </div>
+
+        <!-- Botón 2 -->
+        <div style="display:flex;flex-direction:row;align-items:center;gap:32px;">
+          <div style="max-width:200px;">
+            <p style="font-family:'field-gothic-condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;color:#DBF059;margin:0 0 6px;">primary + glass + pill</p>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.6);line-height:1.5;margin:0;">Variante pill para CTAs secundarios. Misma animación de hover, bordes completamente redondeados. Usado en el hero de home.</p>
+          </div>
+          <a class="cta cta--primary glass-cta cta--pill" href="#" onclick="return false">Contacto</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <div class="lib-component" id="navigation">
+      <div class="lib-component__header">
+        <span class="lib-component__eyebrow">Component</span>
+        <div class="lib-component__name">Navigation</div>
+        <p class="lib-component__desc">Nav fija de 64px. Grid 3 cols: logo | links centrados (glass pill) | CTA. Cambia de color según `data-nav-theme` (dark / light / accent).</p>
+      </div>
+      <div class="lib-preview" style="padding:0;overflow:hidden;flex-direction:column;gap:12px;align-items:stretch;background:#131314;">
+
+        <!-- nav dark -->
+        <header class="nav nav-dark" style="position:relative;background:rgba(19,19,20,0.9);backdrop-filter:blur(14px);">
+          <a href="#" onclick="return false" class="nav__logo">
+            <svg class="nav__logo-svg" viewBox="0 0 208.02 50.11"><g><path d="M50.15,10.33L39.89,0H9.91l-.02.02L0,10.33v9.83h9.81L0,30.45v19.65h9.88v-10.27h-.1l.1-.1v-9.28h30.01v9.26l.12.13h-.12v10.27h10.25v-19.65l-10.15-10.29h10.15v-9.83ZM39.89,20.16H9.88v-9.83h30.01v9.83Z"/><polygon points="103.32 10.33 103.32 30.45 63.07 30.45 63.07 39.73 62.97 39.84 63.07 39.84 63.07 50.11 53.18 50.11 53.18 30.45 63 20.16 93.08 20.16 93.08 10.33 63.07 10.33 63.07 20.08 63 20.16 53.18 20.16 53.18 10.33 63.07 .02 63.09 0 93.08 0 103.32 10.33"/><polygon points="115.33 39.74 115.24 39.84 145.47 39.84 155.59 50.11 105.45 50.11 105.45 30.45 115.27 20.16 105.45 20.16 105.45 10.33 115.33 .03 115.36 0 145.34 0 155.59 10.33 115.33 10.33 115.33 20.16 145.44 20.16 155.59 30.45 115.33 30.45 115.33 39.74"/><g><rect x="187.71" width="20.3" height="10.33"/><polygon points="208.02 39.84 208.02 50.11 187.68 50.11 177.83 39.84 177.78 39.79 177.78 10.33 157.87 10.33 157.87 0 167.76 0 167.76 .03 167.78 0 177.78 0 177.78 .13 187.57 10.33 187.71 10.49 187.71 39.84 208.02 39.84"/><rect x="157.87" y="39.84" width="19.91" height="10.27"/></g></g></svg>
+          </a>
+          <nav class="nav__links" style="display:flex;">
+            <a href="#" onclick="return false">Nosotros</a>
+            <a href="#" onclick="return false">Metodología</a>
+            <a href="#" onclick="return false">Cursos</a>
+            <a href="#" onclick="return false">Contacto</a>
+          </nav>
+          <a class="cta cta--light glass-cta nav__cta" href="#" onclick="return false" style="display:inline-flex;width:137.49px;height:44px;min-height:unset;padding:0;box-sizing:border-box;">Registrarme</a>
+        </header>
+
+        <!-- nav light -->
+        <header class="nav nav-light" style="position:relative;background:rgba(213,215,214,0.9);backdrop-filter:blur(14px);">
+          <a href="#" onclick="return false" class="nav__logo">
+            <svg class="nav__logo-svg" viewBox="0 0 208.02 50.11"><g><path d="M50.15,10.33L39.89,0H9.91l-.02.02L0,10.33v9.83h9.81L0,30.45v19.65h9.88v-10.27h-.1l.1-.1v-9.28h30.01v9.26l.12.13h-.12v10.27h10.25v-19.65l-10.15-10.29h10.15v-9.83ZM39.89,20.16H9.88v-9.83h30.01v9.83Z"/><polygon points="103.32 10.33 103.32 30.45 63.07 30.45 63.07 39.73 62.97 39.84 63.07 39.84 63.07 50.11 53.18 50.11 53.18 30.45 63 20.16 93.08 20.16 93.08 10.33 63.07 10.33 63.07 20.08 63 20.16 53.18 20.16 53.18 10.33 63.07 .02 63.09 0 93.08 0 103.32 10.33"/><polygon points="115.33 39.74 115.24 39.84 145.47 39.84 155.59 50.11 105.45 50.11 105.45 30.45 115.27 20.16 105.45 20.16 105.45 10.33 115.33 .03 115.36 0 145.34 0 155.59 10.33 115.33 10.33 115.33 20.16 145.44 20.16 155.59 30.45 115.33 30.45 115.33 39.74"/><g><rect x="187.71" width="20.3" height="10.33"/><polygon points="208.02 39.84 208.02 50.11 187.68 50.11 177.83 39.84 177.78 39.79 177.78 10.33 157.87 10.33 157.87 0 167.76 0 167.76 .03 167.78 0 177.78 0 177.78 .13 187.57 10.33 187.71 10.49 187.71 39.84 208.02 39.84"/><rect x="157.87" y="39.84" width="19.91" height="10.27"/></g></g></svg>
+          </a>
+          <nav class="nav__links" style="display:flex;">
+            <a href="#" onclick="return false">Nosotros</a>
+            <a href="#" onclick="return false">Metodología</a>
+            <a href="#" onclick="return false">Cursos</a>
+            <a href="#" onclick="return false">Contacto</a>
+          </nav>
+          <a class="cta cta--light glass-cta nav__cta" href="#" onclick="return false" style="display:inline-flex;width:137.49px;height:44px;min-height:unset;padding:0;box-sizing:border-box;">Registrarme</a>
+        </header>
+
+      </div>
+    </div>
+
+
+    <!-- CARDS -->
+    <div class="lib-component" id="cards">
+      <div class="lib-component__header">
+        <span class="lib-component__eyebrow">Component</span>
+        <div class="lib-component__name">Cards</div>
+        <p class="lib-component__desc">Tres tipos: Course (glassmorphism), Coach (clip-path notch + hover reveal sheet), Review (glassmorphism claro).</p>
+      </div>
+      <div style="padding:40px 36px;display:flex;flex-direction:row;gap:40px;align-items:flex-start;flex-wrap:wrap;">
+        <div>
+          <a href="#" onclick="return false" class="course-card glass-card" style="text-decoration:none;display:flex;">
+            <img class="course-card__media" src="ASSETS/placeholders/course-1.png" alt="Foundations">
+            <div class="course-card__body">
+              <h1 class="course-card__title">Técnica de conducción</h1>
+              <p class="course-card__meta">8 semanas / certificación apex</p>
+              <ul class="course-card__bullets"><li>Configuración del puesto de manejo</li><li>Aceleración y transferencia de peso</li><li>Puntos de frenado</li></ul>
+              <h1 class="course-card__price">$265.000</h1>
+            </div>
+            <span class="cta cta--primary glass-cta">Ver más</span>
+          </a>
+        </div>
+        <div class="lib-variant-group">
+          <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%;width:280px;">
+            <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <img class="notch-card__media" src="ASSETS/placeholders/coach-01.png" alt="Martín Rossi">
+            <span class="coach-card__name-label">Martín Rossi</span>
+            <h3 class="coach-card__title">Martín Rossi</h3>
+            <div class="coach-card__sheet glass-sheet">
+              <h1>Director Deportivo &amp; Driver Coach</h1>
+              <p>Lidera la metodología de entrenamiento y supervisa la evolución integral de cada alumno.</p>
+            </div>
+          </div>
+        </div>
+        <div class="lib-variant-group">
+          <div class="review-card" style="width:260px;">
+            <div class="review-card__head">
+              <div style="width:52px;height:52px;border-radius:9999px;background:#404C52;flex-shrink:0;"></div>
+              <span class="review-card__name">Lucas B.</span>
+            </div>
+            <span class="review-card__category">GT3</span>
+            <p class="review-card__quote">"Bajé 3 segundos en Nürburgring en 2 semanas."</p>
+            <span class="review-card__result">↑ Top 5 campeonato regional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- INFORMACIÓN: FAQ + MODULE EXPLORER + ERG LEFT -->
+    <div class="lib-component" id="informacion-comp">
+      <div class="lib-component__header">
+        <span class="lib-component__eyebrow">Component</span>
+        <div class="lib-component__name">Información</div>
+        <p class="lib-component__desc">Tres componentes para presentar contenido informativo: <strong>FAQ</strong> con acordeón nativo para preguntas frecuentes, <strong>Module Explorer Nav</strong> para navegar y expandir módulos del curso, y <strong>Erg Left</strong> para recorrer ítems ergonómicos con flechas y click.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start;">
+
+        <!-- FAQ -->
+        <div class="faq-demo">
+            <details class="faq-item" open>
+              <summary>¿Necesito experiencia previa con telemetría?</summary>
+              <p>No. El curso arranca desde cero y te enseña a leer los datos paso a paso. Solo necesitás tener el simulador instalado.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Las sesiones son individuales o grupales?</summary>
+              <p>Individuales. Cada sesión está diseñada específicamente para tu nivel y tus objetivos.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Obtengo un certificado al finalizar?</summary>
+              <p>Sí, recibís un certificado digital de Apex Sim Racing al completar todos los módulos.</p>
+            </details>
+        </div>
+
+        <!-- MODULE EXPLORER NAV -->
+        <nav class="module-explorer__nav" aria-label="Módulos del curso">
+          <button class="module-nav__item is-active" type="button">
+            <span class="module-nav__num">01</span>
+            <span class="module-nav__title">Fundamentos de telemetría</span>
+            <span class="module-nav__icon" aria-hidden="true">+</span>
+          </button>
+          <button class="module-nav__item" type="button">
+            <span class="module-nav__num">02</span>
+            <span class="module-nav__title">Velocidad y trazada</span>
+            <span class="module-nav__icon" aria-hidden="true">+</span>
+          </button>
+          <button class="module-nav__item" type="button">
+            <span class="module-nav__num">03</span>
+            <span class="module-nav__title">Frenada y acelerador</span>
+            <span class="module-nav__icon" aria-hidden="true">+</span>
+          </button>
+          <button class="module-nav__item" type="button">
+            <span class="module-nav__num">04</span>
+            <span class="module-nav__title">Volante y G lateral</span>
+            <span class="module-nav__icon" aria-hidden="true">+</span>
+          </button>
+          <button class="module-nav__item" type="button">
+            <span class="module-nav__num">05</span>
+            <span class="module-nav__title">Comparación entre vueltas</span>
+            <span class="module-nav__icon" aria-hidden="true">+</span>
+          </button>
+          <button class="module-nav__item" type="button">
+            <span class="module-nav__num">06</span>
+            <span class="module-nav__title">Plan de mejora</span>
+            <span class="module-nav__icon" aria-hidden="true">+</span>
+          </button>
+        </nav>
+
+        <!-- ERG LEFT -->
+        <div class="erg-left">
+            <div class="erg-arrows">
+              <button class="erg-arrow" aria-label="Anterior">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="erg-arrow" aria-label="Siguiente">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 3v8M3 7l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <ul class="erg-list" role="list">
+              <li class="erg-item is-active" role="button" tabindex="0">
+                <div class="erg-item__card">
+                  <div class="erg-item__header">
+                    <span class="erg-item__plus" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+                    <h5 class="erg-item__title">POSICIÓN</h5>
+                  </div>
+                  <div class="erg-item__body"><p>Una postura correcta aumenta el control y la consistencia durante toda la sesión.</p></div>
+                </div>
+              </li>
+              <li class="erg-item" role="button" tabindex="0">
+                <div class="erg-item__card">
+                  <div class="erg-item__header">
+                    <span class="erg-item__plus" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+                    <h5 class="erg-item__title">VISIÓN</h5>
+                  </div>
+                  <div class="erg-item__body"><p>La distancia y el campo visual correctos mejoran la percepción de velocidad, frenadas y referencias.</p></div>
+                </div>
+              </li>
+              <li class="erg-item" role="button" tabindex="0">
+                <div class="erg-item__card">
+                  <div class="erg-item__header">
+                    <span class="erg-item__plus" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+                    <h5 class="erg-item__title">CONTROLES</h5>
+                  </div>
+                  <div class="erg-item__body"><p>Configuramos volante, pedales y force feedback para transmitir información precisa.</p></div>
+                </div>
+              </li>
+              <li class="erg-item" role="button" tabindex="0">
+                <div class="erg-item__card">
+                  <div class="erg-item__header">
+                    <span class="erg-item__plus" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+                    <h5 class="erg-item__title">PRECISIÓN</h5>
+                  </div>
+                  <div class="erg-item__body"><p>Un simulador correctamente calibrado genera datos confiables para entrenar.</p></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+      </div>
+    </div>
+
+
+    <!-- RANKING -->
+    <div class="lib-component" id="ranking">
+      <div class="lib-component__header">
+        <span class="lib-component__eyebrow">Component</span>
+        <div class="lib-component__name">Ranking Row</div>
+        <p class="lib-component__desc">Tabla editorial de ranking. Pos con text-stroke outline, nombre dominante uppercase. Fila APEX tiene barra lateral azul de 3px. Hover → fondo success. Delta ▲ azul / ▼ naranja.</p>
+      </div>
+      <div style="font-size:1.2em;">
+        <div class="rk-demo">
+          <div class="rk-demo-head">
+            <span>Pos</span><span>Piloto</span><span style="text-align:center">Pts</span><span style="text-align:center">Ev.</span>
+          </div>
+          <div class="rk-demo-row apex">
+            <span class="rk-demo-pos">01</span>
+            <span class="rk-demo-name">Bianchi <span class="badge-apex">APEX</span></span>
+            <span class="rk-demo-pts">142</span>
+            <span class="rk-demo-delta rk-demo-delta--up">▲ 2</span>
+          </div>
+          <div class="rk-demo-row">
+            <span class="rk-demo-pos">02</span>
+            <span class="rk-demo-name">García</span>
+            <span class="rk-demo-pts">138</span>
+            <span class="rk-demo-delta rk-demo-delta--down">▼ 1</span>
+          </div>
+          <div class="rk-demo-row">
+            <span class="rk-demo-pos">03</span>
+            <span class="rk-demo-name">López</span>
+            <span class="rk-demo-pts">121</span>
+            <span class="rk-demo-delta rk-demo-delta--up">▲ 3</span>
+          </div>
+        </div>
+        <p class="lib-note" style="margin-top:8px">Hover sobre cualquier fila</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <div class="lib-divider"></div>
+
+
+  <!-- ============================================================
+       03 — MOTION
+  ============================================================ -->
+  <section class="lib-section" id="motion">
+    <div class="lib-section__header">
+      <span class="lib-section__number">03</span>
+      <h2 class="lib-section__title">Motion</h2>
+    </div>
+
+    <p style="font-family:'field-gothic-compact',sans-serif;font-weight:400;font-size:0.9rem;color:#FFFFFF;margin-bottom:48px;max-width:520px;line-height:1.6">
+      Todas las interacciones y animaciones del sistema. Hacé clic en el preview para activar la demostración donde corresponde.
+    </p>
+
+    <div class="motion-grid">
+
+      <!-- Text Reveal -->
+      <div class="motion-card" id="text-reveal">
+        <div class="motion-card__preview" onclick="toggleReveal(this)" style="cursor:pointer;">
+          <div class="text-reveal-demo" id="tr-demo">
+            <span class="text-reveal-demo__text">APEX</span>
+            <div class="text-reveal-demo__clip">
+              <div class="text-reveal-demo__overlay"></div>
+            </div>
+          </div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">Text Reveal</div>
+          <p class="motion-card__desc">Overlay verde que cubre el texto. Al entrar en viewport desliza hacia la derecha descubriendo el heading. Curva: cubic-bezier(0.76, 0, 0.24, 1) · 850ms.</p>
+          <span class="motion-card__use">Uso · Headings de sección, títulos editoriales</span>
+        </div>
+      </div>
+
+
+      <!-- Card Flip -->
+      <div class="motion-card" id="card-flip">
+        <div class="motion-card__preview">
+          <div style="width:139px;height:168px;overflow:hidden;flex-shrink:0;">
+            <div style="width:280px;transform:scale(0.496);transform-origin:top left;">
+              <div class="coach-card notch-card glass-card" style="height:0;padding-bottom:121%;width:280px;">
+                <svg class="coach-card__frame" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z" stroke="currentColor" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+                <img class="notch-card__media" src="ASSETS/placeholders/coach-01.png" alt="Martín Rossi">
+                <span class="coach-card__name-label">Martín Rossi</span>
+                <h3 class="coach-card__title">Martín Rossi</h3>
+                <div class="coach-card__sheet glass-sheet">
+                  <h1>Director Deportivo &amp; Driver Coach</h1>
+                  <p>Lidera la metodología de entrenamiento y supervisa la evolución integral de cada alumno.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">Card Flip</div>
+          <p class="motion-card__desc">Sheet arranca colapsada con clip-path ellipse 0%. En hover se expande a 150% con translateY -40px→0. Ease · 750ms. Siempre parte del mismo estado inicial.</p>
+          <span class="motion-card__use">Uso · Coach cards · Hover o tap en mobile</span>
+        </div>
+      </div>
+
+      <!-- Glass CTA Bubble -->
+      <div class="motion-card" id="cta-bubble">
+        <div class="motion-card__preview">
+          <div class="cta-bubble-demo">Inscribirme</div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">CTA Bubble</div>
+          <p class="motion-card__desc">Círculo de 1.25rem nace desde el borde izquierdo con scale(0→20). Z-index -1 para no tapar el texto. Color texto cambia a dark. Curva ease-default · 500ms.</p>
+          <span class="motion-card__use">Uso · Todos los botones glass-cta, nav CTA</span>
+        </div>
+      </div>
+
+      <!-- Marquee -->
+      <div class="motion-card" id="marquee">
+        <div class="motion-card__preview" style="padding:0;overflow:hidden;">
+          <div class="marquee-demo" style="padding:16px 0;">
+            <div class="marquee-demo__track">
+              <span class="marquee-demo__item">GT3 Pro</span>
+              <span class="marquee-demo__item">Formula Libre</span>
+              <span class="marquee-demo__item">Rally</span>
+              <span class="marquee-demo__item">Telemetría</span>
+              <span class="marquee-demo__item">Setup</span>
+              <span class="marquee-demo__item">GT3 Pro</span>
+              <span class="marquee-demo__item">Formula Libre</span>
+              <span class="marquee-demo__item">Rally</span>
+              <span class="marquee-demo__item">Telemetría</span>
+              <span class="marquee-demo__item">Setup</span>
+            </div>
+          </div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">Marquee</div>
+          <p class="motion-card__desc">Track duplicado con `width: max-content`. Animation translateX(0 → -50%) lineal en loop. Hover pausa la animación. Máscara lateral para fade in/out.</p>
+          <span class="motion-card__use">Uso · Carrusel coaches mobile, logos partners</span>
+        </div>
+      </div>
+
+
+      <!-- Method Expand -->
+      <div class="motion-card" id="method-expand">
+        <div class="motion-card__preview" style="background:#131314;padding:0;">
+          <div class="method-demo">
+            <div class="method-demo__item open" onclick="toggleMethod(this)">
+              <div class="method-demo__head">
+                <span class="method-demo__num">01</span>
+                <span class="method-demo__title">Diagnóstico</span>
+              </div>
+              <div class="method-demo__body">
+                <p>Análisis de tu nivel actual con telemetría. Identificamos los puntos débiles.</p>
+              </div>
+            </div>
+            <div class="method-demo__item" onclick="toggleMethod(this)">
+              <div class="method-demo__head">
+                <span class="method-demo__num">02</span>
+                <span class="method-demo__title">Entrenamiento</span>
+              </div>
+              <div class="method-demo__body">
+                <p>Sesiones enfocadas para corregir los errores detectados en el diagnóstico.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">Step Expand</div>
+          <p class="motion-card__desc">Contenido se expande con max-height 0→500px + opacity + translateY. Desktop vía CSS variable `--expansion`. Mobile con clase `.is-active`.</p>
+          <span class="motion-card__use">Uso · Sección 04 — Metodología Apex</span>
+        </div>
+      </div>
+
+
+      <!-- Reasons Flip -->
+      <div class="motion-card" id="reasons-flip" style="grid-column: 3; grid-row: span 2;">
+        <div class="motion-card__preview" style="height:auto;min-height:320px;display:flex;justify-content:center;align-items:center;padding:24px;">
+          <div class="reasons-flip">
+            <div class="reasons-flip__inner">
+              <div class="reasons-flip__front">
+                <h3 class="reasons-item__title">No sabés dónde<br>perdés tiempo.</h3>
+              </div>
+              <div class="reasons-flip__back">
+                <p class="reasons-item__lead">Sin datos, es imposible identificar qué está limitando tu rendimiento.</p>
+                <span class="reasons-item__cta">Con este curso vas a poder:</span>
+                <ul class="reasons-item__bullets">
+                  <li>Interpretar telemetría.</li>
+                  <li>Detectar pérdidas de tiempo.</li>
+                  <li>Tomar decisiones basadas en datos reales.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">Reasons Flip</div>
+          <p class="motion-card__desc">Card con flip 3D en hover. Front muestra el problema, back muestra la solución con bullets. Transform-style: preserve-3d · rotateY(180deg) · 600ms ease.</p>
+          <span class="motion-card__use">Uso · Sección "Para quién" en curso</span>
+        </div>
+      </div>
+
+      <!-- Hotspots -->
+      <div class="motion-card" id="hotspots" style="grid-column: span 2;">
+        <div class="motion-card__preview" style="gap:48px;">
+          <div class="lib-variant-group" style="align-items:center;">
+            <div class="hotspot-demo">
+              <div class="hotspot-circle"><div class="hotspot-dot"></div></div>
+            </div>
+            <span class="lib-variant-label">success · default</span>
+          </div>
+          <div class="lib-variant-group" style="align-items:center;">
+            <div class="hotspot-demo">
+              <div class="hotspot-circle" style="border-color:#FF5E33;background:rgba(255,94,51,0.12)">
+                <div class="hotspot-dot" style="background:#FF5E33"></div>
+              </div>
+            </div>
+            <span class="lib-variant-label">accent · variante</span>
+          </div>
+          <div class="lib-variant-group" style="align-items:center;">
+            <div class="hotspot-demo">
+              <div class="hotspot-circle" style="border-color:#2F31F5;background:rgba(47,49,245,0.12)">
+                <div class="hotspot-dot" style="background:#2F31F5"></div>
+              </div>
+            </div>
+            <span class="lib-variant-label">data · variante</span>
+          </div>
+        </div>
+        <div class="motion-card__info">
+          <span class="motion-card__eyebrow">Motion</span>
+          <div class="motion-card__name">Hotspots</div>
+          <p class="motion-card__desc">Puntos interactivos sobre el steering wheel SVG. Círculo con borde + animación de pulse radial. Al tap/click expande un panel con info del componente.</p>
+          <span class="motion-card__use">Uso · Dashboard de telemetría, steering wheel</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+function toggleReveal(container) {
+  const demo = document.getElementById('tr-demo');
+  demo.classList.remove('revealed');
+  void demo.offsetWidth;
+  setTimeout(() => demo.classList.add('revealed'), 50);
+}
+
+function toggleScrollReveal() {
+  const demo = document.getElementById('sr-demo');
+  demo.classList.remove('playing');
+  void demo.offsetWidth;
+  demo.classList.add('playing');
+}
+
+function toggleDrawer() {
+  document.getElementById('drawer-panel').classList.toggle('open');
+}
+
+function toggleMethod(item) {
+  item.classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById('tr-demo').classList.add('revealed');
+    document.getElementById('sr-demo').classList.add('playing');
+  }, 700);
+
+  /* Active nav link on scroll */
+  const sections = document.querySelectorAll('section[id], .lib-section[id]');
+  const navLinks = document.querySelectorAll('.lib-nav__links a, .nav__links a');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav__links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-64px 0px 0px 0px' });
+
+  sections.forEach(s => obs.observe(s));
+});
+</script>
+
+
+<style>
+  /* caso-practico__card — CSS de curso-rendimiento-telemetria.html */
+  .caso-practico__card { flex:none; width:302px; height:285px; box-sizing:border-box; display:flex; flex-direction:column; padding:20px; overflow:hidden; }
+  .caso-practico__panels { display:block; }
+  .caso-practico__panel { display:block; width:100%; padding:12px 0; }
+  .caso-practico__panel:first-child { padding-top:0; padding-left:0; }
+  .caso-practico__panel-divider { display:block; width:100%; height:1px; background:rgba(255,255,255,0.12); }
+  .caso-practico__nav { display:flex; margin-top:16px; gap:8px; }
+
+  /* module-explorer accordion mobile */
+  .module-accordion__body { display:none; padding:16px; border-bottom:1px solid rgba(235,235,233,0.12); background:rgba(14,14,15,0.6); }
+  .module-accordion__body.is-open { display:block; }
+  .module-accordion__item { margin-bottom:10px; }
+  .module-accordion__label { font-family:'field-gothic-condensed',sans-serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:#DBF059; display:block; margin-bottom:4px; }
+  .module-accordion__text { font-size:0.8rem; color:rgba(235,235,233,0.7); margin:0; }
+</style>
+
+<script>
+/* ── ERG LEFT: click para expandir ítem ── */
+(function () {
+  var ergRoot = document.querySelector('#informacion-comp .erg-left, #erg-left-comp .erg-left');
+  if (!ergRoot) return;
+  var items = Array.from(ergRoot.querySelectorAll('.erg-item'));
+  if (!items.length) return;
+  var current = 0;
+
+  function activate(n) {
+    n = ((n % items.length) + items.length) % items.length;
+    items[current].classList.remove('is-active');
+    current = n;
+    items[current].classList.add('is-active');
+  }
+
+  items.forEach(function (item, i) {
+    item.addEventListener('click', function () { activate(i); });
+  });
+
+  var arrows = ergRoot.querySelectorAll('.erg-arrow');
+  if (arrows[0]) arrows[0].addEventListener('click', function () { activate(current - 1); });
+  if (arrows[1]) arrows[1].addEventListener('click', function () { activate(current + 1); });
+})();
+
+/* ── CASO PRÁCTICO: navegación de variables ── */
+(function () {
+  var panels  = document.getElementById('cp-panels');
+  var btnPrev = document.getElementById('cp-prev');
+  var btnNext = document.getElementById('cp-next');
+  if (!panels || !btnPrev || !btnNext) return;
+
+  var vars = [
+    { label: 'Velocidad máx.',   before: { value: '204 km/h', note: 'El piloto levantaba antes de La Source y en Raidillon.' },         after: { value: '231 km/h', note: 'Compromiso de velocidad sostenido a lo largo de toda la vuelta.' } },
+    { label: 'Presión de freno', before: { value: '68 %',     note: 'Frenadas cortas y suaves. Sin aprovechar el tope de agarre.' },    after: { value: '84 %',     note: 'Frenadas al límite con trail brake controlado.' } },
+    { label: 'Tiempo de vuelta', before: { value: '1:42.85',  note: 'Vuelta inconsistente con alta variación entre pasadas.' },         after: { value: '1:40.41',  note: 'Consistencia del 91% sobre 15 vueltas consecutivas.' } },
+    { label: 'Fuerza G lateral', before: { value: '2.1 G',    note: 'Subviraje notable en Eau Rouge.' },                                after: { value: '2.8 G',    note: 'Curvas rápidas trabajadas al límite de adherencia.' } }
+  ];
+  var current = 0;
+
+  function render(idx) {
+    var v = vars[idx];
+    document.getElementById('cp-var-before').textContent  = v.label;
+    document.getElementById('cp-value-before').textContent = v.before.value;
+    document.getElementById('cp-note-before').textContent  = v.before.note;
+    document.getElementById('cp-var-after').textContent   = v.label;
+    document.getElementById('cp-value-after').textContent  = v.after.value;
+    document.getElementById('cp-note-after').textContent   = v.after.note;
+  }
+
+  function go(dir) {
+    current = (current + dir + vars.length) % vars.length;
+    render(current);
+  }
+
+  btnPrev.addEventListener('click', function () { go(-1); });
+  btnNext.addEventListener('click', function () { go(1); });
+  render(0);
+})();
+
+/* ── MODULE EXPLORER NAV: accordion ── */
+(function () {
+  var nav = document.querySelector('#informacion-comp .module-explorer__nav, #module-nav-comp .module-explorer__nav');
+  if (!nav) return;
+
+  nav.querySelectorAll('.module-nav__item').forEach(function (btn) {
+    var body = document.createElement('div');
+    body.className = 'module-accordion__body';
+    body.innerHTML = '<div class="module-accordion__item"><span class="module-accordion__label">Contenido del módulo</span><p class="module-accordion__text">Hacé clic en otro módulo para navegar entre ellos.</p></div>';
+    btn.insertAdjacentElement('afterend', body);
+
+    btn.addEventListener('click', function () {
+      var isOpen = body.classList.contains('is-open');
+      nav.querySelectorAll('.module-nav__item').forEach(function (b) { b.classList.remove('is-active'); });
+      nav.querySelectorAll('.module-accordion__body').forEach(function (b) { b.classList.remove('is-open'); });
+      if (!isOpen) {
+        btn.classList.add('is-active');
+        body.classList.add('is-open');
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

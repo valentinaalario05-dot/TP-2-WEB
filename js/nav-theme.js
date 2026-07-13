@@ -24,14 +24,24 @@
     nav.classList.add('nav-' + theme);
   }
 
-  sections.forEach(function (section) {
+  var sectionsArr = Array.from(sections);
+
+  sectionsArr.forEach(function (section, idx) {
     var theme = section.getAttribute('data-nav-theme');
     ScrollTrigger.create({
       trigger: section,
-      start: 'top 80',
-      end: 'bottom 80',
+      start: 'top top',
+      end: 'bottom top',
       onEnter: function () { setTheme(theme); },
-      onEnterBack: function () { setTheme(theme); }
+      onEnterBack: function () { setTheme(theme); },
+      onLeave: function () {
+        var next = sectionsArr[idx + 1];
+        if (next) setTheme(next.getAttribute('data-nav-theme'));
+      },
+      onLeaveBack: function () {
+        var prev = sectionsArr[idx - 1];
+        if (prev) setTheme(prev.getAttribute('data-nav-theme'));
+      }
     });
   });
 
@@ -69,7 +79,19 @@
      fallback (sans-serif), causando reflow en el contenido sobre #cursos y
      desplazando el trigger calculado al inicio. Sin este refresh, las course
      cards pueden animar en el scroll incorrecto en la primera carga. */
+  function applyCurrentTheme() {
+    var scrollY = window.scrollY || window.pageYOffset;
+    var active = null;
+    sectionsArr.forEach(function (s) {
+      if (s.getBoundingClientRect().top <= 1) active = s;
+    });
+    if (active) setTheme(active.getAttribute('data-nav-theme'));
+  }
+
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+    document.fonts.ready.then(function () {
+      ScrollTrigger.refresh();
+      applyCurrentTheme();
+    });
   }
 })();
