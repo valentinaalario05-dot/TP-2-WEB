@@ -2493,7 +2493,9 @@ footer.section.bg-dark {
    transparentes para no tapar la grilla. */
 .tech-grid-wrap {
   position: relative;
-  background: #ebebe9;
+  background-color: #d5d7d6;
+  background-image: url('../ASSETS/backgrounds/background system/noise-grain.png');
+  background-repeat: repeat;
 }
 
 /* Grilla técnica: líneas rectas punteadas (sin curvas), elemento real (no
@@ -3390,16 +3392,17 @@ footer.section.bg-dark {
 .module-quadrant {
   background: transparent;
   padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: var(--space-3);
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+  place-content: center;
+  place-items: center;
   text-align: center;
   box-sizing: border-box;
-  padding-left: var(--space-6);  /* ajustá para centrar horizontalmente */
-  padding-right: var(--space-6); /* ajustá para centrar horizontalmente */
+}
+
+.module-quadrant:nth-child(2),
+.module-quadrant:nth-child(4) {
+  padding-left: calc(var(--space-6) * 2);
 }
 
 .module-quadrant__label {

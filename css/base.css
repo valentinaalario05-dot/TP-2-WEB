@@ -127,7 +127,7 @@ p { font-size: 1.3rem; }
 }
 
 .bg-dark  { background: var(--color-dark);  color: var(--color-text-on-dark); }
-.bg-light { background: var(--color-light); color: var(--color-text-on-light); }
+.bg-light { background-color: var(--color-light); background-image: url('../ASSETS/backgrounds/background system/noise-grain.png'); background-repeat: repeat; color: var(--color-text-on-light); }
 
 .bg-dark  .text-muted { color: var(--color-text-muted-dark); }
 .bg-light .text-muted { color: var(--color-text-muted-light); }
