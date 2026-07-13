@@ -2168,7 +2168,7 @@ footer.section.bg-dark {
 
 .analytics-head .section-title,
 .analytics-head .text-reveal-wrap {
-  text-align: center;
+  text-align: left;
 }
 
 /* ---- ANALYTICS DASHBOARD ----
@@ -2196,7 +2196,7 @@ footer.section.bg-dark {
   width: 90%;
   height: auto;
   display: block;
-  margin-top: var(--space-6);
+  margin-top: -40px;
   margin-bottom: 0;
 }
 
