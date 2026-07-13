@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="is-loading">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APEX — UI Library</title>
+<style>
+  html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
+  #preloader { position: fixed; inset: 0; z-index: 9999; background: #000; }
+</style>
 <link rel="stylesheet" href="https://use.typekit.net/ljr5kxo.css">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/glass.css">
 <link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/preloader.css">
 <style>
 
 /* ============================================================
@@ -130,7 +135,9 @@ body {
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   background-image: url('ASSETS/backgrounds/background-editorial-black.png');
-  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -1516,6 +1523,12 @@ body {
 ============================================================ */
 @media (max-width: 768px) {
 
+  /* Prevent horizontal overflow */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   /* Navbar */
   header.nav {
     padding: 0 20px !important;
@@ -1528,18 +1541,27 @@ body {
   /* Main layout */
   .lib-main {
     padding: 112px 20px 80px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
-  /* Page header */
+  /* Page header — escape the 20px padding of lib-main */
   .lib-page-header {
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -112px;
+    margin-bottom: 64px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 112px;
     padding-bottom: 40px;
     min-height: 100svh;
-    margin-bottom: 64px;
+    width: calc(100% + 40px);
+    box-sizing: border-box;
+    background-image: url('ASSETS/mobile/background-editorial-mobile.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   .lib-page-header h1 {
@@ -1591,20 +1613,17 @@ body {
     gap: 16px;
   }
 
-  /* Color swatches */
+  /* Color swatches — solo HEX en mobile */
   .container-items {
     padding: 16px 0 32px;
   }
 
-  .item-color__name {
-    font-size: 0.75rem;
+  .item-color__name,
+  .item-color__use {
+    display: none;
   }
 
   .item-color__hex {
-    font-size: 0.75rem;
-  }
-
-  .item-color__use {
     font-size: 0.5rem;
   }
 
@@ -1618,6 +1637,11 @@ body {
   .type-row__meta {
     font-size: 0.65rem;
     opacity: 0.6;
+  }
+
+  /* Información — una sola columna */
+  .info-grid {
+    grid-template-columns: 1fr !important;
   }
 
   /* Contenedores */
@@ -1646,7 +1670,64 @@ body {
     align-items: flex-start;
   }
 
-  /* Nav mock — hide center links */
+  /* Nav demo — ocultar links y CTA desktop (el inline style:flex lo sobreescribe !important) */
+  .nav__links {
+    display: none !important;
+  }
+  .nav__cta {
+    display: none !important;
+  }
+
+  /* Hamburger principal — forzar columna derecha con margen 20px */
+  #lib-nav-toggle {
+    grid-column: 3;
+    justify-self: end;
+    margin-right: 0;
+  }
+
+  /* Nav toggle — circular liquid glass (igual que home mobile) */
+  .nav__toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.18);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 5px;
+    flex-direction: column;
+  }
+  .nav__toggle span {
+    width: 18px;
+  }
+  .nav-light .nav__toggle {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(0,0,0,0.06);
+  }
+
+  /* Nav CTA mobile — liquid glass */
+  .nav__cta--mobile {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    color: #fff !important;
+  }
+  .nav-light .nav__cta--mobile {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(0,0,0,0.06) !important;
+    color: #000 !important;
+  }
+
+  /* Nav mock — hide center links (old class) */
   .nav-mock__links {
     display: none;
   }
@@ -1684,12 +1765,87 @@ body {
 
   /* Motion grid — single column */
   .motion-grid {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .motion-card {
+    max-width: 100%;
+    overflow: hidden;
   }
 
   /* Divider */
   .lib-divider {
     margin: 56px 0;
+  }
+
+  /* Footer mobile */
+  footer.section.bg-dark .wrap {
+    display: grid !important;
+    grid-template-columns: repeat(2, auto) !important;
+    justify-content: center !important;
+    padding: 32px 20px 24px !important;
+    box-sizing: border-box !important;
+    row-gap: var(--space-5) !important;
+    column-gap: var(--space-3) !important;
+    align-items: start !important;
+  }
+  .footer__top {
+    display: contents !important;
+  }
+  /* 2 cols de links: fila 1 */
+  .footer__col:nth-child(2) { grid-column: 1 !important; grid-row: 1 !important; align-items: center !important; text-align: center !important; }
+  .footer__col:nth-child(3) { grid-column: 2 !important; grid-row: 1 !important; align-items: center !important; text-align: center !important; }
+  /* Botones: fila 2, full-width, centrados en fila */
+  .footer__col:nth-child(4) {
+    grid-column: 1 / 3 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+  }
+  .footer__col:nth-child(4) .footer__dev-btn {
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+  /* Logo: fila 3, full-width, centrado */
+  .footer__logo {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-top: 35px !important;
+  }
+  .footer__tagline { font-size: 15px !important; text-align: center !important; }
+  /* Social: fila 4 */
+  .footer__social {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 0 !important;
+    gap: var(--space-3) !important;
+  }
+  /* Divider: fila 5 */
+  .footer__divider {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+  }
+  /* Legal: fila 6 */
+  .footer__legal {
+    grid-column: 1 / -1 !important;
+    grid-row: 6 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: var(--space-1) !important;
   }
 
   /* Hotspots row */
@@ -1716,6 +1872,121 @@ body {
 </head>
 <body>
 
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader__stage">
+    <svg class="preloader__loading-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210">
+      <defs>
+        <style>
+          #preloader .st0 { stroke: #dbf059; stroke-dasharray: 28 6; stroke-width: 11.5px; }
+          #preloader .st0, #preloader .st1, #preloader .st2, #preloader .st3, #preloader .st4, #preloader .st5, #preloader .st6 { fill: none; stroke-miterlimit: 10; }
+          #preloader .st1 { stroke-width: .7px; }
+          #preloader .st1, #preloader .st2, #preloader .st3, #preloader .st4, #preloader .st5, #preloader .st6 { stroke: #ebebeb; }
+          #preloader .st1, #preloader .st3, #preloader .st5 { stroke-linecap: round; }
+          #preloader .st2 { stroke-width: .2px; }
+          #preloader .st3 { stroke-width: .5px; }
+          #preloader .st4, #preloader .st5 { stroke-width: .2px; }
+          #preloader .st7 { fill: #ebebeb; }
+          #preloader .st5 { stroke-dasharray: .2 1; }
+          #preloader .st6 { stroke-width: .3px; }
+        </style>
+      </defs>
+      <circle id="loader" class="st0" cx="105.2" cy="105.3" r="88.4"/>
+      <g>
+        <path class="st7" d="M40.8,117.8v-1.3h2.2v1.3c0,.7.3,1,.9,1s1-.3,1-1v-1c0-.7-.3-1-1-1h-1.2v-1.5h1.2c.6,0,.9-.2.9-.9v-1c0-.7-.3-.9-.9-.9s-.9.3-.9.9v1.2h-2.2v-1.2c0-1.7,1.1-2.6,3.1-2.6s3.1.9,3.1,2.6v.6c0,1.1-.4,1.8-1.4,2h0c1,.2,1.5,1,1.5,2.1v.7c0,1.7-1.1,2.6-3.2,2.6s-3.1-1-3.1-2.6Z"/>
+        <path class="st7" d="M58.1,149.8l1.4-.9c.6-.4.9-.7.9-1.6v-.5c0-.7-.3-1-.9-1s-.9.3-.9,1v1.1h-2.2v-1.1c0-1.7,1.1-2.7,3.1-2.7s3.1,1,3.1,2.7v.4c0,1.4-.4,2.1-1.8,3l-1.4.9c-.5.3-.7.6-.7,1.4v.3h4v1.8h-6.3v-2c0-1.3.3-2,1.7-2.9Z"/>
+        <path class="st7" d="M46.7,87.2h-3.6v-1.5l2.2-7.1h3.4v7.1h1v1.6h-1v1.7h-2.1v-1.7ZM46.7,85.6v-5.5h0l-1.6,5.5h1.6Z"/>
+        <path class="st7" d="M64.3,56.8v-1h2.2v1c0,.7.3,1,.9,1s.9-.3.9-1v-2.3c0-.6-.3-.9-.9-.9s-.9.3-.9.9v.4h-2.1v-5.9h5.8v1.7h-3.8v2.3c.4-.7.9-1,1.8-1,1.4,0,2.2.8,2.2,2.3v2.5c0,1.7-1,2.6-3.1,2.6s-3.1-1-3.1-2.6Z"/>
+        <path class="st7" d="M100.8,43.9v-5.3c0-1.7,1.1-2.6,3.1-2.6s3.2,1,3.2,2.6v.7h-2.2v-.8c0-.7-.3-1-.9-1s-.9.3-.9,1v2.3c.4-.7,1.1-1,1.9-1,1.4,0,2.2.8,2.2,2.4v1.7c0,1.7-1.1,2.6-3.2,2.6s-3.1-1-3.1-2.6ZM104,44.9c.6,0,.9-.3.9-1v-1.7c0-.6-.3-.9-.9-.9s-.7.1-1,.4v2.2c0,.7.3,1,.9,1Z"/>
+        <path class="st7" d="M144.4,50.8h-3.4v-1.7h5.7v1.6s-2.8,8.7-2.8,8.7h-2.2l2.8-8.6Z"/>
+        <path class="st7" d="M103.4,166.8c-.4.2-.8.3-1.3.3v-1.8c1.1,0,2-.6,2-1.4h1.6v10.3h-2.2v-7.4Z"/>
+        <path class="st7" d="M160.3,86.2v-.3c0-1.2.5-2,1.5-2.2h0c-1-.3-1.4-1.1-1.4-2.3v-.3c0-1.8,1.2-2.7,3.1-2.7s3.1.9,3.1,2.7v.3c0,1.2-.4,2-1.4,2.3h0c1,.3,1.5,1.1,1.5,2.3v.3c0,1.8-1.2,2.8-3.2,2.8s-3.2-.9-3.2-2.8ZM163.5,87.3c.7,0,1-.4,1-1.1v-.9c0-.7-.3-1.1-1-1.1s-1,.4-1,1.1v.9c0,.7.3,1.1,1,1.1ZM163.5,82.9c.6,0,.9-.4.9-1.1v-.8c0-.7-.3-1.1-.9-1.1s-.9.4-.9,1.1v.8c0,.7.3,1.1.9,1.1Z"/>
+        <path class="st7" d="M169.2,112.9v5.3c0,1.7-1.1,2.6-3.1,2.6s-3.2-1-3.2-2.6v-.7h2.2v.8c0,.7.3,1,.9,1s.9-.3.9-1v-2.3c-.4.7-1.1,1-1.9,1-1.4,0-2.2-.8-2.2-2.4v-1.7c0-1.7,1.1-2.6,3.2-2.6s3.1,1,3.1,2.6ZM166,115.5c.4,0,.7-.1,1-.4v-2.2c0-.7-.3-1-.9-1s-.9.3-.9,1v1.7c0,.6.3.9.9.9Z"/>
+        <g>
+          <path class="st7" d="M148.6,146.8c-.4.2-.8.3-1.3.3v-1.8c1.1,0,2-.6,2-1.4h1.6v10.3h-2.2v-7.4Z"/>
+          <path class="st7" d="M152.2,151.4v-4.8c0-2,1.2-2.9,3.2-2.9s3.2.9,3.2,2.9v4.8c0,2-1.2,2.9-3.2,2.9s-3.2-.9-3.2-2.9ZM155.3,152.7c.7,0,1-.4,1-1.1v-5.1c0-.7-.3-1.1-1-1.1s-1,.4-1,1.1v5.1c0,.7.3,1.1,1,1.1Z"/>
+        </g>
+      </g>
+      <g>
+        <circle class="st4" cx="104.4" cy="105.4" r="50.6"/>
+        <path class="st4" d="M104.4,153.2c-26.3,0-47.7-21.4-47.7-47.7s21.4-47.7,47.7-47.7,47.7,21.4,47.7,47.7-21.4,47.7-47.7,47.7Z"/>
+        <path class="st4" d="M104.4,150.3c-24.8,0-44.9-20.1-44.9-44.9s20.1-44.9,44.9-44.9,44.9,20.1,44.9,44.9-20.1,44.9-44.9,44.9Z"/>
+        <line class="st4" x1="67.7" y1="71.1" x2="71.4" y2="74.8"/>
+        <line class="st6" x1="129.4" y1="142.9" x2="133" y2="147.2"/>
+        <line class="st4" x1="55.8" y1="91.4" x2="61.2" y2="93.1"/>
+        <line class="st4" x1="146.1" y1="122.4" x2="151.4" y2="124.3"/>
+        <line class="st4" x1="128.7" y1="67.6" x2="132" y2="63"/>
+        <line class="st4" x1="70.3" y1="142.8" x2="73.9" y2="138.3"/>
+        <line class="st4" x1="143.2" y1="82.7" x2="147.8" y2="79.4"/>
+        <line class="st4" x1="149.1" y1="101.8" x2="154.9" y2="101.6"/>
+        <line class="st4" x1="55.5" y1="118" x2="61" y2="116.3"/>
+        <line class="st4" x1="104.4" y1="54.9" x2="104.4" y2="60.5"/>
+        <line class="st2" x1="102.7" y1="150.2" x2="102.7" y2="156"/>
+      </g>
+      <g>
+        <circle class="st4" cx="105" cy="105" r="104.9"/>
+        <circle class="st3" cx="105" cy="105" r="94.6"/>
+        <circle class="st5" cx="105" cy="105" r="97.6"/>
+      </g>
+      <g>
+        <line class="st1" x1="103.8" y1="27" x2="103.8" y2="30.8"/>
+        <line class="st1" x1="91.5" y1="28.2" x2="92.1" y2="32"/>
+        <line class="st1" x1="79.6" y1="31.2" x2="80.8" y2="34.9"/>
+        <line class="st1" x1="68.4" y1="36.2" x2="70.1" y2="39.6"/>
+        <line class="st1" x1="58" y1="42.8" x2="60.3" y2="45.9"/>
+        <line class="st1" x1="48.8" y1="50.9" x2="51.5" y2="53.6"/>
+        <line class="st1" x1="41" y1="60.4" x2="44.1" y2="62.7"/>
+        <line class="st1" x1="34.7" y1="71" x2="38.2" y2="72.7"/>
+        <line class="st1" x1="30.2" y1="82.4" x2="33.9" y2="83.6"/>
+        <line class="st1" x1="27.6" y1="94.4" x2="31.4" y2="95"/>
+        <line class="st1" x1="26.8" y1="106.7" x2="30.7" y2="106.7"/>
+        <line class="st1" x1="28" y1="119" x2="31.8" y2="118.3"/>
+        <line class="st1" x1="31.1" y1="130.9" x2="34.8" y2="129.7"/>
+        <line class="st1" x1="36" y1="142.1" x2="39.5" y2="140.4"/>
+        <line class="st1" x1="42.6" y1="152.5" x2="45.7" y2="150.2"/>
+        <line class="st1" x1="50.8" y1="161.7" x2="53.5" y2="159"/>
+        <line class="st1" x1="60.3" y1="169.5" x2="62.5" y2="166.4"/>
+        <line class="st1" x1="70.9" y1="175.7" x2="72.6" y2="172.3"/>
+        <line class="st1" x1="82.3" y1="180.2" x2="83.5" y2="176.6"/>
+        <line class="st1" x1="94.3" y1="182.9" x2="94.9" y2="179.1"/>
+        <line class="st1" x1="106.1" y1="183.6" x2="106.1" y2="179.8"/>
+        <line class="st1" x1="118.8" y1="182.5" x2="118.2" y2="178.7"/>
+        <line class="st1" x1="130.7" y1="179.4" x2="129.5" y2="175.7"/>
+        <line class="st1" x1="142" y1="174.5" x2="140.2" y2="171"/>
+        <line class="st1" x1="152.4" y1="167.9" x2="150.1" y2="164.7"/>
+        <line class="st1" x1="161.5" y1="159.2" x2="158.9" y2="156.4"/>
+        <line class="st1" x1="169.4" y1="150.2" x2="166.3" y2="148"/>
+        <line class="st1" x1="175.6" y1="139.6" x2="172.2" y2="137.9"/>
+        <line class="st1" x1="180.1" y1="128.2" x2="176.4" y2="127"/>
+        <line class="st1" x1="182.8" y1="116.2" x2="179" y2="115.6"/>
+        <line class="st1" x1="183.5" y1="103.9" x2="179.7" y2="103.9"/>
+        <line class="st1" x1="182.3" y1="91.7" x2="178.5" y2="92.3"/>
+        <line class="st1" x1="179.2" y1="79.8" x2="175.6" y2="81"/>
+        <line class="st1" x1="174.3" y1="68.5" x2="170.9" y2="70.3"/>
+        <line class="st1" x1="167.7" y1="58.1" x2="164.6" y2="60.4"/>
+        <line class="st1" x1="159.6" y1="48.9" x2="156.9" y2="51.7"/>
+        <line class="st1" x1="150.1" y1="41.1" x2="147.8" y2="44.2"/>
+        <line class="st1" x1="139.5" y1="34.9" x2="137.7" y2="38.3"/>
+        <line class="st1" x1="128" y1="30.4" x2="126.9" y2="34"/>
+        <line class="st1" x1="116" y1="27.7" x2="115.4" y2="31.5"/>
+      </g>
+      <g id="logo">
+        <g>
+          <path class="st7" d="M85.1,100.2l-3.7-3.7h-10.7s-3.5,3.7-3.5,3.7v3.5h3.5l-3.5,3.7v7h3.5v-3.7h0,0v-3.4h10.7v3.3h0s0,0,0,0v3.7h3.7v-7l-3.6-3.7h3.6v-3.5h0ZM81.5,103.7h-10.7v-3.5h10.7v3.5Z"/>
+          <polygon class="st7" points="104.2 100.2 104.2 107.4 89.8 107.4 89.8 110.7 89.7 110.7 89.8 110.7 89.8 114.4 86.2 114.4 86.2 107.4 89.7 103.7 100.5 103.7 100.5 100.2 89.8 100.2 89.8 103.7 89.7 103.7 86.2 103.7 86.2 100.2 89.8 96.5 89.8 96.5 100.5 96.5 104.2 100.2"/>
+          <polygon class="st7" points="108.5 110.7 108.4 110.7 119.3 110.7 122.9 114.4 104.9 114.4 104.9 107.4 108.5 103.7 104.9 103.7 104.9 100.2 108.5 96.5 108.5 96.5 119.2 96.5 122.9 100.2 108.5 100.2 108.5 103.7 119.3 103.7 122.9 107.4 108.5 107.4 108.5 110.7"/>
+          <g>
+            <rect class="st7" x="134.4" y="96.5" width="7.3" height="3.7"/>
+            <polygon class="st7" points="141.7 110.7 141.7 114.4 134.4 114.4 130.9 110.7 130.8 110.7 130.8 100.2 123.7 100.2 123.7 96.5 127.3 96.5 127.3 96.5 127.3 96.5 130.8 96.5 130.8 96.5 134.3 100.2 134.4 100.2 134.4 110.7 141.7 110.7"/>
+            <rect class="st7" x="123.7" y="110.7" width="7.1" height="3.7"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+<script src="js/preloader.js"></script>
+
 <!-- ============================================================
      NAVBAR
 ============================================================ -->
@@ -1741,7 +2012,17 @@ body {
     <a href="#motion">Motion</a>
   </nav>
 
+  <button class="nav__toggle" aria-label="Abrir menú" id="lib-nav-toggle">
+    <span></span><span></span><span></span>
+  </button>
+
 </header>
+
+<div class="nav__drawer" id="lib-nav-drawer">
+  <a href="#foundations">Foundations</a>
+  <a href="#components">Components</a>
+  <a href="#motion">Motion</a>
+</div>
 
 
 <!-- ============================================================
@@ -1779,8 +2060,7 @@ body {
 
     <!-- COLORS -->
     <div class="lib-sub" id="colors">
-      <span class="lib-sub__eyebrow">Foundations · Color</span>
-      <div class="lib-sub__title">Colors</div>
+      <div class="lib-sub__title">COLORES</div>
       <p class="lib-sub__desc">Paleta de 8 colores semánticos. Los fondos (dark / light) alternan entre secciones. Los acentos (orange, blue, green) se usan para jerarquía de información y estados.</p>
 
       <div class="container-items">
@@ -1846,8 +2126,7 @@ body {
 
     <!-- TYPOGRAPHY -->
     <div class="lib-sub" id="typography">
-      <span class="lib-sub__eyebrow">Foundations · Tipografía</span>
-      <div class="lib-sub__title">Typography</div>
+      <div class="lib-sub__title">TIPOGRAFÍAS</div>
       <p class="lib-sub__desc">Tres familias de Field Gothic con pesos diferenciados. Transducer solo para tratamiento outline editorial.</p>
 
       <div class="type-scale">
@@ -1884,7 +2163,6 @@ body {
 
     <!-- CONTENEDORES -->
     <div class="lib-sub" id="contenedores">
-      <span class="lib-sub__eyebrow">Foundations · Forma</span>
       <div class="lib-sub__title">Contenedores</div>
       <p class="lib-sub__desc">Las cuatro siluetas de contenedor que definen el sistema visual de APEX. Cada forma está normalizada a objectBoundingBox y se aplica como clip-path SVG.</p>
 
@@ -1962,8 +2240,7 @@ body {
     <!-- BUTTONS -->
     <div class="lib-component" id="buttons">
       <div class="lib-component__header">
-        <span class="lib-component__eyebrow">Component</span>
-        <div class="lib-component__name">Buttons</div>
+        <div class="lib-component__name">BOTONES</div>
       </div>
       <div class="lib-preview lib-preview--dark" style="flex-direction:row;align-items:flex-start;gap:48px;">
 
@@ -1992,8 +2269,7 @@ body {
     <!-- NAVIGATION -->
     <div class="lib-component" id="navigation">
       <div class="lib-component__header">
-        <span class="lib-component__eyebrow">Component</span>
-        <div class="lib-component__name">Navigation</div>
+        <div class="lib-component__name">NAV BAR</div>
         <p class="lib-component__desc">Nav fija de 64px. Grid 3 cols: logo | links centrados (glass pill) | CTA. Cambia de color según `data-nav-theme` (dark / light / accent).</p>
       </div>
       <div class="lib-preview" style="padding:0;overflow:hidden;flex-direction:column;gap:12px;align-items:stretch;background:#131314;">
@@ -2010,6 +2286,8 @@ body {
             <a href="#" onclick="return false">Contacto</a>
           </nav>
           <a class="cta cta--light glass-cta nav__cta" href="#" onclick="return false" style="display:inline-flex;width:137.49px;height:44px;min-height:unset;padding:0;box-sizing:border-box;">Registrarme</a>
+          <a class="cta cta--light glass-cta nav__cta--mobile" href="#" onclick="return false">Registrarme</a>
+          <button class="nav__toggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
         </header>
 
         <!-- nav light -->
@@ -2024,6 +2302,8 @@ body {
             <a href="#" onclick="return false">Contacto</a>
           </nav>
           <a class="cta cta--light glass-cta nav__cta" href="#" onclick="return false" style="display:inline-flex;width:137.49px;height:44px;min-height:unset;padding:0;box-sizing:border-box;">Registrarme</a>
+          <a class="cta cta--light glass-cta nav__cta--mobile" href="#" onclick="return false">Registrarme</a>
+          <button class="nav__toggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
         </header>
 
       </div>
@@ -2033,7 +2313,6 @@ body {
     <!-- CARDS -->
     <div class="lib-component" id="cards">
       <div class="lib-component__header">
-        <span class="lib-component__eyebrow">Component</span>
         <div class="lib-component__name">Cards</div>
         <p class="lib-component__desc">Tres tipos: Course (glassmorphism), Coach (clip-path notch + hover reveal sheet), Review (glassmorphism claro).</p>
       </div>
@@ -2087,11 +2366,10 @@ body {
     <!-- INFORMACIÓN: FAQ + MODULE EXPLORER + ERG LEFT -->
     <div class="lib-component" id="informacion-comp">
       <div class="lib-component__header">
-        <span class="lib-component__eyebrow">Component</span>
         <div class="lib-component__name">Información</div>
         <p class="lib-component__desc">Tres componentes para presentar contenido informativo: <strong>FAQ</strong> con acordeón nativo para preguntas frecuentes, <strong>Module Explorer Nav</strong> para navegar y expandir módulos del curso, y <strong>Erg Left</strong> para recorrer ítems ergonómicos con flechas y click.</p>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start;">
+      <div class="info-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start;">
 
         <!-- FAQ -->
         <div class="faq-demo">
@@ -2200,7 +2478,6 @@ body {
     <!-- RANKING -->
     <div class="lib-component" id="ranking">
       <div class="lib-component__header">
-        <span class="lib-component__eyebrow">Component</span>
         <div class="lib-component__name">Ranking Row</div>
         <p class="lib-component__desc">Tabla editorial de ranking. Pos con text-stroke outline, nombre dominante uppercase. Fila APEX tiene barra lateral azul de 3px. Hover → fondo success. Delta ▲ azul / ▼ naranja.</p>
       </div>
@@ -2257,7 +2534,7 @@ body {
       <div class="motion-card" id="text-reveal">
         <div class="motion-card__preview" onclick="toggleReveal(this)" style="cursor:pointer;">
           <div class="text-reveal-demo" id="tr-demo">
-            <span class="text-reveal-demo__text">APEX</span>
+            <span class="text-reveal-demo__text">TELEMETRÍA</span>
             <div class="text-reveal-demo__clip">
               <div class="text-reveal-demo__overlay"></div>
             </div>
@@ -2401,35 +2678,15 @@ body {
 
       <!-- Hotspots -->
       <div class="motion-card" id="hotspots" style="grid-column: span 2;">
-        <div class="motion-card__preview" style="gap:48px;">
-          <div class="lib-variant-group" style="align-items:center;">
-            <div class="hotspot-demo">
-              <div class="hotspot-circle"><div class="hotspot-dot"></div></div>
-            </div>
-            <span class="lib-variant-label">success · default</span>
+        <div class="motion-card__preview" style="gap:40px;padding:0 40px;justify-content:flex-start;">
+          <div class="hotspot-demo" style="flex-shrink:0;">
+            <div class="hotspot-circle"><div class="hotspot-dot"></div></div>
           </div>
-          <div class="lib-variant-group" style="align-items:center;">
-            <div class="hotspot-demo">
-              <div class="hotspot-circle" style="border-color:#FF5E33;background:rgba(255,94,51,0.12)">
-                <div class="hotspot-dot" style="background:#FF5E33"></div>
-              </div>
-            </div>
-            <span class="lib-variant-label">accent · variante</span>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+<span class="motion-card__eyebrow" style="margin:0;">Motion</span>
+            <div class="motion-card__name" style="font-size:1rem;line-height:1.1;">Hotspots</div>
+            <p class="motion-card__desc" style="font-size:0.72rem;margin:0;">Círculo con borde + animación de pulse radial. Al tap/click expande un panel con info del componente.</p>
           </div>
-          <div class="lib-variant-group" style="align-items:center;">
-            <div class="hotspot-demo">
-              <div class="hotspot-circle" style="border-color:#2F31F5;background:rgba(47,49,245,0.12)">
-                <div class="hotspot-dot" style="background:#2F31F5"></div>
-              </div>
-            </div>
-            <span class="lib-variant-label">data · variante</span>
-          </div>
-        </div>
-        <div class="motion-card__info">
-          <span class="motion-card__eyebrow">Motion</span>
-          <div class="motion-card__name">Hotspots</div>
-          <p class="motion-card__desc">Puntos interactivos sobre el steering wheel SVG. Círculo con borde + animación de pulse radial. Al tap/click expande un panel con info del componente.</p>
-          <span class="motion-card__use">Uso · Dashboard de telemetría, steering wheel</span>
         </div>
       </div>
 
@@ -2438,13 +2695,54 @@ body {
 
 </main>
 
+<footer class="section bg-dark">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__logo">
+        <img src="ASSETS/logo-apex.svg.svg" alt="Apex Sim Racing">
+        <p class="footer__tagline">Academia de<br> Sim Racing</p>
+      </div>
+      <div class="footer__col">
+        <span class="footer__col-title">Explorar</span>
+        <a href="#quienes-somos">Nosotros</a>
+        <a href="#metodologia">Metodología</a>
+        <a href="#cursos">Cursos</a>
+      </div>
+      <div class="footer__col">
+        <span class="footer__col-title">Servicios</span>
+        <a href="#cursos">Coaches</a>
+        <a href="#cursos">Comunidad</a>
+        <a href="#resultados-pilotos">Resultados</a>
+      </div>
+      <div class="footer__col">
+        <a href="curso-rendimiento-telemetria.html" class="cta cta--primary glass-cta footer__dev-btn">Cursos</a>
+        <a href="home.html" class="cta cta--primary glass-cta footer__dev-btn">Home</a>
+      </div>
+    </div>
+    <div class="footer__social">
+      <a href="#" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="#" aria-label="Twitter / X">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="#" aria-label="Discord">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg>
+      </a>
+      <a href="#" aria-label="YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+    </div>
+    <div class="footer__divider"></div>
+    <div class="footer__legal">
+      <p>© 2026 Apex Sim Racing</p>
+      <p>Términos · Privacidad</p>
+    </div>
+  </div>
+</footer>
+
 <script>
-function toggleReveal(container) {
-  const demo = document.getElementById('tr-demo');
-  demo.classList.remove('revealed');
-  void demo.offsetWidth;
-  setTimeout(() => demo.classList.add('revealed'), 50);
-}
+function toggleReveal() {}
 
 function toggleScrollReveal() {
   const demo = document.getElementById('sr-demo');
@@ -2461,11 +2759,33 @@ function toggleMethod(item) {
   item.classList.toggle('open');
 }
 
+/* Nav drawer mobile */
+(function () {
+  const toggle = document.getElementById('lib-nav-toggle');
+  const drawer = document.getElementById('lib-nav-drawer');
+  if (!toggle || !drawer) return;
+  toggle.addEventListener('click', () => {
+    drawer.classList.toggle('is-open');
+    toggle.classList.toggle('is-open');
+  });
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      drawer.classList.remove('is-open');
+      toggle.classList.remove('is-open');
+    });
+  });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    document.getElementById('tr-demo').classList.add('revealed');
-    document.getElementById('sr-demo').classList.add('playing');
-  }, 700);
+  (function loopReveal() {
+    const demo = document.getElementById('tr-demo');
+    if (!demo) return;
+    demo.classList.add('revealed');
+    setTimeout(() => {
+      demo.classList.remove('revealed');
+      setTimeout(loopReveal, 900);
+    }, 1800);
+  })();
 
   /* Active nav link on scroll */
   const sections = document.querySelectorAll('section[id], .lib-section[id]');

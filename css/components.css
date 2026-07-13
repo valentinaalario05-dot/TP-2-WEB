@@ -2004,6 +2004,10 @@ footer.section.bg-dark {
   display: flex; align-items: center; justify-content: center;
 }
 
+.footer__dev-btn { background: #FF5E33 !important; border-color: #FF5E33 !important; color: #fff !important; }
+.footer__dev-btn:hover { background: #2F31F5 !important; border-color: #2F31F5 !important; }
+.footer__dev-btn::before { background: #2F31F5 !important; }
+
 .footer__divider { border-top: 1px solid var(--color-border-dark); margin-bottom: var(--space-4); }
 
 .footer__legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); }
